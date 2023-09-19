@@ -1,0 +1,27 @@
+export const GET_IP_WHITELIST_REQUEST = "GET_IP_WHITELIST_REQUEST";
+export const GET_IP_WHITELIST_RESPONSE = "GET_IP_WHITELIST_RESPONSE";
+
+export const ADD_IP_WHITELIST_REQUEST = "ADD_IP_WHITELIST_REQUEST";
+export const ADD_IP_WHITELIST_RESPONSE = "ADD_IP_WHITELIST_RESPONSE";
+
+export const DELETE_IP_WHITELIST_REQUEST = "DELETE_IP_WHITELIST_REQUEST";
+export const DELETE_IP_WHITELIST_RESPONSE = "DELETE_IP_WHITELIST_RESPONSE";
+
+export const UPDATE_IP_WHITELIST_REQUEST = "UPDATE_IP_WHITELIST_REQUEST";
+export const UPDATE_IP_WHITELIST_RESPONSE = "UPDATE_IP_WHITELIST_RESPONSE";
+
+export const DETAIL_IP_WHITELIST_REQUEST = "DETAIL_IP_WHITELIST_REQUEST";
+export const DETAIL_IP_WHITELIST_RESPONSE = "DETAIL_IP_WHITELIST_RESPONSE";
+
+export const getIpWhiteListRequest = (currentPage, perPage, searchQuery, callback) => ({
+    type: GET_IP_WHITELIST_REQUEST,
+    currentPage,
+    perPage,
+    searchQuery,
+    callback,
+});
+
+export const getIpWhiteListResponse = (data) => ({
+    type: GET_IP_WHITELIST_RESPONSE,
+    payload: data,
+});

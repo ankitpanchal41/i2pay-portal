@@ -1,0 +1,294 @@
+import React, {useEffect, useState} from "react";
+import {Form, Formik} from "formik";
+import * as Yup from "yup";
+
+import {
+    APPROVE_MERCHANT_APPLICATION_RATES_REQUEST,
+    DETAIL_MERCHANT_APPLICATION_RATES_REQUEST,
+    DECLINE_MERCHANT_APPLICATION_RATES_REQUEST,
+} from "../../redux/types/MerchantApplicationRates";
+import {useDispatch, useSelector} from "react-redux";
+import {ClipLoader} from "react-spinners";
+import MiniLoader from "./MiniLoader";
+import {detailStart} from "../../redux/actions/PersistActions";
+import {useNavigate} from "react-router";
+import Modal from "./Modal";
+import Input from "./forms/Input";
+
+const ApplicationRatesPopup = ({visible = true, onClose}) => {
+    const dispatch = useDispatch();
+    const [isLoading, setIsLoading] = useState(true);
+    const [isAccepting, setIsAccepting] = useState(false);
+    const {merchantApplicationRates} = useSelector((state) => state.rates);
+    const {userData} = useSelector((state) => state.persist);
+    const state = useSelector((state) => state);
+    const [declineRateModalVisible, setDeclineRateModalVisible] = useState(false);
+    const [declineButtonLoading, setDeclineButtonLoading] = useState(false);
+    const navigate = useNavigate();
+
+    const [declinedModalInitialValues, setDeclinedModalInitialValues] = useState({});
+    const [declineModalFormValidationState, setDeclineModalFormValidationState] = useState({});
+
+    useEffect(() => {
+        if (visible) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "unset";
+        }
+    }, [visible]);
+
+    useEffect(() => {
+        navigate("/");
+    }, [userData?.data?.is_rate_sent != 1])
+
+    useEffect(() => {
+        let payload = {};
+
+        const callBack = () => {
+            setIsLoading(false);
+        };
+
+        setIsLoading(true);
+        dispatch({type: DETAIL_MERCHANT_APPLICATION_RATES_REQUEST, payload, callBack});
+    }, []);
+
+    const acceptRates = () => {
+        setIsAccepting(true);
+
+        let payload = {};
+
+        const callBack = () => {
+            dispatch(detailStart(userData?.data?.token, () => {}));
+            // window.location.href("/");
+            navigate(`/`);
+            setIsAccepting(false);
+        };
+
+        dispatch({type: APPROVE_MERCHANT_APPLICATION_RATES_REQUEST, payload, callBack});
+    };
+
+    const onCloseDeclineModal = () => {
+        setDeclineRateModalVisible(!declineRateModalVisible);
+    };
+
+    const showDeclineMerchantRatesModal = () => {
+        setDeclineRateModalVisible(true);
+        setDeclinedModalInitialValues({rate_decline_reason: ""});
+
+        let validationObject = {};
+        validationObject.rate_decline_reason = Yup.string().required(`Please enter reason.`);
+        let validationState = Yup.object().shape(validationObject);
+        setDeclineModalFormValidationState(validationState);
+    };
+
+    const declineRates = async (value) => {
+        setDeclineButtonLoading(true);
+
+        let payload = {
+            rate_decline_reason: value.rate_decline_reason,
+        };
+
+        const callBack = () => {
+            dispatch(detailStart(userData?.data?.token, () => {}));
+            setDeclineRateModalVisible(false);
+            navigate(`/`);
+            // window.location.href("/");
+            setIsAccepting(false);
+            setDeclineButtonLoading(false);
+        };
+
+        dispatch({type: DECLINE_MERCHANT_APPLICATION_RATES_REQUEST, payload, callBack});
+    };
+
+    const _renderDeclineMerchantRateModal = () => {
+        return (
+            <>
+                {/* BEGIN: Modal */}
+                <Modal
+                    heading={"Decline Rates"}
+                    visible={declineRateModalVisible}
+                    onClose={onCloseDeclineModal}
+                    onClickSave={declineRates}
+                    onClickCancel={onCloseDeclineModal}
+                    useFormik
+                    initialValues={declinedModalInitialValues}
+                    validationState={declineModalFormValidationState}
+                    modalMinWidth={"50%"}
+                    buttonLoading={declineButtonLoading}
+                    cancelButtonText={`Cancel`}>
+                    <Input
+                        type="text"
+                        className="intro-x login__input form-control py-2 px-3 block"
+                        containerClassName="mt-3"
+                        placeholder="Enter Reason"
+                        name="rate_decline_reason"
+                        label="Reason"
+                        isRequiredField={true}
+                    />
+                </Modal>
+                {/* BEGIN: Modal */}
+            </>
+        );
+    };
+
+    if (visible) {
+        return (
+            <>
+                {_renderDeclineMerchantRateModal()}
+
+                <div
+                    className="modal  show mt-0 ml-0 pl-0 z-[999998] justify-center items-center flex  fixed inset-0 z-[999] outline-none focus:outline-none modal-dialog"
+                    data-tw-backdrop="static"
+                    tabIndex="-1"
+                    aria-hidden="true">
+                    <div className="modal-dialog min-w-[50%]" onClick={(e) => e.stopPropagation()}>
+                        <div
+                            className="border-0 rounded-lg shadow-lg relative flex flex-col w-full modal-content outline-none focus:outline-none max-h-[100vh]">
+                            <div className="modal-header">
+                                <h2 className="font-medium text-base mr-auto">Free Schedule</h2>
+                            </div>
+
+                            {isLoading ? (
+                                <div className="flex justify-center h-48 items-center">
+                                    <ClipLoader
+                                        loading={true}
+                                        color="#1e3a8a"
+                                        size={55}
+                                        css="border-width: 6px;border-color: #1e3a8a !important;border-bottom-color: transparent !important;"
+                                    />
+                                </div>
+                            ) : (
+                                <>
+                                    <div className="modal-body overflow-y-auto">
+                                        <p className="text-big font-bold dark:text-white">Congratulations...</p>
+                                        <p className="mt-3 dark:text-white">
+                                            Your account has been <strong>'Approved'</strong> with the below mentioned
+                                            rates.
+                                        </p>
+                                        <p className="dark:text-white">
+                                            Please click strong <strong>Accept</strong> to proceed.
+                                        </p>
+
+                                        <div className="py-3">
+                                            <div className="mt-3 grid grid-cols-12 gap-4 gap-y-3">
+                                                <div className="col-span-12 sm:col-span-12 xl:col-span-6 flex flex-col">
+                                                    <div
+                                                        className="grid grid-cols-12 font-normal bg-slate-200 dark:bg-darkmode-300 py-5 px-3 mb-2 flex-1">
+                                                        <div className="col-span-12 sm:col-span-9">
+                                                            <strong>Visa </strong> - Merchant Discount Rate (%)
+                                                        </div>
+                                                        <div className="col-span-12 sm:col-span-3 text-right">
+                                                            {merchantApplicationRates?.merchant_discount_rate_visa_card || 0.0}
+                                                        </div>
+                                                    </div>
+
+                                                    <div
+                                                        className="grid grid-cols-12 font-normal bg-slate-200 dark:bg-darkmode-300 py-5 px-3 mb-2 flex-1">
+                                                        <div className="col-span-12 sm:col-span-9">
+                                                            <strong>Visa </strong> - Setup Fee
+                                                        </div>
+                                                        <div className="col-span-12 sm:col-span-3 text-right">
+                                                            {merchantApplicationRates?.setup_fee_visa_card || 0.0}
+                                                        </div>
+                                                    </div>
+
+                                                    <div
+                                                        className="grid grid-cols-12 font-normal bg-slate-200 dark:bg-darkmode-300 py-5 px-3 mb-2 flex-1">
+                                                        <div className="col-span-12 sm:col-span-9">Transaction Fee</div>
+                                                        <div className="col-span-12 sm:col-span-3 text-right">
+                                                            {merchantApplicationRates?.transaction_fee || 0.0}
+                                                        </div>
+                                                    </div>
+
+                                                    <div
+                                                        className="grid grid-cols-12 font-normal bg-slate-200 dark:bg-darkmode-300 py-5 px-3 mb-2 flex-1">
+                                                        <div className="col-span-12 sm:col-span-9">Chargeback Fee</div>
+                                                        <div className="col-span-12 sm:col-span-3 text-right">
+                                                            {merchantApplicationRates?.chargeback_fee || 0.0}
+                                                        </div>
+                                                    </div>
+
+                                                    <div
+                                                        className="grid grid-cols-12 font-normal bg-slate-200 dark:bg-darkmode-300 py-5 px-3 mb-2 flex-1">
+                                                        <div className="col-span-12 sm:col-span-9">Retrieval Fee</div>
+                                                        <div className="col-span-12 sm:col-span-3 text-right">
+                                                            {merchantApplicationRates?.retrieval_fee || 0.0}
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div className="col-span-12 sm:col-span-12 xl:col-span-6 flex flex-col">
+                                                    <div
+                                                        className="grid grid-cols-12 font-normal bg-slate-200 dark:bg-darkmode-300 py-5 px-3 mb-2 flex-1">
+
+                                                        <div className="col-span-12 sm:col-span-9">
+                                                            <strong>Master </strong> - Merchant Discount Rate (%)
+                                                        </div>
+                                                        <div className="col-span-12 sm:col-span-3 text-right">
+                                                            {merchantApplicationRates?.merchant_discount_rate_master_card || 0.0}
+                                                        </div>
+                                                    </div>
+
+                                                    <div
+                                                        className="grid grid-cols-12 font-normal bg-slate-200 dark:bg-darkmode-300 py-5 px-3 mb-2 flex-1">
+                                                        <div className="col-span-12 sm:col-span-9">
+                                                            <strong>Master </strong> - Setup Fee
+                                                        </div>
+                                                        <div className="col-span-12 sm:col-span-3 text-right">
+                                                            {merchantApplicationRates?.setup_fee_master_card || 0.0}
+                                                        </div>
+                                                    </div>
+
+                                                    <div
+                                                        className="grid grid-cols-12 font-normal bg-slate-200 dark:bg-darkmode-300 py-5 px-3 mb-2 flex-1">
+                                                        <div className="col-span-12 sm:col-span-9">Rolling Reserve (%)
+                                                        </div>
+                                                        <div className="col-span-12 sm:col-span-3 text-right">
+                                                            {merchantApplicationRates?.rolling_reserve_paercentage || 0.0}
+                                                        </div>
+                                                    </div>
+
+                                                    <div
+                                                        className="grid grid-cols-12 font-normal bg-slate-200 dark:bg-darkmode-300 py-5 px-3 mb-2 flex-1">
+                                                        <div className="col-span-12 sm:col-span-9">Refund Fee</div>
+                                                        <div className="col-span-12 sm:col-span-3 text-right">
+                                                            {merchantApplicationRates?.refund_fee || 0.0}
+                                                        </div>
+                                                    </div>
+
+                                                    <div
+                                                        className="grid grid-cols-12 font-normal bg-slate-200 dark:bg-darkmode-300 py-5 px-3 mb-2 flex-1">
+                                                        <div className="col-span-12 sm:col-span-9">Suspicious
+                                                            Transaction Fee
+                                                        </div>
+                                                        <div className="col-span-12 sm:col-span-3 text-right">1.00</div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="modal-footer">
+                                        <button className="btn btn-primary w-24 mr-2" onClick={() => acceptRates()}>
+                                            Accept
+                                            <MiniLoader isLoading={isAccepting}/>
+                                        </button>
+                                        <button className="btn btn-danger w-24"
+                                                onClick={() => showDeclineMerchantRatesModal()}>
+                                            Decline
+                                        </button>
+                                    </div>
+                                </>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </>
+        );
+    } else {
+        return false;
+    }
+};
+
+export default ApplicationRatesPopup;

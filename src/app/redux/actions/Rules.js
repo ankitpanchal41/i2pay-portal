@@ -1,0 +1,34 @@
+export const GET_RULES_REQUEST = "GET_RULES_REQUEST";
+export const GET_RULES_RESPONSE = "GET_RULES_RESPONSE";
+
+export const GET_DETAIL_RULES_REQUEST = "GET_DETAIL_RULES_REQUEST";
+export const GET_DETAIL_RULES_RESPONSE = "GET_DETAIL_RULES_RESPONSE";
+
+export const CREATE_RULES_REQUEST = "CREATE_RULES_REQUEST";
+export const CREATE_RULES_RESPONSE = "CREATES_RULES_RESPONSE";
+
+export const UPDATE_RULES_REQUEST = "UPDATE_RULES_REQUEST";
+export const UPDATE_RULES_RESPONSE = "UPDATE_RULES_RESPONSE";
+
+export const UPDATE_RULES_STATUS_REQUEST = "UPDATE_RULES_STATUS_REQUEST";
+export const UPDATE_RULES_STATUS_RESPONSE = "UPDATE_RULES_STATUS_RESPONSE";
+
+export const DELETE_RULES_REQUEST = "DELETE_RULES_REQUEST";
+export const DELETE_RULES_RESPONSE = "DELETE_RULES_RESPONSE";
+
+export const UPDATE_RULES_PRIORITY_REQUEST = "UPDATE_RULES_PRIORITY_REQUEST";
+export const UPDATE_RULES_PRIORITY_RESPONSE = "UPDATE_RULES_PRIORITY_RESPONSE";
+
+
+export const getRulesRequest = (currentPage, perPage, searchQuery, callback) => ({
+    type: GET_RULES_REQUEST,
+    currentPage,
+    perPage,
+    searchQuery,
+    callback,
+});
+
+export const getRulesResponse = (data) => ({
+    type: GET_RULES_RESPONSE,
+    payload: data,
+});

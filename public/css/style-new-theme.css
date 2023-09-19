@@ -1,0 +1,665 @@
+@charset "utf-8";
+
+/* RESET
+----------------------------------------------------------------------------------------*/
+
+/*html, div, span, applet, object, iframe,*/
+/*h1, h2, h3, h4, h5, h6, p, blockquote, pre,*/
+/*a, abbr, acronym, address, big, cite, code,*/
+/*del, dfn, em, ins, kbd, q, s, samp,*/
+/*small, strike, strong, sub, sup, tt, var,*/
+/*b, u, i, center,*/
+/*dl, dt, dd, ol, ul, li,*/
+/*fieldset, form, label, legend,*/
+/*table, caption, tbody, tfoot, thead, tr, th, td,*/
+/*article, aside, canvas, details, embed,*/
+/*figure, figcaption, footer, hgroup,*/
+/*menu, nav, output, ruby, section, summary,*/
+/*time, mark, audio, video {*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    border: 0;*/
+/*    font-size:100%;*/
+/*    font: inherit;*/
+/*    vertical-align: baseline;*/
+/*}*/
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+img,
+embed,
+object,
+video {
+    max-width: 100%;
+}
+.ie6 img.full,
+.ie6 object.full,
+.ie6 embed,
+.ie6 video {
+    width: 100%;
+}
+
+/* BASE
+----------------------------------------------------------------------------------------*/
+
+* {
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+html,
+/*{*/
+/*    position:relative;*/
+/*    min-height: 100%;*/
+/*    height: 100%;*/
+/*    -webkit-backface-visibility: hidden;*/
+/*    font-family: 'Roboto', sans-serif;*/
+/*}*/
+strong {
+    font-weight: 500;
+}
+i {
+    font-style: italic;
+}
+.overflow-hidden {
+    position: relative;
+    overflow: hidden;
+}
+.api-document a {
+    color: #00a8e3;
+    text-decoration: none;
+}
+.api-document a:hover {
+    text-decoration: underline;
+}
+.scroll-to-link {
+    cursor: pointer;
+}
+.api-document p,
+.api-document ul,
+.api-document ol {
+    font-size: 14px;
+    color: #777a7a;
+    margin-bottom: 16px;
+    line-height: 1.6;
+    font-weight: 300;
+}
+.api-document h1:first-child {
+    font-size: 1.333em;
+    color: #034c8f;
+    padding-top: 2.5em;
+    text-transform: uppercase;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    border-top-width: 0;
+    margin-top: 0;
+    margin-bottom: 1.3em;
+    clear: both;
+}
+
+code,
+pre {
+    font-family: "Source Code Pro", monospace;
+}
+.higlighted {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 3px;
+    border-radius: 3px;
+}
+
+/* LEFT-MENU
+----------------------------------------------------------------------------------------*/
+
+.left-menu {
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 300px;
+    box-sizing: border-box;
+    background-color: #f4f5f8;
+    overflow-x: hidden;
+    font-size: 18px;
+}
+.left-menu .api-document-infos {
+    position: relative;
+    padding: 12px 13.25%;
+    margin-bottom: 20px;
+}
+.left-menu .info {
+    position: relative;
+    font-size: 14px;
+    margin-top: 5px;
+    color: #777a7a;
+}
+.left-menu .info b {
+    font-weight: 500;
+    color: #034c8f;
+}
+.api-document-logo {
+    position: relative;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1.425em 11.5%;
+    padding-right: 0;
+}
+.api-document-logo img {
+    display: inline-block;
+    max-width: 70%;
+    vertical-align: middle;
+}
+.api-document-logo span {
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: middle;
+    color: #323f4c;
+    font-size: 1.1em;
+}
+.api-document-menu {
+    margin: 2em auto 2em;
+    padding: 0 0 100px;
+}
+.api-document-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    line-height: 28px;
+}
+.api-document-menu ul li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    line-height: 0;
+}
+.api-document-menu ul li:hover,
+.api-document-menu ul li.active {
+    background-color: #dcdee9;
+}
+.api-document-menu ul li:hover a,
+.api-document-menu ul li.active a {
+    color: #00a8e3;
+}
+@media (hover: none) {
+    .api-document-menu ul li:not(.active):hover {
+        background-color: inherit;
+    }
+    .api-document-menu ul li:not(.active):hover a {
+        color: #777a7a;
+    }
+}
+.api-document-menu ul li a {
+    padding: 12px 13.25%;
+    color: #777a7a;
+    letter-spacing: 0.025em;
+    line-height: 1.1;
+    display: block;
+    text-transform: capitalize;
+}
+
+/* CONTENT-PAGE
+----------------------------------------------------------------------------------------*/
+
+.api-document-page {
+    position: relative;
+    box-sizing: border-box;
+    margin-left: 300px;
+    z-index: 2;
+    background-color: #fff;
+    min-height: 100%;
+    padding-bottom: 1px;
+}
+.api-document-code {
+    width: 50%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #323f4c;
+    border-color: #323f4c;
+    min-height: 100vh;
+}
+.api-document {
+    position: relative;
+    z-index: 30;
+    min-height: 100vh;
+}
+.api-document h1,
+.api-document h2,
+.api-document h3,
+.api-document h4,
+.api-document h5,
+.api-document h6,
+.api-document p,
+.api-document table,
+.api-document aside,
+.api-document dl,
+.api-document ul,
+.api-document ol,
+.api-document .central-overflow-x {
+    margin-right: 50%;
+    padding: 0 28px;
+    box-sizing: border-box;
+    display: block;
+    max-width: 680px;
+}
+.api-document .central-overflow-x {
+    margin-right: calc(50% + 28px);
+    margin-left: 28px;
+    padding: 0;
+    overflow-y: hidden;
+    max-width: 100%;
+    display: block;
+}
+.api-document p .central-overflow-x {
+    margin-right: 0;
+    margin-left: 0;
+}
+.break-word {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+.api-document ul,
+.api-document ol {
+    padding: 0 44px;
+}
+.api-document h2,
+.api-document h3,
+.api-document h4,
+.api-document h5,
+.api-document h6 {
+    font-size: 15px;
+    margin-top: 2.5em;
+    margin-bottom: 0.8em;
+    color: #034c8f;
+    text-transform: uppercase;
+}
+.api-document h2 {
+    font-size: 1.333em;
+}
+.api-document h4 {
+    color: #00a8e3;
+    margin-top: 0;
+    text-transform: none;
+    font-size: 14px;
+    margin-bottom: 0.2em;
+}
+.api-document-page .api-document p,
+.api-document-page .api-document pre {
+    max-width: 680px;
+}
+.api-document pre,
+.api-document blockquote {
+    background-color: #323f4c;
+    border-color: #323f4c;
+    color: #fff;
+    padding: 0 28px 2em;
+    margin: 0;
+    width: 50%;
+    float: right;
+    clear: right;
+    box-sizing: border-box;
+}
+.api-document pre code,
+.api-document pre {
+    font-size: 12px;
+    line-height: 1.5;
+}
+.api-document blockquote,
+.api-document pre,
+.api-document pre code {
+    padding-top: 0;
+    margin-top: 0;
+}
+.api-document pre code {
+    margin-top: -2em;
+}
+.api-document table {
+    font-size: 0.825em;
+    margin-bottom: 1.5em;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+.api-document table tr:last-child {
+    border-bottom: 1px solid #ccc;
+}
+.api-document table th {
+    font-size: 0.925em;
+    padding: 5px 18px 5px 0;
+    border-bottom: 1px solid #ccc;
+    vertical-align: bottom;
+    text-align: left;
+    line-height: 1.6;
+}
+.api-document table td {
+    padding: 5px 18px 5px 0;
+    text-align: left;
+    vertical-align: top;
+    line-height: 1.6;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    color: #777a7a;
+}
+
+/* ONE CONTENT COLUMN VERSION
+----------------------------------------------------------------------------------------*/
+
+.one-api-document-column-version .api-document h1,
+.one-api-document-column-version .api-document h2,
+.one-api-document-column-version .api-document h3,
+.one-api-document-column-version .api-document h4,
+.one-api-document-column-version .api-document h5,
+.one-api-document-column-version .api-document h6,
+.one-api-document-column-version .api-document p,
+.one-api-document-column-version .api-document table,
+.one-api-document-column-version .api-document ul,
+.one-api-document-column-version .api-document ol,
+.one-api-document-column-version .api-document aside,
+.one-api-document-column-version .api-document dl,
+.one-api-document-column-version .api-document ul,
+.one-api-document-column-version .api-document ol {
+    margin-right: 0;
+    max-width: 100%;
+}
+.one-api-document-column-version .api-document-page .api-document p,
+.one-api-document-column-version .api-document-page .api-document pre {
+    max-width: 100%;
+}
+.one-api-document-column-version .api-document-page {
+    background-color: #323f4c;
+}
+.one-api-document-column-version .api-document h1:first-child,
+.one-api-document-column-version .api-document h2,
+.one-api-document-column-version .api-document h3,
+.one-api-document-column-version .api-document h4,
+.one-api-document-column-version .api-document h5,
+.one-api-document-column-version .api-document h6 {
+    color: #59c3c3;
+}
+.one-api-document-column-version p {
+    color: #d6f0f0;
+}
+.one-api-document-column-version .api-document table td {
+    color: #d6f0f0;
+}
+.one-api-document-column-version .api-document thead {
+    color: #417179;
+}
+
+/* RESPONSIVE
+----------------------------------------------------------------------------------------*/
+
+@media only screen and (max-width: 980px) {
+    .api-document h1,
+    .api-document h2,
+    .api-document h3,
+    .api-document h4,
+    .api-document h5,
+    .api-document h6,
+    .api-document p,
+    .api-document table,
+    .api-document ul,
+    .api-document ol,
+    .api-document aside,
+    .api-document dl,
+    .api-document ul,
+    .api-document ol {
+        margin-right: 0;
+    }
+    .api-document .central-overflow-x {
+        margin: 0;
+        padding: 0 28px;
+    }
+    .api-document-code {
+        display: none;
+    }
+    .api-document pre,
+    .api-document blockquote {
+        margin: 20px 0;
+        padding: 28px;
+        display: block;
+        width: auto;
+        float: none;
+    }
+    .api-document pre code {
+        margin-top: 0;
+    }
+}
+
+@media only screen and (max-width: 680px) {
+    .left-menu {
+        position: relative;
+        width: auto;
+    }
+    .left-menu .api-document-menu {
+        position: fixed;
+        width: 400px;
+        max-width: 90vw;
+        z-index: 3;
+        top: 0;
+        bottom: 0;
+        right: -405px;
+        left: auto;
+        background-color: #fff;
+        margin: 0;
+        overflow-x: hidden;
+        padding-top: 83px;
+        padding-bottom: 20px;
+    }
+    .left-menu .api-document-menu ul {
+        position: relative;
+    }
+    .left-menu .mobile-menu-closer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 2;
+        background-color: rgba(50, 63, 76, 0.5);
+        opacity: 0;
+        visibility: hidden;
+    }
+    html.menu-opened .left-menu .mobile-menu-closer {
+        opacity: 1;
+        visibility: visible;
+    }
+    html.menu-opened .left-menu .api-document-menu {
+        right: 0;
+    }
+    .left-menu .api-document-logo {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 4;
+        background-color: #f4f5f8;
+    }
+    .api-document-logo .logo {
+        margin-right: 65px;
+    }
+    .api-document-page {
+        margin-left: 0;
+        padding-top: 83px;
+    }
+    .burger-menu-icon {
+        display: block !important;
+    }
+}
+
+/* burger-menu-icon
+----------------------------------------------------------------------------------------*/
+.burger-menu-icon {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0;
+    position: absolute;
+    right: 26px;
+    top: 26px;
+    display: none;
+}
+.burger-menu-icon .line {
+    fill: none;
+    stroke: #000;
+    stroke-width: 6;
+    transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1), stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.burger-menu-icon .line1 {
+    stroke-dasharray: 60 207;
+    stroke-width: 6;
+}
+.burger-menu-icon .line2 {
+    stroke-dasharray: 60 60;
+    stroke-width: 6;
+}
+.burger-menu-icon .line3 {
+    stroke-dasharray: 60 207;
+    stroke-width: 6;
+}
+html.menu-opened .burger-menu-icon .line1 {
+    stroke-dasharray: 90 207;
+    stroke-dashoffset: -134;
+    stroke-width: 6;
+}
+html.menu-opened .burger-menu-icon .line2 {
+    stroke-dasharray: 1 60;
+    stroke-dashoffset: -30;
+    stroke-width: 6;
+}
+html.menu-opened .burger-menu-icon .line3 {
+    stroke-dasharray: 90 207;
+    stroke-dashoffset: -134;
+    stroke-width: 6;
+}
+
+/* BROWSER AND NON-SEMANTIC STYLING
+----------------------------------------------------------------------------------------*/
+
+.cf:before,
+.cf:after {
+    content: "";
+    display: block;
+}
+.cf:after {
+    clear: both;
+}
+.ie6 .cf {
+    zoom: 1;
+}
+
+.api-document pre {
+    background: transparent !important;
+}
+
+.api-document-detail {
+    padding: 25px;
+}
+.api-document-detail-image {
+    border-radius: 10px;
+}
+
+.api-document-page .api-document-single-content p {
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+.api-document-back-menu {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.api-document-back-menu li {
+    padding: 6px 0 10px 30px !important;
+}
+
+.api-document-back-menu li:hover {
+    background-color: #dcdee9;
+}
+
+.api-document-back-menu li a {
+    padding: 0 !important;
+    position: relative;
+    top: 10px;
+    color: #777a7a;
+}
+
+.api-document-copy-buttons {
+    padding: 0 25px;
+}
+
+.api-document-copy-buttons .copy-button {
+    width: 100%;
+    position: relative;
+    justify-content: left;
+    display: flex;
+}
+
+.api-document-copy-buttons .copy-button pre {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+.copy-button-title {
+    float: left;
+    margin-right: 10px;
+}
+
+.copy-button pre {
+    background: rgb(68, 68, 68) !important;
+}
+
+.sms-template-replace-input div {
+    margin: 0 10px;
+    /* display: block; */
+    margin-bottom: 10px;
+}
+
+.sms-template-replace-input div div {
+    margin: 0 !important;
+    /* display: block; */
+}
+
+.upload-agreement-dropzone {
+    width: 480px;
+}
+
+@media only screen and (max-width: 680px) {
+    .upload-agreement-dropzone {
+        width: auto;
+    }
+}
+
+.dragging-helper-class div {
+    font-family: Helvetica Neue, Helvetica, sans-serif;
+    background-color: white;
+}
+
+.dragging-helper-class .shadow{
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
+}
+
+.dragging-helper-class {
+    list-style: none;
+}
+
+
+.document-image-border {
+    border: 1px solid #e8e9eb;
+}
+

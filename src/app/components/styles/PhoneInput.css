@@ -1,0 +1,23 @@
+.dropInput {
+    position: relative;
+}
+
+.dropdownContainer {
+    position: relative;
+}
+
+.dropdownContainer .dropdown {
+    position: absolute;
+    top: 25%;
+    z-index: 10000;
+    width: 60px;
+}
+
+/* select {
+    border: none;
+}
+
+select:focus {
+    outline-style: none;
+    box-shadow: none;
+} */
