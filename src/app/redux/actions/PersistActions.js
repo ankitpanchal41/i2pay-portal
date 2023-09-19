@@ -32,7 +32,6 @@ export const DELETE_INVOICE = "DELETE_INVOICE";
 export const CHANGE_APPLICATION_STATUS = "CHANGE_APPLICATION_STATUS";
 export const CHANGE_MOBILE_VERIFICATION = "CHANGE_MOBILE_VERIFICATION";
 export const CHANGE_GOOGLE_AUTH_VERIFICATION = "CHANGE_GOOGLE_AUTH_VERIFICATION";
-export const CHANGE_LOGIN_START = "CHANGE_LOGIN_START";
 
 export const loginUser = (data) => ({
     type: LOGIN_USER,
@@ -151,9 +150,4 @@ export const changeMobileVerification = (status) => ({
 export const changeGoogleAuthVerification = (status) => ({
     type: CHANGE_GOOGLE_AUTH_VERIFICATION,
     data: status,
-});
-
-export const changeLoginStart = (data) => ({
-    type: CHANGE_LOGIN_START,
-    data: data,
 });

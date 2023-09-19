@@ -46,7 +46,7 @@ function checkAspectRatio(value, width, height) {
     });
 }
 
-function emailValidation() {
+export function emailValidation() {
     return Yup.string().email(messages.email.invalid).required(messages.email.required);
 }
 
@@ -86,7 +86,7 @@ function collectionBannerImageValidation(msg) {
         });
 }
 
-function mobileValidation() {
+export function mobileValidation() {
     return Yup.string()
         .trim()
         .required(messages.mobile.required)
@@ -777,14 +777,14 @@ export const payoutSchema = Yup.object().shape({
     email: emailValidation(),
     phone: mobileValidation(),
     address: Yup.string().required(messages.address.required),
-    account_no: Yup.string()
-        .required(messages.account_no.required)
-        .min(9, "Please enter minimum 9 digit")
-        .max(18, "Please enter maximum 18 digit"),
-    ifsc_code: Yup.string()
-        .required(messages.ifsc_code.required)
-        .matches(/^[A-Z]{4}0[A-Z0-9]{6}$/, "Please enter valid IFSC code"),
-    payout_mode: Yup.string().required(messages.payout_mode.required),
+    // account_no: Yup.string()
+    //     .required(messages.account_no.required)
+    //     .min(9, "Please enter minimum 9 digit")
+    //     .max(18, "Please enter maximum 18 digit"),
+    // ifsc_code: Yup.string()
+    //     .required(messages.ifsc_code.required)
+    //     .matches(/^[A-Z]{4}0[A-Z0-9]{6}$/, "Please enter valid IFSC code"),
+    // payout_mode: Yup.string().required(messages.payout_mode.required),
     // amount: Yup.number().required(messages.amount.required),
 });
 

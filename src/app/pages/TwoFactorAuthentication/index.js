@@ -28,10 +28,6 @@ const TwoFactorAuthentication = () => {
 
     const [isLoading, setIsLoading] = useState(false);
 
-    console.log({ userData });
-
-    console.log("userData?.data?.has_mobile_no_verified", userData?.data?.has_google_auth_activated);
-
     useEffect(() => {
         if (isVerifyMobile === "1") {
             onClickEnableVerification();
@@ -43,11 +39,12 @@ const TwoFactorAuthentication = () => {
             setIsLoading(true);
             const payload = {
                 mobile_no: userData?.data?.mobile_no,
+                country_code: userData?.data?.country_code,
                 type: "mobile",
             };
 
             const data = await resendOtp(payload);
-            console.log({ data });
+
             if (data?.responseCode === 200) {
                 // setMobileSysOtp(data?.data?.otp_mobile);
                 // setTimeRemainingMobile(60);
@@ -57,7 +54,6 @@ const TwoFactorAuthentication = () => {
                 setIsOTPVisible(true);
             }
         } catch (error) {
-            console.log("error", error);
         } finally {
             setIsLoading(false);
         }
@@ -72,14 +68,13 @@ const TwoFactorAuthentication = () => {
             };
 
             const data = await verifyMobileOtp(payload);
-            console.log({ data });
+
             if (data?.responseCode === 200) {
                 setIsOTPVisible(false);
                 setInitialValuesOTP({ otp: "" });
                 dispatch(changeMobileVerification(data?.data));
             }
         } catch (error) {
-            console.log("error", error);
         } finally {
             setIsLoading(false);
         }
@@ -95,7 +90,7 @@ const TwoFactorAuthentication = () => {
             secretCode: userData?.data?.secret_code,
         };
         const data = await googleAuthPair(payload);
-        console.log("DATAS", { data });
+
         if (data) {
             const urlRegex = /(((https?:\/\/)|(www\.))[^\s]+)/g;
             let image = data.match(urlRegex);
@@ -345,13 +340,13 @@ const TwoFactorAuthentication = () => {
                                     {/* <div className="px-10 pt-3 sm:whitespace-normal font-medium text-lg text-center">
                                         One time password (OTP) has been sent to your registered +91 9979931298 mobile number.
                                     </div> */}
-                                    <em className="pb-6 text-center">
+                                    {/* <em className="pb-6 text-center">
                                         <b>One time password (OTP)</b> has been sent to your registered{" "}
                                         <b>
                                             {userData?.data?.country_code} {userData?.data?.mobile_no} Mobile Number
                                         </b>
                                         .
-                                    </em>
+                                    </em> */}
                                     <div className="pb-6 text-center text-[12px] font-normal text-[#3B4863]">
                                         <span className="font-medium text-[14px]">One time password (OTP)</span> has been sent to your
                                         registered{" "}

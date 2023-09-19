@@ -20,7 +20,6 @@ function* getAPIKeySaga(action) {
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         action.callBack();
     }
@@ -30,14 +29,12 @@ function* addAPIKeySaga(action) {
     try {
         const result = yield call(addAPIKeyData, action.payload);
         if (result?.responseCode === 200) {
-            console.log({ result });
             yield put({
                 type: ADD_API_KEY_RESPONSE,
                 data: result?.data,
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         action.callBack();
     }
@@ -47,14 +44,12 @@ function* deleteAPIKeySaga(action) {
     try {
         const result = yield call(deleteAPIKeyData, action.payload);
         if (result?.responseCode === 200) {
-            console.log({ result });
             yield put({
                 type: DELETE_API_KEY_RESPONSE,
                 data: result?.data,
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         action.callBack();
     }

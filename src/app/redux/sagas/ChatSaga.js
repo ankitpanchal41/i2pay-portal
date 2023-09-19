@@ -15,11 +15,10 @@ function* getTransactionStatusSaga(data) {
         if (result?.responseCode === 200) {
             yield put({
                 type: GET_TRANSACTION_CHART_RESPONSE,
-                data:  result?.data,
+                data: result?.data,
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         data?.callback();
     }
@@ -31,11 +30,10 @@ function* getConnectorTransactionSaga(data) {
         if (result?.responseCode === 200) {
             yield put({
                 type: GET_CONNECTOR_TRANSACTION_CHART_RESPONSE,
-                data:  result?.data,
+                data: result?.data,
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         data?.callback();
     }
@@ -47,11 +45,10 @@ function* getPaymentMethodTransactionSaga(data) {
         if (result.responseCode === 200) {
             yield put({
                 type: GET_PAYMENT_METHOD_TRANSACTION_CHART_RESPONSE,
-                data:  result?.data,
+                data: result?.data,
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         data?.callback();
     }

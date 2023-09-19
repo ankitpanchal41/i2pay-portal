@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 
 export const showToastMessage = (text, responseCode, options) => {
-    const type = responseCode === 200 ? "success" : "error";
+    const type = responseCode === 200 ? "success" : responseCode === "info" ? "info" : "error";
 
     const toastAlert = toast?.[type || "success"];
 

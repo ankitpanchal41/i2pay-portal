@@ -42,8 +42,6 @@ const MultipleDropzone = ({
         (files) => {
             const totalFilesAllowed = maxFiles - images.length;
 
-            // console.log({ files });
-
             if (totalFilesAllowed > 0) {
                 const previews = files.map((file) => ({ id: UUID(), preview: URL.createObjectURL(file), ...file }));
                 setImages((oImages) => [...oImages, ...previews]);
@@ -63,7 +61,7 @@ const MultipleDropzone = ({
             if (type?.length > 0) {
                 type.map((item) => {
                     const data = item?.split("/");
-                    // console.log({ data });
+
                     if (displayType !== "") {
                         displayType =
                             data[1] === "vnd.openxmlformats-officedocument.spreadsheetml.sheet"
@@ -81,7 +79,6 @@ const MultipleDropzone = ({
                     }
                 });
             }
-            console.log({ fileRejections });
 
             let visibleError = true;
             fileRejections.forEach((file) => {
@@ -113,7 +110,6 @@ const MultipleDropzone = ({
 
     const removeImage = useCallback(
         (e, id, preview) => {
-            console.log(e, id, preview);
             if (preview?.includes("blob:") || !maxFiles || maxFiles <= 1) {
                 e.stopPropagation();
                 if (disabled) return;
@@ -138,7 +134,6 @@ const MultipleDropzone = ({
         },
         [images, disabled, acceptedFiles, setFieldValue, name],
     );
-    console.log({ values });
 
     const onRemoveMultipleImageData = async (id, values) => {
         setIsLoadingMultiImages(true);
@@ -148,7 +143,6 @@ const MultipleDropzone = ({
 
     useEffect(() => {
         if (setFieldValue && acceptedFiles.length) {
-            console.log({ values }, [...values, ...acceptedFiles]?.length, maxFiles);
             if ([...values, ...acceptedFiles]?.length > maxFiles) {
                 showToastMessage(`Please upload maximum ${maxFiles} files.`, 500);
                 return false;
@@ -239,7 +233,7 @@ const MultipleDropzone = ({
                 ? values?.map((file) => ({ id: UUID(), preview: URL.createObjectURL(file), ...file }))
                 : [values];
         }
-        console.log({ previews });
+
         setImages(previews);
     }, [values]);
 

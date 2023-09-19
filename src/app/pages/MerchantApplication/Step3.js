@@ -191,6 +191,7 @@ const Step3 = ({ onNextClick, changeStepNumber, stepValues, onPreviousClick, dis
                             <div className={disabled ? "bg-slate-100" : ""}>
                                 <Select
                                     isDisabled={disabled}
+                                    isClearable
                                     value={countryCodesApplication?.find((item) => item?.code === values?.share_holder_country)}
                                     styles={colourStyles}
                                     style={{ boxShadow: "none" }}

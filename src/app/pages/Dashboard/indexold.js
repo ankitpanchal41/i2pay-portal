@@ -5,13 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { TOTAL_MERCHANT_APPLICATION_STEP } from "../../utils/constants";
 import { getConnectorTransactionRequest, getPaymentMethodTransactionRequest, getTransactionStatusRequest } from "../../redux/actions/Chart";
+import { changeLoginStart } from "../../redux/actions/Product";
 import { SET_CURRENCY_TYPE_REQUEST } from "../../redux/actions/Menu";
 import { Currency } from "../../utils/currency";
 import { decode } from "html-entities";
 import "react-datepicker/dist/react-datepicker.css";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { detailStart, changeLoginStart } from "../../redux/actions/PersistActions";
+import { detailStart } from "../../redux/actions/PersistActions";
 
 const DashboardCard = React.lazy(() => import("./dashboardCard"));
 const EducationCard = React.lazy(() => import("./educationCard"));
@@ -102,9 +103,7 @@ const Dashboard = () => {
     }, [connectorStartDate, connectorEndDate, dispatch, currencyValue]);
 
     useEffect(() => {
-        console.log("1111", { currencyValue });
         if (currencyValue) {
-            console.log("2222", { currencyValue });
             const payload = {
                 currency: currencyValue,
                 from: paymentMethodStartDate && paymentMethodEndDate ? moment(paymentMethodStartDate).format("DD/MM/YYYY") : "",
@@ -502,7 +501,7 @@ const Dashboard = () => {
             <div className="content">
                 <div className="flex flex-col md:flex-row justify-between items-center">
                     <div className="lg:text-4xl mb-5 mt-8 font-semibold text-2xl dark:text-white">
-                        Welcome to Exotic {userData?.data?.name || ""} 😊
+                        Welcome to I2pay {userData?.data?.name || ""} 😊
                     </div>
                     <div className="md:w-64 w-full">
                         <Select

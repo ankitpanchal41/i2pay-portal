@@ -124,13 +124,14 @@ export const TypeOfEntities = [
     { value: "4", label: "Limited Liability partnership Company(LLP)" },
     { value: "5", label: "Sole Proprietorship" },
     { value: "6", label: "Trust" },
-]
+];
 
 export const PayoutMode = [
     { value: "IMPS", label: "IMPS" },
     { value: "NEFT", label: "NEFT" },
     { value: "RTGS", label: "RTGS" },
-]
+];
+
 export const AutoSplitPayment = [
     { value: 0, label: "NO" },
     { value: 1, label: "YES" },

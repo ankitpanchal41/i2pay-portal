@@ -25,7 +25,6 @@ function* getApplicationStepSaga(data) {
             yield put(getStepDataEnd({ data: result?.data, step: data?.payload?.step }));
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         // yield put(setLoading(false));
         data?.callback();
@@ -40,7 +39,7 @@ function* editApplicationStepSaga(data) {
     try {
         // yield put(setLoading(true));
         // yield put({ type: SET_LOADER, newState: true });
-        console.log("TRY START");
+
         const result = yield call(authApiHandlerPost, apiRoutes.editApplicationStep(data?.stepNumber), data?.payload);
         if (result?.responseCode === 200) {
             let response = {};
@@ -50,11 +49,8 @@ function* editApplicationStepSaga(data) {
             yield put(editStepDataEnd({ data: response, step: data?.stepNumber, isCreate: false }));
             data?.callback(result);
         }
-        console.log("TRY END");
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
-        console.log("FINALLY CALLED");
         // yield put(setLoading(false));
         yield put({ type: SET_LOADER, newState: false });
         data?.callback();
@@ -89,7 +85,7 @@ function* deleteApplicationSaga({ payload, deleteType, id, callback }) {
     try {
         yield put(setLoading(true));
         const result = yield call(handleDirectorShareholderDelete, payload, deleteType);
-        console.log(result);
+
         if (result?.responseCode === 200) {
             yield put(deleteDirectorShareholderEnd(id, deleteType));
             if (callback) {
@@ -97,7 +93,6 @@ function* deleteApplicationSaga({ payload, deleteType, id, callback }) {
             }
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         yield put(setLoading(false));
     }
@@ -110,12 +105,11 @@ function* watchDeleteApplicationSaga() {
 function* getApplicationListSaga({ callback }) {
     try {
         const result = yield call(handleApplicationList);
-        console.log(result);
+
         if (result?.responseCode === 200) {
             yield put(getApplicationListEnd(result?.data));
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         callback();
     }

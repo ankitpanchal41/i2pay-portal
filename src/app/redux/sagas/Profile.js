@@ -6,14 +6,12 @@ function* setProfilePicSaga(action) {
     try {
         const result = yield call(setProfilePic, action.payload);
         if (result?.responseCode === 200) {
-            console.log({ result });
             yield put({
                 type: SET_PROFILE_RESPONSE,
                 data: result,
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         action.callBack();
     }

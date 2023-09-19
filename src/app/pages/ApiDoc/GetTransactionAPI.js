@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, { useRef, useState } from "react";
 import { dark } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import { useNavigate } from "react-router";
 import * as Icon from "react-feather";
@@ -6,9 +6,8 @@ import AwesomeSlider from "react-awesome-slider";
 import withAutoplay from "react-awesome-slider/dist/autoplay";
 const AutoplaySlider = withAutoplay(AwesomeSlider);
 const SyntaxHighlighter = React.lazy(() => import("react-syntax-highlighter"));
-const  Scrollspy = React.lazy(() => import("react-scrollspy"));
+const Scrollspy = React.lazy(() => import("react-scrollspy"));
 const ApiDocumentImageModal = React.lazy(() => import("../../components/common/ApiDocumentImageModal"));
-
 
 const GetTransactionAPI = () => {
     const myRef = useRef(null);
@@ -22,13 +21,11 @@ const GetTransactionAPI = () => {
     };
 
     const onClickBanner = (item) => {
-        console.log(item);
         setVisibleBannerModal(!visibleBannerModal);
         const images = [];
         images.push(item);
         setBannerImages(images);
     };
-
 
     const goToSection = (scrollToID, el) => {
         let target = document.getElementById(scrollToID);
@@ -46,7 +43,6 @@ const GetTransactionAPI = () => {
 
     return (
         <>
-
             <ApiDocumentImageModal removeHeader={false} removeFooter={false} visible={visibleBannerModal} onClose={onClickBanner}>
                 <div className="">
                     <AutoplaySlider
@@ -86,7 +82,7 @@ const GetTransactionAPI = () => {
                     <ul>
                         <li className="flex" onClick={onClickBack}>
                             <Icon.ChevronLeft className="mr-2 cursor-pointer relative top-1" size={30} color="#777A7A" />
-                            <a className="" style={{cursor: "pointer"}}>
+                            <a className="" style={{ cursor: "pointer" }}>
                                 BACK
                             </a>
                         </li>
@@ -109,7 +105,6 @@ const GetTransactionAPI = () => {
             <div className="api-document-page">
                 <div className="api-document-code"></div>
                 <div ref={myRef} className="api-document">
-
                     {/* START: HOW TO INTEGRATE API */}
                     <div className="overflow-hidden api-document-section" id="how-to-integrate-api">
                         <h2>How to integrate API</h2>
@@ -117,19 +112,17 @@ const GetTransactionAPI = () => {
                             Our platform’s payment API can be integrated with any platform of your choice. You need to send a payment
                             request with payload in JSON format to our API Endpoint. Make sure you have whitelisted all your server IPs at{" "}
                             <strong>
-                                <a href={process.env.REACT_APP_MERCHANT_URL + `ip-whitelist`}
-                                   target="_blank">
+                                <a href={process.env.REACT_APP_MERCHANT_URL + `ip-whitelist`} target="_blank">
                                     {process.env.REACT_APP_MERCHANT_URL}ip-whitelist
                                 </a>
-                            </strong>{" "}.
-
+                            </strong>{" "}
+                            .
                         </p>
 
                         <p className="mt-3">
-                            After that, create an API key using {" "}
+                            After that, create an API key using{" "}
                             <strong>
-                                <a href={process.env.REACT_APP_MERCHANT_URL + `api-key`}
-                                   target="_blank">
+                                <a href={process.env.REACT_APP_MERCHANT_URL + `api-key`} target="_blank">
                                     {process.env.REACT_APP_MERCHANT_URL}api-key
                                 </a>
                             </strong>{" "}
@@ -158,9 +151,6 @@ API Endpoint
 curl -X POST ${process.env.REACT_APP_API_URL}payment/get/transaction
 `}
                         </SyntaxHighlighter>
-
-
-
                         <SyntaxHighlighter language="json" style={dark}>
                             {`
 EXAMPLE: Request Headers
@@ -170,7 +160,6 @@ EXAMPLE: Request Headers
     "Authorization": API_KEY,
 }`}
                         </SyntaxHighlighter>
-
                         <br /> <br /> <br />
                         <h4>REQUEST PARAMETERS</h4>
                         <SyntaxHighlighter language="json" style={dark}>
@@ -182,43 +171,38 @@ EXAMPLE: Request Parameters
     "order_id": "I7EHJ0m4-FpI0-Q9W3-16493264720K"  
 }`}
                         </SyntaxHighlighter>
-
                         <table className="central-overflow-x">
                             <thead>
-                            <tr>
-                                <th>Parameters</th>
-                                <th>Required</th>
-                                <th>Data Type</th>
-                                <th>Description</th>
-                            </tr>
+                                <tr>
+                                    <th>Parameters</th>
+                                    <th>Required</th>
+                                    <th>Data Type</th>
+                                    <th>Description</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>merchant_ref</td>
-                                <td>Yes (When order_id is not present)</td>
-                                <td>String</td>
-                                <td>Valid Email address of User</td>
-                            </tr>
-                            <tr>
-                                <td>order_id</td>
-                                <td>Yes (When merchant_ref is not present)</td>
-                                <td>Decimal</td>
-                                <td>Amount Value</td>
-                            </tr>
+                                <tr>
+                                    <td>merchant_ref</td>
+                                    <td>Yes (When order_id is not present)</td>
+                                    <td>String</td>
+                                    <td>Valid Email address of User</td>
+                                </tr>
+                                <tr>
+                                    <td>order_id</td>
+                                    <td>Yes (When merchant_ref is not present)</td>
+                                    <td>Decimal</td>
+                                    <td>Amount Value</td>
+                                </tr>
                             </tbody>
                         </table>
-
-
-
                         <br /> <br /> <br />
                         <h4>RESPONSE PARAMETERS</h4>
                         <p>
-                            Our server will validate the request and then send the response in JSON format. The response will contain the below parameters. In the successful response as shown you will get all transactions.
+                            Our server will validate the request and then send the response in JSON format. The response will contain the
+                            below parameters. In the successful response as shown you will get all transactions.
                             <br />
                         </p>
-
                         <br />
-
                         <div className="mt-12"></div>
                         <br />
                         <SyntaxHighlighter language="json" style={dark}>
@@ -248,8 +232,6 @@ EXAMPLE: Successful Response
     }
 }`}
                         </SyntaxHighlighter>
-
-
                         <div className="mt-12"></div>
                         <SyntaxHighlighter language="json" style={dark}>
                             {`
@@ -272,7 +254,6 @@ EXAMPLE: Error Response
                         <p>If your API request failed due to validation, the response JSON format will be similar as shown:</p>
                     </div>
                     {/*END: GET TRANSACTION*/}
-
                 </div>
                 <div className="api-document-code"></div>
             </div>

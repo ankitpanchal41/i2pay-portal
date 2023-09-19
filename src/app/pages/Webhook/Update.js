@@ -3,14 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { Formik, Form } from "formik";
 import Input from "../../components/common/forms/Input";
-import {  webhookSchema } from "../../utils/validationSchema";
+import Dropzone from "../../components/common/forms/Dropzone";
+import * as Icon from "react-feather";
+import { productDetails, webhookSchema } from "../../utils/validationSchema";
 import { messages } from "../../messages/merchantRegister";
+import { createProductStart } from "../../redux/actions/Product";
 import MiniLoader from "../../components/common/MiniLoader";
 import Heading from "../../components/common/Heading";
 import Select from "react-select";
+import { decode } from "html-entities";
 import { ClipLoader } from "react-spinners";
 import { eventWebhookData } from "../../redux/services/Webhook";
-import {  DETAIL_WEBHOOK_REQUEST, UPDATE_WEBHOOK_REQUEST } from "../../redux/actions/Webhook";
+import { ADD_WEBHOOK_REQUEST, DETAIL_WEBHOOK_REQUEST, UPDATE_WEBHOOK_REQUEST } from "../../redux/actions/Webhook";
 
 const WebhookUpdate = () => {
     const dispatch = useDispatch();
@@ -98,11 +102,10 @@ const WebhookUpdate = () => {
                 e?.options?.map((o) => {
                     if (detailWebhook?.topics?.includes(o?.value)) {
                         topicValues.push(o);
-                        // console.log(e);
                     }
                 });
             });
-            console.log({ topicValues });
+
             setInitialValues({
                 endpoint_url: detailWebhook?.endpoint_url,
                 description: detailWebhook?.description,
@@ -208,7 +211,6 @@ const WebhookUpdate = () => {
                                                                     style={{ boxShadow: "none" }}
                                                                     options={eventOptions}
                                                                     onChange={(e) => {
-                                                                        console.log(e);
                                                                         setFieldValue("topics", e);
                                                                     }}
                                                                     placeholder={messages.webhook.topicsPlaceholder}
@@ -253,8 +255,7 @@ const WebhookUpdate = () => {
                                                                     type="buttons"
                                                                     className="btn btn-primary w-24 ml-2"
                                                                     onClick={handleSubmit}
-                                                                    disabled={isSubmiting}
-                                                                >
+                                                                    disabled={isSubmiting}>
                                                                     Save <MiniLoader isLoading={isSubmiting} />
                                                                 </button>
                                                             </div>

@@ -195,11 +195,13 @@ const IPWhiteList = () => {
 
                                         <td className="table-report__action text-center w-10">
                                             <div className="flex justify-center">
-                                                <Link
-                                                    to={`/ip-whitelist/${item?.id}/edit`}
-                                                    className="font-medium whitespace-nowrap flex items-center cursor-pointer text-slate-900 dark:text-slate-300 mr-3">
-                                                    <Icon.Edit size={15} /> &nbsp;
-                                                </Link>
+                                                {item?.is_active !== 1 && (
+                                                    <Link
+                                                        to={`/ip-whitelist/${item?.id}/edit`}
+                                                        className="font-medium whitespace-nowrap flex items-center cursor-pointer text-slate-900 dark:text-slate-300 mr-3">
+                                                        <Icon.Edit size={15} /> &nbsp;
+                                                    </Link>
+                                                )}
 
                                                 <div
                                                     className={

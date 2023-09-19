@@ -41,8 +41,6 @@ const SoreLogoDropzone = ({
         (files) => {
             const totalFilesAllowed = maxFiles - images.length;
 
-            // console.log({ files });
-
             if (totalFilesAllowed > 0) {
                 const previews = files.map((file) => ({ id: UUID(), preview: URL.createObjectURL(file), ...file }));
                 setImages((oImages) => [...oImages, ...previews]);
@@ -62,7 +60,7 @@ const SoreLogoDropzone = ({
             if (type?.length > 0) {
                 type.map((item) => {
                     const data = item?.split("/");
-                    // console.log({ data });
+
                     if (displayType !== "") {
                         displayType =
                             data[1] === "vnd.openxmlformats-officedocument.spreadsheetml.sheet"
@@ -138,7 +136,6 @@ const SoreLogoDropzone = ({
 
     useEffect(() => {
         if (setFieldValue && acceptedFiles.length) {
-            console.log({ name, acceptedFiles });
             uploadImage(acceptedFiles[0]);
         }
     }, [acceptedFiles]);
@@ -169,7 +166,7 @@ const SoreLogoDropzone = ({
 
     const uploadImage = async (file) => {
         const base64 = await convertBase64(file);
-        console.log({ name, base64 });
+
         setFieldValue(name, base64);
     };
 

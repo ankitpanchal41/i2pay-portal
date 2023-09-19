@@ -3,8 +3,6 @@ import { showToastMessage } from "../../utils/methods";
 import Rest from "../../apiMethod/index";
 
 export const uploadAgreement = async (payload) => {
-
-    console.log("payload", payload);
     try {
         const { data } = await Rest.post(apiRoutes.uploadAgreement, payload, true);
 

@@ -43,7 +43,7 @@ const PhoneInput = ({
                 </div>
             )}
             <div className={marginTopNull ? "relative rounded-md shadow-sm" : "mt-5 relative rounded-md shadow-sm"}>
-                <div className="absolute inset-y-0 left-0 flex items-center z-[100]" style={{ width: 70 }}>
+                <div className="absolute inset-y-0 left-0 flex items-center z-[9999]" style={{ width: 70 }}>
                     <label htmlFor="countryCode" className="sr-only">
                         Code
                     </label>

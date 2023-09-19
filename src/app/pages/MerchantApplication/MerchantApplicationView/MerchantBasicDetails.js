@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as Icon from "react-feather";
 import Images from "../../../../assets/images";
 import { TypeOfEntities } from "../../../utils/staticDropdown";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const MerchantBasicDetails = ({ name, email, address, phoneNo, status, reason, profileImage, entitiesType }) => {
+const MerchantBasicDetails = ({ name, email, id, address, phoneNo, status, reason, profileImage, entitiesType, agreementToken }) => {
     const _renderApplicationStatus = () => {
         return (
             <div className="relative flex flex-col lg:flex-row text-center before:hidden before:lg:block before:absolute before:h-[3px] before:top-0 before:bottom-0 before:mt-4 before:bg-slate-100 before:dark:bg-primary mb-3">
@@ -33,6 +35,13 @@ const MerchantBasicDetails = ({ name, email, address, phoneNo, status, reason, p
                             Agreement Send{" "}
                         </span>
                         {reason && <div className="mt-4 intro-y p-3 rounded-md text-slate-400 dark:text-slate-100 text-xs">{reason}</div>}
+                        <div className="mt-5">
+                            <Link
+                                to={`/agreement-documents-upload?userId=${id}&token=${agreementToken}`}
+                                className="py-2 px-4 rounded-full text-xs bg-success text-white cursor-pointer font-medium">
+                                Upload Agreement{" "}
+                            </Link>
+                        </div>
                     </div>
                 )}
                 {status == 5 && (
@@ -46,9 +55,19 @@ const MerchantBasicDetails = ({ name, email, address, phoneNo, status, reason, p
                 {status == 6 && (
                     <div className="">
                         {reason ? (
-                            <span className="py-2 px-4 rounded-full text-xs bg-danger text-white cursor-pointer font-medium">
-                                Reassigned Agreement{" "}
-                            </span>
+                            <>
+                                <span className="py-2 px-4 rounded-full text-xs bg-danger text-white cursor-pointer font-medium">
+                                    Reassigned Agreement{" "}
+                                </span>
+
+                                <div className="mt-5">
+                                    <Link
+                                        to={`/agreement-documents-upload?userId=${id}&token=${agreementToken}`}
+                                        className="py-2 px-4 rounded-full text-xs bg-success text-white cursor-pointer font-medium">
+                                        Upload Agreement{" "}
+                                    </Link>
+                                </div>
+                            </>
                         ) : (
                             <span className="py-2 px-4 rounded-full text-xs bg-success text-white cursor-pointer font-medium">
                                 Signed Agreement{" "}
@@ -57,6 +76,7 @@ const MerchantBasicDetails = ({ name, email, address, phoneNo, status, reason, p
                         {reason && <div className="mt-4 intro-y p-3 rounded-md text-slate-400 dark:text-slate-100 text-xs">{reason}</div>}
                     </div>
                 )}
+
                 {status == 7 && (
                     <div className="">
                         <span className="py-2 px-4 rounded-full text-xs bg-success text-white cursor-pointer font-medium">
@@ -65,6 +85,7 @@ const MerchantBasicDetails = ({ name, email, address, phoneNo, status, reason, p
                         {reason && <div className="mt-4 intro-y p-3 rounded-md text-slate-400 dark:text-slate-100 text-xs">{reason}</div>}
                     </div>
                 )}
+
                 {status == 8 && (
                     <div className="">
                         <span className="py-2 px-4 rounded-full text-xs bg-danger text-white cursor-pointer font-medium">
@@ -105,7 +126,11 @@ const MerchantBasicDetails = ({ name, email, address, phoneNo, status, reason, p
                             {name && <div className="mb-1 truncate sm:whitespace-normal font-medium text-lg">{name}</div>}
                             {email && <div className="truncate sm:whitespace-normal flex items-center mb-2">{email} </div>}
                             {phoneNo && <div className="truncate sm:whitespace-normal flex items-center">{phoneNo}</div>}
-                            {entitiesType && <div className="truncate sm:whitespace-normal flex items-center">{TypeOfEntities?.find(i => i?.value === entitiesType)?.label}</div>}
+                            {entitiesType && (
+                                <div className="truncate sm:whitespace-normal flex items-center">
+                                    {TypeOfEntities?.find((i) => i?.value === entitiesType)?.label}
+                                </div>
+                            )}
                         </div>
                     </div>
                 )}

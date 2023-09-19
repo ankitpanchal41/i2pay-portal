@@ -57,16 +57,15 @@ const ConnectorReducer = (state = initialState, action) => {
             };
 
         case UPDATE_CONNECTOR_MODE_RESPONSE:
-            console.log({ state, action });
-            const data = []
+            const data = [];
             state?.connector?.map((item) => {
                 if (item?.id === action?.data?.connector_id) {
-                    data.push({...item, mode: action?.data?.mode})    
+                    data.push({ ...item, mode: action?.data?.mode });
                 } else {
-                    data.push(item)
+                    data.push(item);
                 }
             });
-            console.log({data})
+
             return {
                 ...state,
                 connector: data,

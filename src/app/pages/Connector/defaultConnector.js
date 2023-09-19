@@ -327,8 +327,6 @@ const DefaultConnector = () => {
             });
         });
 
-        console.log({ payload });
-
         // const payload = {
         //     type_id: item?.type_id,
         //     connector_id: defaultConnectorValue?.[index],
@@ -367,9 +365,9 @@ const DefaultConnector = () => {
         // }
 
         // const errorMessageCustomize = [...errorMessage];
-        // console.log({ errorMessageCustomize });
+
         // errorMessageCustomize[index] = error;
-        // console.log(errorMessageCustomize, percentageValue[index], percentageSwitchConnectorValue[index]);
+
         // setErrorMessage(errorMessageCustomize);
 
         // if (isError) {
@@ -396,8 +394,6 @@ const DefaultConnector = () => {
         }
         setIsLoadingSubmit(false);
     };
-
-    console.log({ amountErrorMessage, percentageErrorMessage });
 
     const _renderHeading = () => {
         return (

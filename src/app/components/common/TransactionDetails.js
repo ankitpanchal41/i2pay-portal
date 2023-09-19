@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import * as Icon from "react-feather";
 import { transactionsFallBackStatusLabel, transactionsStatusLabels } from "../../utils/transactions";
 import NotAvailable from "./status/NotAvailable";
-import { addSplitPaymentData, getSplitTransactionsData, getVendorListData } from "../../redux/services/Transactions";
-import MiniLoader from "./MiniLoader";
-import { decode } from "html-entities";
-import { Currency } from "../../utils/currency";
 import { Formik, Form } from "formik";
 import { vendorsSelectSchema } from "../../utils/validationSchema";
+import MiniLoader from "./MiniLoader";
 import Input from "./forms/Input";
+import { addSplitPaymentData, getSplitTransactionsData, getVendorListData } from "../../redux/services/Transactions";
+import { decode } from "html-entities";
+import { Currency } from "../../utils/currency";
 
 const initialValues = {
     vendors: [],

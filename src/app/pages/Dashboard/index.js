@@ -5,16 +5,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { TOTAL_MERCHANT_APPLICATION_STEP } from "../../utils/constants";
 import { getConnectorTransactionRequest, getPaymentMethodTransactionRequest, getTransactionStatusRequest } from "../../redux/actions/Chart";
+import { changeLoginStart } from "../../redux/actions/Product";
 import { SET_CURRENCY_TYPE_REQUEST } from "../../redux/actions/Menu";
 import { Currency } from "../../utils/currency";
 import { decode } from "html-entities";
 import "react-datepicker/dist/react-datepicker.css";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { detailStart, changeLoginStart } from "../../redux/actions/PersistActions";
+import { detailStart } from "../../redux/actions/PersistActions";
 import OverViewCard from "./OverViewCard";
 import TransactionCounts from "./TransactionCounts";
 import TransactionBox from "./TransactionBox";
+import OnlineStore from "./OnlineStores";
 import ConnectorsCard from "./ConnectorsCard";
 import PlaceholderLoading from "react-placeholder-loading";
 import { getWidgetListRequest } from "../../redux/actions/Dashboard";
@@ -142,9 +144,7 @@ const Dashboard = () => {
     }, [connectorStartDate, connectorEndDate, dispatch, currencyValue]);
 
     useEffect(() => {
-        console.log("1111", { currencyValue });
         if (currencyValue) {
-            console.log("2222", { currencyValue });
             const payload = {
                 currency: currencyValue,
                 from: paymentMethodStartDate && paymentMethodEndDate ? moment(paymentMethodStartDate).format("DD/MM/YYYY") : "",
@@ -173,7 +173,6 @@ const Dashboard = () => {
         }
     }, [currencyValue]);
 
-    console.log({ state });
     // useEffect(() => {
     //     if (state?.chart?.connectorTransaction) {
     //         const dasdasd = [];
@@ -215,53 +214,6 @@ const Dashboard = () => {
             setVisibleBarChart(barChartAmount);
         }
     }, [state?.chart?.paymentMethodTransaction?.value]);
-
-    // const pieOptions = {
-    //     chart: {
-    //         type: "column",
-    //         inverted: true,
-    //         polar: true,
-    //         // marginTop: 25,
-    //     },
-    //     title: {
-    //         text: "Custom start and end angles of pane",
-    //     },
-    //     subtitle: {
-    //         text: "The startAngle <b>(45)</b> and endAngle <b>(315)</b>",
-    //     },
-    //     pane: {
-    //         startAngle: 45,
-    //         endAngle: 315,
-    //     },
-    //     xAxis: {
-    //         tickInterval: 1,
-    //         labels: {
-    //             allowOverlap: true,
-    //             y: -5,
-    //         },
-    //     },
-    //     yAxis: {
-    //         max: 220,
-    //         showLastLabel: true,
-    //     },
-    //     plotOptions: {
-    //         series: {
-    //             pointPadding: 0,
-    //             groupPadding: 0,
-    //             dataLabels: {
-    //                 enabled: true,
-    //                 inside: true,
-    //                 allowOverlap: true,
-    //             },
-    //         },
-    //     },
-    //     series: [
-    //         {
-    //             colorByPoint: true,
-    //             data: [29, 71, 106, 129, 144, 176, 135, 148, 216, 194, 95, 94],
-    //         },
-    //     ],
-    // };
 
     const pieOptions = {
         chart: {
@@ -705,7 +657,7 @@ const Dashboard = () => {
             <div className="content">
                 <div className="flex flex-col md:flex-row justify-between items-center">
                     <div className="mb-5 mt-8 font-semibold text-[26px] dark:text-white">
-                        Welcome to Exotic {userData?.data?.name || ""}
+                        Welcome to I2pay {userData?.data?.name || ""}
                     </div>
                     <div className="flex items-center">
                         <div className="border common-border-color h-[40px] mr-3 flex items-center px-3">
@@ -716,8 +668,8 @@ const Dashboard = () => {
                                     <PlaceholderLoading shape="rect" width={60} height={10} />
                                 ) : (
                                     <>
-                                        {decode(Currency?.find((item) => item?.value === currencyValue)?.symbol)}
-                                        {widgetList?.transaction?.refund_transaction_total}
+                                    {decode(Currency?.find((item) => item?.value === currencyValue)?.symbol)}
+                                    {widgetList?.transaction?.refund_transaction_total}
                                     </>
                                 )}
                             </div>
@@ -729,7 +681,7 @@ const Dashboard = () => {
                                 style={{ boxShadow: "none" }}
                                 options={Currency}
                                 onChange={onChangeCurrency}
-                                className="intro-x login__input form-control block shadow-none z-index-99"
+                                className="intro-x login__input form-control block shadow-none"
                                 getOptionLabel={(e) => (
                                     <div style={{ display: "flex", alignItems: "center" }}>
                                         <span style={{ marginLeft: 5 }}>
@@ -763,26 +715,39 @@ const Dashboard = () => {
                 <OverViewCard data={userData?.data} />
 
                 <div className="grid grid-cols-12 gap-4 mt-4">
-                    <div className="intro-y col-span-12 lg:col-span-9">
-                        <TransactionBox
-                            minHeight={300}
-                            title="Connectors"
-                            rightTitle="View All Connectors"
-                            onClickRightTitle={() => {
-                                navigate("/connector");
-                            }}>
-                            <ConnectorsCard currencyValue={currencyValue} />
-                        </TransactionBox>
-                    </div>
-                    <div className="intro-y col-span-12 lg:col-span-3">
+                    <div className="intro-y col-span-12 lg:col-span-8">
                         <TransactionBox title="Payment Transaction Count" minHeight={300}>
                             <TransactionCounts currencyValue={currencyValue} isLoading={cardLoading} />
                         </TransactionBox>
                     </div>
+                    <div className="intro-y col-span-12 lg:col-span-4">
+                        <div>
+                            <TransactionBox
+                                minHeight={85}
+                                title="Online Store"
+                                rightTitle="View All Store"
+                                onClickRightTitle={() => {
+                                    navigate("/store-front");
+                                }}>
+                                <OnlineStore isLoading={isLoadingTransactionStatus} />
+                            </TransactionBox>
+                        </div>
+                        <div className="mt-4">
+                            <TransactionBox
+                                minHeight={85}
+                                title="Connectors"
+                                rightTitle="View All Connectorse"
+                                onClickRightTitle={() => {
+                                    navigate("/connector");
+                                }}>
+                                <ConnectorsCard currencyValue={currencyValue} />
+                            </TransactionBox>
+                        </div>
+                    </div>
                 </div>
 
                 <div className="grid grid-cols-12 gap-4 mt-4">
-                    <div className="intro-y col-span-12 lg:col-span-6">
+                    <div className="intro-y col-span-12 sm:col-span-4">
                         <TransactionBox
                             height={420}
                             removeBottomPadding
@@ -830,11 +795,32 @@ const Dashboard = () => {
                             )}
                         </TransactionBox>
                     </div>
-                    <div className="intro-y col-span-12 sm:col-span-6">
+                    <div className="intro-y col-span-12 sm:col-span-4">
                         <TransactionBox
                             height={420}
+                            // removeBottomPadding
                             removeFooterIcon
                             title="Transactions Status"
+                            // rightLayout={
+                            //     <div>
+                            //         <div className="z-[1] absolute rounded-l w-10 h-full flex items-center justify-center border border-slate-300 text-slate-500 dark:bg-darkmode-700 dark:border-darkmode-800 dark:text-slate-400 h-38">
+                            //             <Icon.Calendar size={15} />
+                            //         </div>
+                            //         <DatePicker
+                            //             selectsRange={true}
+                            //             startDate={statusStartDate}
+                            //             endDate={statusEndDate}
+                            //             onChange={(update) => {
+                            //                 onChangeStatusDate(update);
+                            //             }}
+                            //             isClearable={true}
+                            //             className="form-control pl-12 text-[10px] w-[190px]"
+                            //             dateFormat="dd/MM/yyyy"
+                            //             placeholderText="Select Date"
+                            //             maxDate={new Date()}
+                            //         />
+                            //     </div>
+                            // }
                             footerLayout={
                                 isLoadingTransactionStatus ? (
                                     <div className="h-[55px] flex items-center px-4 border-t justify-between">
@@ -896,6 +882,54 @@ const Dashboard = () => {
                                 </div>
                             ) : (
                                 <HighchartsReact highcharts={Highcharts} options={pieOptions} />
+                            )}
+                        </TransactionBox>
+                    </div>
+                    <div className="intro-y col-span-12 sm:col-span-4">
+                        <TransactionBox
+                            height={420}
+                            removeBottomPadding
+                            removeFooterIcon
+                            footerTitle="Payment Method"
+                            title="Payment Method Transactions"
+                            // rightLayout={
+                            //     <div>
+                            //         <div className="z-[1] absolute rounded-l w-10 h-full flex items-center justify-center border border-slate-300 text-slate-500 dark:bg-darkmode-700 dark:border-darkmode-800 dark:text-slate-400 h-38">
+                            //             <Icon.Calendar size={15} />
+                            //         </div>
+                            //         <DatePicker
+                            //             selectsRange={true}
+                            //             startDate={paymentMethodStartDate}
+                            //             endDate={paymentMethodEndDate}
+                            //             onChange={(update) => {
+                            //                 onChangePaymentMethodDate(update);
+                            //             }}
+                            //             isClearable={true}
+                            //             className="form-control pl-12 text-[10px] w-[190px]"
+                            //             dateFormat="dd/MM/yyyy"
+                            //             placeholderText="Select Date"
+                            //             maxDate={new Date()}
+                            //         />
+                            //     </div>
+                            // }
+                        >
+                            {isLoadingPaymentMethodTransaction ? (
+                                <div className="flex justify-between items-end">
+                                    <PlaceholderLoading shape="rect" width={30} height={400} />
+                                    <PlaceholderLoading shape="rect" width={30} height={200} />
+                                    <PlaceholderLoading shape="rect" width={30} height={50} />
+                                    <PlaceholderLoading shape="rect" width={30} height={300} />
+                                    <PlaceholderLoading shape="rect" width={30} height={150} />
+                                    <PlaceholderLoading shape="rect" width={30} height={200} />
+                                </div>
+                            ) : state?.chart?.transactionStatus?.length === 0 ? (
+                                <div className="h-full flex items-center justify-center">
+                                    <div className="intro-y col-span-12 flex items-center justify-center text-[#97A3B9] h-[57px]">
+                                        No Transactions Found
+                                    </div>
+                                </div>
+                            ) : (
+                                <HighchartsReact highcharts={Highcharts} options={barOptions} />
                             )}
                         </TransactionBox>
                     </div>

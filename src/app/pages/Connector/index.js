@@ -34,15 +34,16 @@ const Connector = () => {
     const [initialValues, setInitialValues] = useState({});
     const [listingType, setListingType] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+
+    
     const state = useSelector((state) => state);
     const { connector, totalPage } = useSelector((state) => state.connector);
-    console.log("connector", connector);
     const [searchQuery, setSearchQuery] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const [perPage, setPerPage] = useState(10);
     const [isPerPage, setIsPerPage] = useState(false);
     const [isLoadingExport, setIsLoadingExport] = useState(false);
-    const [usePayomatixConnector, setUsePayomatixConnector] = useState(false);
+    const [useI2payConnector, setUseI2payConnector] = useState(false);
     const [editConnectorName, setEditConnectorName] = useState("");
     const [modalItem, setModalItem] = useState({});
     const [typeModal, setTypeModal] = useState(false);
@@ -51,6 +52,8 @@ const Connector = () => {
     const [isLoadingMultipleConnector, setIsLoadingMultipleConnector] = useState(false);
     const [activeConnectorList, setActiveConnectorList] = useState([]);
     const [disableMultipleConnectorValue, setDisableMultipleConnectorValue] = useState(false);
+    const [isPayoutProvider, setIsPayoutProvider] = useState(false);
+    const [modeType, setModeType] = useState();
     const { connector: connectors } = useSelector((state) => state.connector);
 
     useEffect(() => {
@@ -63,15 +66,6 @@ const Connector = () => {
             }),
         );
     }, [currentPage, searchQuery]);
-
-    useEffect(() => {
-        if (isPerPage) {
-            getEnableConnectors();
-            setCurrentPage(1);
-            setIsLoading(true);
-            dispatch(getConnectorsRequest(searchQuery, () => setIsLoading(false)));
-        }
-    }, [perPage]);
 
     const { mode } = useSelector((state) => state.persist);
     const { userData } = useSelector((state) => state.persist);
@@ -124,23 +118,21 @@ const Connector = () => {
     };
 
     const onSubmit = async (value) => {
-        console.log({ value });
-
         let liveValue = {};
         let testValue = {};
-        let is_filled_live_credentials = false;
-        let is_filled_test_credentials = false;
+        let is_filled_live_credentials = 0;
+        let is_filled_test_credentials = 0;
 
         modalData.map((item) => {
             if (value[item?.name]) {
-                is_filled_live_credentials = true;
+                is_filled_live_credentials = 1;
                 liveValue[item?.name] = value[item?.name];
             } else {
                 liveValue[item?.name] = "";
             }
 
             if (value[`${item?.name}_sandbox`]) {
-                is_filled_test_credentials = true;
+                is_filled_test_credentials = 1;
                 testValue[`${item?.name}`] = value[`${item?.name}_sandbox`];
             } else {
                 testValue[`${item?.name}`] = "";
@@ -152,11 +144,7 @@ const Connector = () => {
             types.push(type?.value);
         });
 
-        // console.log({value})
-
         // return false;
-
-        // console.log({ liveValue, testValue, modalData });
 
         // let customizeValue = {};
         // if (Object.keys(liveValue)?.length === modalData?.length && Object.keys(testValue)?.length === modalData?.length) {
@@ -168,7 +156,6 @@ const Connector = () => {
         // } else {
         // }
 
-        // console.log({customizeValue});
         // return false;
         // const is_filled_live_credentials = Object.keys(liveValue)?.length === modalData?.length ? 1 : 0;
         // const is_filled_test_credentials = Object.keys(testValue)?.length === modalData?.length ? 1 : 0;
@@ -178,9 +165,12 @@ const Connector = () => {
             is_active: isActive === 0 ? 1 : 0,
             is_filled_live_credentials,
             is_filled_test_credentials,
+            is_payout_provider: isPayoutProvider,
             mode:
                 is_filled_live_credentials === 1 && is_filled_test_credentials === 1
-                    ? 0
+                    ? modeType
+                        ? modeType
+                        : 0
                     : is_filled_live_credentials === 1
                     ? 1
                     : is_filled_test_credentials === 1
@@ -198,7 +188,6 @@ const Connector = () => {
         //     }
         // }
 
-        // console.log({ payload });
         // return false;
 
         setLoadingId(true);
@@ -222,10 +211,14 @@ const Connector = () => {
     };
 
     const onChangeSwitch = (item, isEdit = false) => {
+        console.log("item?.is_payout_provider", item?.is_payout_provider);
+        setIsPayoutProvider(item?.is_payout_provider);
+        setModeType(item?.mode);
         if (item?.is_active === 1 && !isEdit) {
             setLoadingId(item?.id);
 
-            let payload = { id: item?.id, is_active: 0 };
+            let payload = { id: item?.id, is_active: 0, is_payout_provider: item?.is_payout_provider };
+            console.log({ payload });
 
             const callBack = () => {
                 setLoadingId(false);
@@ -268,8 +261,6 @@ const Connector = () => {
 
                 initialValuesObj[property + "_sandbox"] = item?.test_credentials[property];
 
-                console.log({ initialValuesObj });
-
                 if (liveValue) {
                     validationObject[property] = Yup.string().required(`Please enter ${item?.credential_titles[property]}`);
                 }
@@ -284,11 +275,17 @@ const Connector = () => {
                 }
             }
 
-            initialValuesObj["connector_type"] = item?.selected_connector_type;
+            if (item?.is_payout_provider !== 1) {
+                initialValuesObj["connector_type"] = item?.selected_connector_type;
 
-            validationObject["connector_type"] = Yup.array()
-                .min(1, "Connector Type is required field")
-                .required(`Please select connector type`);
+                validationObject["connector_type"] = Yup.array()
+                    .min(1, "Connector Type is required field")
+                    .required(`Please select connector type`);
+            } else {
+                // initialValuesObj["connector_type"] = item?.selected_connector_type;
+                // validationObject["connector_type"] = Yup.array();
+            }
+
             let validationState = Yup.object().shape(validationObject);
             setValidationState(validationState);
 
@@ -296,7 +293,7 @@ const Connector = () => {
             setConnectorTypes(item?.default_connector_type);
             setEditConnectorName(item?.name);
             setInitialValues(initialValuesObj);
-            setUsePayomatixConnector(item?.use_payomatix_connector);
+            setUseI2payConnector(item?.use_payomatix_connector);
             setModalData(labelArray);
             setSignupURI(item?.signup_url);
             setModalTitle(item?.name);
@@ -318,8 +315,8 @@ const Connector = () => {
         dispatch({ type: UPDATE_CONNECTOR_MODE_REQUEST, payload, callBack });
     };
 
-    // const handleUsePayomatixConnector = (value) => {
-    //     setUsePayomatixConnector(value);
+    // const handleUseI2payConnector = (value) => {
+    //     setUseI2payConnector(value);
 
     //     let validationObject = {};
 
@@ -328,7 +325,7 @@ const Connector = () => {
     //     }
 
     //     let validationState = Yup.object().shape({});
-    //     if (usePayomatixConnector) {
+    //     if (useI2payConnector) {
     //         validationState = Yup.object().shape(validationObject);
     //     }
 
@@ -368,7 +365,7 @@ const Connector = () => {
         setIsLoadingExport(false);
     };
 
-    const onChangeCredential = (values) => {
+    const onChangeCredential = (values, isPayoutProvider) => {
         let isTestRequired = false;
         let isLiveRequired = false;
         modalData.map((item) => {
@@ -382,7 +379,7 @@ const Connector = () => {
         });
 
         let validationObject = {};
-        console.log({ isTestRequired });
+
         if (isTestRequired) {
             for (const property in modalItem?.credential_titles) {
                 validationObject[property + "_sandbox"] = Yup.string().required(`Please enter ${modalItem?.credential_titles[property]}`);
@@ -405,17 +402,18 @@ const Connector = () => {
             }
         }
 
-        console.log({ validationObject });
-        validationObject["connector_type"] = Yup.array()
-            .min(1, "Connector Type is required field")
-            .required(`Please select connector type`);
+        if (isPayoutProvider !== 1) {
+            validationObject["connector_type"] = Yup.array()
+                .min(1, "Connector Type is required field")
+                .required(`Please select connector type`);
+        }
+
         const validationState = Yup.object().shape(validationObject);
 
         setValidationState(validationState);
     };
 
     let handleTypeChange = (onChange, values) => {
-        console.log({ values });
         // const newValue = [];
         // values?.map((type) => {
         //     newValue.push(type?.value);
@@ -495,9 +493,6 @@ const Connector = () => {
                             <div className="px-5 py-2">
                                 <label>Please select which connector you want to enable default.</label>
                                 {activeConnectorList?.map((item) => {
-                                    {
-                                        console.log(disableMultipleConnectorValue, item?.id);
-                                    }
                                     return (
                                         <div class="form-check mt-2">
                                             <input
@@ -634,13 +629,13 @@ const Connector = () => {
                             <span style={{ fontSize: "16px", maxWidth: 300 }} className="font-bold">
                                 Email:
                             </span>{" "}
-                            payaura8@gmail.com
+                            sales@i2pay.dev
                         </p>
                         <p>
                             <span style={{ fontSize: "16px", maxWidth: 300 }} className="font-bold">
                                 Mobile Number:
                             </span>{" "}
-                            +91 74278 50701
+                            +44 800 832 1733
                         </p>
                         <div className="text-center mt-4">
                             <button className="btn btn-success py-3 px-4 align-top text-white">
@@ -676,32 +671,40 @@ const Connector = () => {
                         console.log({ values, errors });
                         return (
                             <>
-                                <span>
-                                    Select Types{" "}
-                                    <small className="text-gray-500">
-                                        (<em>Multiple</em>)
-                                    </small>
-                                    <span className="text-danger"> *</span>
-                                </span>
+                                {isPayoutProvider !== 1 && (
+                                    <span>
+                                        Select Types{" "}
+                                        <small className="text-gray-500">
+                                            (<em>Multiple</em>)
+                                        </small>
+                                        <span className="text-danger"> *</span>
+                                    </span>
+                                )}
+
                                 <div>
-                                    <Select
-                                        // menuPortalTarget={document.body}
-                                        styles={colourStyles}
-                                        // defaultValue={element.value}
-                                        value={values.connector_type}
-                                        // onBlur={() => setFieldTouched(`formValues[${index}].value`)}
-                                        isMulti
-                                        style={{ boxShadow: "none" }}
-                                        options={connectorTypes}
-                                        name="value"
-                                        onChange={(e) => handleTypeChange(setFieldValue, e)}
-                                        className="intro-x login__input form-control block shadow-none"
-                                    />
-                                    <div className="mb-4">
-                                        {errors && errors?.connector_type ? (
-                                            <p className="text-red-500 mt-2 ml-1">{errors?.connector_type}</p>
-                                        ) : null}
-                                    </div>
+                                    {isPayoutProvider !== 1 && (
+                                        <>
+                                            <Select
+                                                // menuPortalTarget={document.body}
+                                                styles={colourStyles}
+                                                // defaultValue={element.value}
+                                                value={values.connector_type}
+                                                // onBlur={() => setFieldTouched(`formValues[${index}].value`)}
+                                                isMulti
+                                                style={{ boxShadow: "none" }}
+                                                options={connectorTypes}
+                                                name="value"
+                                                onChange={(e) => handleTypeChange(setFieldValue, e)}
+                                                className="intro-x login__input form-control block shadow-none"
+                                            />
+                                            <div className="mb-4">
+                                                {errors && errors?.connector_type ? (
+                                                    <p className="text-red-500 mt-2 ml-1">{errors?.connector_type}</p>
+                                                ) : null}
+                                            </div>
+                                        </>
+                                    )}
+
                                     <div className="sm:flex">
                                         <div className="pr-3 flex flex-col justify-center flex-1">
                                             <p>Live Credential</p>
@@ -709,7 +712,7 @@ const Connector = () => {
                                                 return (
                                                     <Input
                                                         onKeyUp={() => {
-                                                            onChangeCredential(values);
+                                                            onChangeCredential(values, isPayoutProvider);
                                                         }}
                                                         key={index}
                                                         type="text"
@@ -729,7 +732,7 @@ const Connector = () => {
                                                 return (
                                                     <Input
                                                         onKeyUp={() => {
-                                                            onChangeCredential(values);
+                                                            onChangeCredential(values, isPayoutProvider);
                                                         }}
                                                         key={index}
                                                         type="text"
@@ -754,11 +757,11 @@ const Connector = () => {
                                 className="form-check-input my-3 mr-4 block"
                                 name="own_checkbox"
                                 type="checkbox"
-                                onChange={(e) => handleUsePayomatixConnector(e.target.checked)}
-                                defaultChecked={usePayomatixConnector !== 0 ? true : false}
+                                onChange={(e) => handleUseI2payConnector(e.target.checked)}
+                                defaultChecked={useI2payConnector !== 0 ? true : false}
                             />
                             <label className="form-check-label ml-0" htmlFor="own_checkbox">
-                                Use Exotic Connector
+                                Use I2pay Connector
                             </label>
                         </div>
                     ) : null} */}
@@ -868,7 +871,6 @@ const Connector = () => {
                                         <td>
                                             {item?.selected_connector_type?.length > 0 ? (
                                                 <div className="flex flex-wrap">
-                                                    {console.log({ item })}
                                                     {item?.selected_connector_type?.map((dc) => {
                                                         return (
                                                             <>
@@ -927,7 +929,6 @@ const Connector = () => {
                                                         <div className="form-switch ">
                                                             <input
                                                                 onChange={(e) => {
-                                                                    // console.log(e);
                                                                     onChangeMode(item, item?.mode === 1 ? 0 : 1);
                                                                 }}
                                                                 // id="show-example-5"
@@ -1133,7 +1134,6 @@ const Connector = () => {
         );
     };
 
-    console.log("State", { state });
     // MAIN CONTENT
     return (
         <>
@@ -1160,6 +1160,15 @@ const Connector = () => {
                         </div>
                     </div>
                 </div>
+                {/* {!isLoading && connector?.length !== 0 && typeof connector !== "undefined" && (
+                    <Pagination
+                        pagination={pagination}
+                        currentPage={currentPage}
+                        perPage={perPage}
+                        onChangePage={onChangePage}
+                        onChangePerPage={onChangePerPage}
+                    />
+                )} */}
             </div>
         </>
     );

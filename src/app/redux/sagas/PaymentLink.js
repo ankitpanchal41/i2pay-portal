@@ -10,7 +10,9 @@ import {
     UPDATE_PAYMENT_LINK_REQUEST,
     UPDATE_PAYMENT_LINK_RESPONSE,
     DETAIL_PAYMENT_LINK_REQUEST,
-    DETAIL_PAYMENT_LINK_RESPONSE, PAYMENT_LINK_SEND_REQUEST, PAYMENT_LINK_SEND_RESPONSE
+    DETAIL_PAYMENT_LINK_RESPONSE,
+    PAYMENT_LINK_SEND_REQUEST,
+    PAYMENT_LINK_SEND_RESPONSE,
 } from "../actions/PaymentLinkAction";
 import {
     addPaymentLinkData,
@@ -18,12 +20,11 @@ import {
     getPaymentLinkData,
     updatePaymentLinkData,
     detailPaymentLinkData,
-    paymentLinkSendData
+    paymentLinkSendData,
 } from "../services/PaymentLink";
 
 function* getPaymentLinkSaga(data) {
     try {
-
         const result = yield call(getPaymentLinkData, data);
         if (result.responseCode === 200) {
             yield put({
@@ -32,7 +33,6 @@ function* getPaymentLinkSaga(data) {
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         data?.callback();
     }
@@ -42,7 +42,6 @@ function* addPaymentLinkSaga(action) {
     try {
         const result = yield call(addPaymentLinkData, action.payload);
         if (result?.responseCode === 200) {
-            console.log({result})
             yield put({
                 type: ADD_PAYMENT_LINK_RESPONSE,
                 data: result,
@@ -50,14 +49,12 @@ function* addPaymentLinkSaga(action) {
             action.navigateState();
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         action.callBack();
     }
 }
 
 function* deletePaymentLinkSaga(action) {
-    // console.log("Delete Saga", {action});
     // return;
     try {
         const result = yield call(deletePaymentLinkData, action.payload);
@@ -69,14 +66,12 @@ function* deletePaymentLinkSaga(action) {
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         action.callBack();
     }
 }
 
 export function* updatePaymentLinkSaga(action) {
-
     try {
         const result = yield call(updatePaymentLinkData, action.payload);
         if (result?.responseCode === 200) {
@@ -87,32 +82,27 @@ export function* updatePaymentLinkSaga(action) {
             action.navigateState();
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         action.callBack();
     }
-
 }
 
 function* detailPaymentLinkSaga(action) {
     try {
-
         const result = yield call(detailPaymentLinkData, action.payload);
 
-        if(result === 404 && action.navigateListing) {
+        if (result === 404 && action.navigateListing) {
             action.navigateListing();
             return false;
         }
 
         if (result?.responseCode === 200) {
-            console.log({ result });
             yield put({
                 type: DETAIL_PAYMENT_LINK_RESPONSE,
                 data: result,
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         action.callBack();
     }
@@ -120,19 +110,15 @@ function* detailPaymentLinkSaga(action) {
 
 function* paymentLinkSendSaga(action) {
     try {
-
         const result = yield call(paymentLinkSendData, action.payload);
 
-
         if (result?.responseCode === 200) {
-            console.log({ result });
             yield put({
                 type: PAYMENT_LINK_SEND_RESPONSE,
                 data: result,
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         action.callBack();
     }

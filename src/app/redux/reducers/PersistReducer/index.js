@@ -21,7 +21,7 @@ import {
     CHANGE_MOBILE_VERIFICATION,
     CHANGE_GOOGLE_AUTH_VERIFICATION,
 } from "../../actions/PersistActions";
-import { CHANGE_LOGIN_START } from "../../actions/PersistActions";
+import { CHANGE_LOGIN_START } from "../../actions/Product";
 import { SET_PROFILE_RESPONSE } from "../../actions/Profile";
 import { LOGIN_END } from "../../types/Persist";
 

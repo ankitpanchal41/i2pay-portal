@@ -216,8 +216,8 @@ const PayButtonIntegration = () => {
 
                         <p>
                             After that, click on the <strong>Status</strong> button to <strong>activate</strong> connector. As you can see,
-                            you need to provide appropriate credentials. On the other hand, you can use exotic connector by clicking{" "}
-                            <strong>Use Exotic Connector</strong> too.
+                            you need to provide appropriate credentials. On the other hand, you can use i2pay connector by clicking{" "}
+                            <strong>Use I2pay Connector</strong> too.
                         </p>
 
                         <div className="api-document-detail">
@@ -485,7 +485,7 @@ const PayButtonIntegration = () => {
                             <div className="w-100 mt-8 flex ml-6">
                                 <span className="copy-button-title">Copy Pay Button Script</span>
                                 <CopyToClipboard
-                                    text={`<script src="${process.env.REACT_APP_API_URL}js/exotic-paybutton.min.js"></script>`}
+                                    text={`<script src="${process.env.REACT_APP_API_URL}js/payomatix-paybutton.min.js"></script>`}
                                     onCopy={() => {
                                         onCopyText();
                                     }}>
@@ -502,7 +502,7 @@ const PayButtonIntegration = () => {
                                 <div className="flex">
                                     <div className="copy-button">
                                         <SyntaxHighlighter language="json" style={dark}>
-                                            {`<script src="${process.env.REACT_APP_API_URL}js/exotic-paybutton.min.js"></script>`}
+                                            {`<script src="${process.env.REACT_APP_API_URL}js/payomatix-paybutton.min.js"></script>`}
                                         </SyntaxHighlighter>
                                     </div>
                                 </div>

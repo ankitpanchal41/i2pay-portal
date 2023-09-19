@@ -151,7 +151,7 @@ const Home = () => {
     const _renderHeading = () => {
         return (
             <Heading
-                title={"Transactions"}
+                title={"Manual Transactions"}
                 onChangeSearchQuery={onChangeSearchQuery}
                 displayBackButton={false}
                 onClickExport={onClickExport}

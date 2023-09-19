@@ -34,7 +34,6 @@ const initialValuesPayout = {
     phone: "",
     address: "",
     account_no: "",
-
     ifsc_code: "",
     payout_mode: "",
     // amount: "",

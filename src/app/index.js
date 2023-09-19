@@ -130,16 +130,16 @@ const App = () => {
             // }, 3000);
         });
     } catch (err) {
-        console.log("Message received", { err });
+        // console.log("Message received", { err });
     }
 
     useEffect(() => {
         window.ononline = (event) => {
-            console.log("Back Online");
+            // console.log("Back Online");
         };
 
         window.onoffline = (event) => {
-            console.log("Connection Lost");
+            // console.log("Connection Lost");
         };
     }, []);
 
@@ -175,7 +175,7 @@ const App = () => {
 
     const getData = async () => {
         const db = getDatabase();
-        console.log({ merchantId });
+
         const q = query(ref(db, "merchant_detail"), orderByChild("merchant_id"), equalTo(merchantId));
 
         onValue(q, (snapshot) => {

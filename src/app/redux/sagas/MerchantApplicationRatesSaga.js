@@ -24,7 +24,6 @@ function* detailSmsTemplateSaga(action) {
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         action.callBack();
     }
@@ -34,7 +33,6 @@ export function* approveMerchantApplicationRatesSage(action) {
     try {
         const result = yield call(approveMerchantApplicationRate, action.payload);
         if (result?.responseCode === 200) {
-            console.log({ result });
             yield put({
                 type: APPROVE_MERCHANT_APPLICATION_RATES_RESPONSE,
                 data: result,
@@ -42,7 +40,6 @@ export function* approveMerchantApplicationRatesSage(action) {
             action.navigateState();
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         action.callBack();
     }
@@ -52,7 +49,6 @@ export function* declineMerchantApplicationRatesSage(action) {
     try {
         const result = yield call(declineMerchantApplicationRate, action.payload);
         if (result?.responseCode === 200) {
-            console.log({ result });
             yield put({
                 type: DECLINE_MERCHANT_APPLICATION_RATES_RESPONSE,
                 data: result,
@@ -60,7 +56,6 @@ export function* declineMerchantApplicationRatesSage(action) {
             action.navigateState();
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         action.callBack();
     }

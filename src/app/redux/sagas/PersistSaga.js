@@ -17,7 +17,6 @@ function* loginSaga(data) {
             }
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         yield put(setLoading(false));
     }
@@ -29,13 +28,12 @@ function* detailSaga(data) {
         // const captchaVerifyResult = yield call(authApiHandler, apiRoutes.captchaVerify, data?.captchaToken, false);
         // if (process.env.NODE_ENV === "development" || captchaVerifyResult?.responseCode === 200) {
         const result = yield call(getMerchantDetail, data?.payload);
-        console.log({ result });
+
         if (result?.responseCode === 200) {
             yield put(loginEnd(result));
         }
         // }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         yield put(setLoading(false));
         data.callback();
@@ -47,7 +45,6 @@ function* addInvoiceSaga(data) {
         yield put(setLoading(true));
         yield put(addInvoiceEnd(data.payload));
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         yield put(setLoading(false));
         data.callback();
@@ -59,7 +56,6 @@ function* editInvoiceSaga(data) {
         yield put(setLoading(true));
         yield put(editInvoiceEnd(data.payload));
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         yield put(setLoading(false));
         data.callback();

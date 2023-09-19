@@ -29,17 +29,14 @@ const SetNewPassword = () => {
             const data = await handleChangePassword(payload);
             if (data?.responseCode === 200) {
                 dispatch(changePasswordEnd());
-                console.log("formikBag", formikBag);
+
                 formikBag?.resetForm();
             }
         } catch (error) {
-            console.log("err", error);
         } finally {
             setIsSubmiting(false);
         }
     }, []);
-
-    console.log({ initialValues });
 
     return (
         <Formik initialValues={initialValues} validationSchema={setNewPasswordValidation} onSubmit={onSubmit} validateOnMount>

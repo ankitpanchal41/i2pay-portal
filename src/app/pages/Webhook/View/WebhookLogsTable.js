@@ -35,8 +35,6 @@ const WebhookLogsTable = ({ isLogsLoading = false, subscribedEventOptions }) => 
         );
     };
 
-    console.log("Webhook Logs", { webhookLogs });
-
     useEffect(() => {
         if (webhookLogs.length > 0) {
             const newLogDetail = webhookLogs[0];
@@ -76,7 +74,6 @@ const WebhookLogsTable = ({ isLogsLoading = false, subscribedEventOptions }) => 
                 </div>
             ) : (
                 <>
-                    {console.log({ logDetails, webhookLogs })}
                     {webhookLogs && webhookLogs.length ? (
                         <>
                             <div className="grid grid-cols-2 mt-4">

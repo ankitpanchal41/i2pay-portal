@@ -293,7 +293,7 @@ const DashboardCard = ({ currencyValue }) => {
                     </div>
                 </Link>
             )}
-            {cardLoading ? (
+             {cardLoading ? (
                 <div className="col-span-12 sm:col-span-6 xl:col-span-3 intro-y">
                     <div className="report-box zoom-in">
                         <div className="box">

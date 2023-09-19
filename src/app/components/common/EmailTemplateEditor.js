@@ -77,7 +77,7 @@ const EmailTemplateEditor = ({ json, onSaveData, id }) => {
 
     const onReady = () => {
         // editor is ready
-        console.log("onReady");
+        // console.log("onReady");
     };
 
     return (

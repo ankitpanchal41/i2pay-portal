@@ -2,7 +2,7 @@ export const authMesages = {
     login: {
         headingText: "Sign in",
         sideScreen: {
-            textLine1: "Welcome to Exotic",
+            textLine1: "Welcome to I2pay",
             // textLine2: "sign in to your account.",
             // subText: "Manage all your e-commerce accounts in one place",
         },
@@ -21,31 +21,31 @@ export const authMesages = {
     },
     register: {
         sideScreen: {
-            textLine1: "Welcome to Exotic",
+            textLine1: "Welcome to I2pay",
         },
     },
     forgotPassword: {
         sideScreen: {
-            textLine1: "Welcome to Exotic",
+            textLine1: "Welcome to I2pay",
         },
         getLink: "Get Link",
     },
     changePassword: {
         headingText: "Change Password",
         sideScreen: {
-            textLine1: "Welcome to Exotic",
+            textLine1: "Welcome to I2pay",
         },
     },
     setNewPassword: {
         headingText: "Reset Password",
         sideScreen: {
-            textLine1: "Welcome to Exotic",
+            textLine1: "Welcome to I2pay",
         },
     },
     resetPassword: {
         headingText: "Enter new password",
         sideScreen: {
-            textLine1: "Welcome to Exotic",
+            textLine1: "Welcome to I2pay",
         },
     },
 };

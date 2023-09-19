@@ -95,11 +95,19 @@ export const printIpAddressesLabels = (ipAddresses) => {
 
 export const campaignStatusLabels = (status) => {
     switch (status) {
-        case "0":
-            return <span class="rounded-full text-[11px] text-[#FFFFFF] cursor-pointer font-medium bg-warning py-[5px] px-[11px]">Incomplete</span>;
+        case 0:
+            return (
+                <span class="rounded-full text-[11px] text-[#FFFFFF] cursor-pointer font-medium bg-warning py-[5px] px-[11px]">
+                    Incomplete
+                </span>
+            );
             break;
-        case "1":
-            return <span class="rounded-full text-[11px] text-[#FFFFFF] cursor-pointer font-medium bg-success py-[5px] px-[11px]">Complete</span>;
+        case 1:
+            return (
+                <span class="rounded-full text-[11px] text-[#FFFFFF] cursor-pointer font-medium bg-success py-[5px] px-[11px]">
+                    Complete
+                </span>
+            );
             break;
         default:
             break;
@@ -262,7 +270,6 @@ export function withDecimal(n) {
         if (nums[0] <= 0 && (nums[1] === "00" || nums[1] === "0")) {
             return "Zero";
         } else {
-            console.log(nums[1])
             if (nums[1] === "00" || nums[1] === "0") {
                 return whole + fraction + "Only";
             } else {

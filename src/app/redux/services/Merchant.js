@@ -20,7 +20,6 @@ export const submitStep = async (payload, stepNumber) => {
             return false;
         }
     } catch (error) {
-        console.log("error", JSON.stringify(error));
         return {
             error: true,
             data: error,

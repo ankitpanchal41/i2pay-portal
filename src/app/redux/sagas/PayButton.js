@@ -17,7 +17,6 @@ function* addPayButtonSaga(action) {
     try {
         const result = yield call(addPayButton, action.payload);
         if (result?.responseCode === 200) {
-            console.log({ result });
             yield put({
                 type: ADD_PAY_BUTTON_RESPONSE,
                 data: result,
@@ -25,7 +24,6 @@ function* addPayButtonSaga(action) {
             action?.navigateState();
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         action.callBack();
     }
@@ -35,7 +33,6 @@ function* editPayButtonSaga(action) {
     try {
         const result = yield call(updatePayButton, action.payload);
         if (result?.responseCode === 200) {
-            console.log({ result });
             yield put({
                 type: EDIT_PAY_BUTTON_RESPONSE,
                 data: result,
@@ -43,7 +40,6 @@ function* editPayButtonSaga(action) {
             action?.navigateState();
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         action.callBack();
     }
@@ -53,7 +49,6 @@ function* deletePayButtonSaga(action) {
     try {
         const result = yield call(deletePayButton, action.payload);
         if (result?.responseCode === 200) {
-            console.log({ result });
             yield put({
                 type: DELETE_PAY_BUTTON_RESPONSE,
                 data: result,
@@ -61,7 +56,6 @@ function* deletePayButtonSaga(action) {
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         action.callBack();
     }
@@ -71,21 +65,18 @@ function* detailPayButtonSaga(action) {
     try {
         const result = yield call(detailPayButton, action.payload);
 
-        if(result === 404 && action.navigateListing) {
+        if (result === 404 && action.navigateListing) {
             action.navigateListing();
             return false;
         }
 
         if (result?.responseCode === 200) {
-            console.log({ result });
             yield put({
                 type: DETAIL_PAY_BUTTON_RESPONSE,
                 data: result,
             });
         }
-
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         action.callBack();
     }
@@ -95,19 +86,18 @@ function* detailPayButtonSaga(action) {
 //     try {
 //         const result = yield call(listPayButton, action.payload);
 //         if (result?.responseCode === 200) {
-//             console.log({ result });
+
 //             yield put({
 //                 type: LIST_PAY_BUTTON_RESPONSE,
 //                 data: result,
 //             });
 //         }
 //     } catch (error) {
-//         console.log("ERROR", error);
+
 //     } finally {
 //         action.callBack();
 //     }
 // }
-
 
 function* listPayButtonSaga(data) {
     try {
@@ -119,12 +109,10 @@ function* listPayButtonSaga(data) {
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         data?.callback();
     }
 }
-
 
 function* watchSetStoreFrontSaga() {
     yield takeEvery(ADD_PAY_BUTTON_REQUEST, addPayButtonSaga);

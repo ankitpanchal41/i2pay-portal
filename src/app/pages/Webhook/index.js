@@ -100,7 +100,7 @@ const Webhook = () => {
         let updatePayload = { id: item?.id };
 
         const { data } = await updateWebhookStatus(updatePayload);
-        console.log({ data });
+
         if (data) {
             setIsLoading(true);
             dispatch(

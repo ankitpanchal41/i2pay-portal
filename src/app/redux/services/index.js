@@ -2,7 +2,7 @@ import axios from "axios";
 import { store } from "../store/index";
 
 // const client = axios.create({
-//     baseURL: "https://admin.exotic.in/",
+//     baseURL: "https://admin.payomatix.com/",
 // });
 
 // client.interceptors.request.use(
@@ -34,7 +34,7 @@ export async function callApi(path, options, params, baseURL) {
 
     try {
         const response = await axios({
-            url: (baseURL) + path,
+            url: (baseURL || "https://admin.payomatix.com/") + path,
             ...options,
             headers: {
                 ...options.headers,

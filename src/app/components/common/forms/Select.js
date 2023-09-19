@@ -33,7 +33,7 @@ const Select = ({
                                 })}
                             </select>
                         }
-                        {errorEnabled && meta.touched && meta.error ? <p className="text-red-500 mt-2 ml-1">{meta.error}</p> : null}
+                        {errorEnabled && meta.touched && meta.error ? <p className="text-red-500 text-[12px] mt-2">{meta.error}</p> : null}
                     </>
                 )}
             </Field>

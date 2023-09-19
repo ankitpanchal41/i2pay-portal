@@ -37,11 +37,13 @@ const MerchantApplicationView = () => {
                     <MerchantBasicDetails
                         name={userData?.data?.name}
                         email={userData?.data?.email}
+                        id={userData?.data?.id}
                         profileImage={userData?.data?.image || Images.profileImage}
                         phoneNo={userData?.data?.country_code + " " + userData?.data?.mobile_no}
                         status={applicationList?.status}
                         reason={applicationList?.reason}
                         entitiesType={applicationList?.entities_type}
+                        agreementToken={applicationList?.agreement_token}
                     />
                 </div>
                 <div className="md:col-span-9 col-span-12">

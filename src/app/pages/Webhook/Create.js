@@ -3,11 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { Formik, Form } from "formik";
 import Input from "../../components/common/forms/Input";
-import { webhookSchema } from "../../utils/validationSchema";
+import Dropzone from "../../components/common/forms/Dropzone";
+import * as Icon from "react-feather";
+import { productDetails, webhookSchema } from "../../utils/validationSchema";
 import { messages } from "../../messages/merchantRegister";
+import { createProductStart } from "../../redux/actions/Product";
 import MiniLoader from "../../components/common/MiniLoader";
 import Heading from "../../components/common/Heading";
 import Select from "react-select";
+import { decode } from "html-entities";
 import { eventWebhookData } from "../../redux/services/Webhook";
 import { ADD_WEBHOOK_REQUEST } from "../../redux/actions/Webhook";
 
@@ -135,7 +139,6 @@ const WebhookCreate = () => {
                                         validateOnMount>
                                         {({ handleSubmit, errors, values, setFieldValue, touched, isValid }) => (
                                             <Form className="">
-                                                {console.log(errors)}
                                                 <div className="grid grid-cols-12 gap-4 gap-y-5">
                                                     <div className="intro-y col-span-12 sm:col-span-12">
                                                         {/* <Input
@@ -157,7 +160,6 @@ const WebhookCreate = () => {
                                                             style={{ boxShadow: "none" }}
                                                             options={eventOptions}
                                                             onChange={(e) => {
-                                                                console.log(e);
                                                                 setFieldValue("topics", e);
                                                             }}
                                                             placeholder={messages.webhook.topicsPlaceholder}

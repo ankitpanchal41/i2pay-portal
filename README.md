@@ -1,1 +1,1 @@
-# Exotic
+# i2pay

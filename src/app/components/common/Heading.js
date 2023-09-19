@@ -19,7 +19,6 @@ const Heading = ({
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            console.log("CALL API");
             if (onChangeSearchQuery) {
                 onChangeSearchQuery(searchText);
             }
@@ -40,7 +39,11 @@ const Heading = ({
                             </small>
                         )}
                     </div>
-                    {note && <small className="text-gray-500 mt-1"><span className="text-danger">Note:</span> {note}</small>}
+                    {note && (
+                        <small className="text-gray-500 mt-1">
+                            <span className="text-danger">Note:</span> {note}
+                        </small>
+                    )}
                 </div>
             )}
 

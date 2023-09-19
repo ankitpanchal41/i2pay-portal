@@ -6,7 +6,6 @@ import { imageMapping } from "../../../utils/helper";
 import { ClipLoader } from "react-spinners";
 import Images from "../../../../assets/images";
 import { showToastMessage } from "../../../utils/methods";
-const Rest = React.lazy(() => import("../../../apiMethod/index"));
 
 const ProductDropzone = ({
     label,
@@ -59,7 +58,7 @@ const ProductDropzone = ({
                     }
                 });
             }
-            
+
             fileRejections.forEach((file) => {
                 file.errors.forEach((err) => {
                     if (err.code === "file-too-large") {
@@ -87,7 +86,7 @@ const ProductDropzone = ({
             acceptedFiles.splice(acceptedIndex, 1);
             setImages((imgs) => imgs.filter((item) => item.id !== id));
             if (setFieldValue && !acceptedFiles.length) {
-                setFieldValue(name, "");
+                setFieldValue(name, "", "remove");
             }
             if (name === "director_pan_card") {
                 setPanNumber("");

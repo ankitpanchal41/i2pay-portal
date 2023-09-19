@@ -144,6 +144,19 @@ const TestTransactions = () => {
         setVisibleDetailModal(!visibleDetailModal);
     };
 
+    const onCloseDetailModalWithReload = (item) => {
+        setSingleDetails(item);
+        setVisibleDetailModal(!visibleDetailModal);
+        setIsLoading(true);
+        setIsReset(false);
+        dispatch(
+            getTestTransactionsStart(currentPage, perPage, searchQuery, { test_mode: 1, ...advanceSearchPayload }, () => {
+                setIsLoading(false);
+                setIsParPage(true);
+            }),
+        );
+    };
+
     const _renderHeading = () => {
         return (
             <Heading
@@ -271,20 +284,17 @@ const TestTransactions = () => {
 
     useEffect(() => {
         $(document).on("click", ".transaction-actions", function (e) {
-            console.log("Inside it");
             let type = $(this).data("name");
             let orderId = $(this).data("id");
             let date = $(this).data("date");
             setOrderId(orderId);
-            console.log({ type, orderId });
+
             // setRefundDate(date);
             type === "Refund" ? handleRefundModal(type) : type === "Suspicious" ? handleSuspiciousModal(type) : handleChargeBackModal(type);
             e.preventDefault();
             $(".dropdown-menu").removeClass("show");
         });
     }, []);
-
-    console.log({ state });
 
     const _renderTransactionTable = () => {
         return (
@@ -618,7 +628,11 @@ const TestTransactions = () => {
             {_renderChargeBackModal()}
 
             <Modal fullWidth visible={visibleDetailModal} removeFooter={false} onClose={onCloseDetailModal} heading="Transaction Details">
-                <TransactionDetails singleDetails={singleDetails} />
+                <TransactionDetails
+                    singleDetails={singleDetails}
+                    onClose={onCloseDetailModalWithReload}
+                    isSpitEnable={singleDetails?.status === 1}
+                />
             </Modal>
 
             {/* BEGIN: Content */}

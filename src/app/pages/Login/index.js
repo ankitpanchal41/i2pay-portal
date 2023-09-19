@@ -32,11 +32,11 @@ const TermsAndConditionsText = () => {
     return (
         <div class="intro-x text-sm text-slate-400 text-center">
             By sign up, you agree to our <br />
-            <a className="text-primary" href="#" target="_blank">
+            <a className="text-primary" href="https://payomatix.com/terms-of-service/" target="_blank">
                 Terms and Conditions
             </a>{" "}
             &{" "}
-            <a className="text-primary" href="#" target="_blank">
+            <a className="text-primary" href="https://payomatix.com/privacy-policy/" target="_blank">
                 Privacy Policy
             </a>
         </div>
@@ -73,7 +73,7 @@ const Login = (props) => {
             snapshot.forEach(function (child) {
                 data.push(child.val());
             });
-            console.log("Firebase Data Out 2", { data });
+            // console.log("Firebase Data Out 2", { data });
             dispatch(changeApplicationStatus(data?.[0]));
             dispatch(changeRateStatus(data?.[0]));
             dispatch(changeConnectorStatus(data?.[0]));
@@ -92,11 +92,11 @@ const Login = (props) => {
                 if (currentToken) {
                     fcm_token = currentToken;
                 } else {
-                    console.log("No registration token available. Request permission to generate one.");
+                    console.warn("No registration token available. Request permission to generate one.");
                 }
             })
             .catch((err) => {
-                console.log("An error occurred while retrieving token. ", err);
+                console.warn("An error occurred while retrieving token. ", err);
             });
 
         const payload = {
@@ -135,7 +135,7 @@ const Login = (props) => {
     };
 
     useEffect(() => {
-        console.log(signInAnotherWay);
+        // console.log(signInAnotherWay);
     }, [signInAnotherWay]);
 
     return (
@@ -144,7 +144,7 @@ const Login = (props) => {
                 <div className="h-full flex items-center justify-center lg:justify-start">
                     {/* BEGIN: Logo */}
                     <Link to="/" className="-intro-x md:flex">
-                        <img alt="Icewall Tailwind HTML Admin Template" className="w-[150px]" src={Images.logoImage} />
+                        <img alt="Icewall Tailwind HTML Admin Template" className="w-[150px] h-[95px] object-contain" src={Images.logoImage} />
                     </Link>
                     {/* END: Logo */}
                 </div>

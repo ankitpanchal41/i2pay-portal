@@ -25,7 +25,6 @@ export const getRulesData = async (value, payload) => {
     }
 };
 
-
 export const getRulesDetailData = async (payload) => {
     try {
         const { data } = await Rest.post(apiRoutes.getRulesDetail, payload);
@@ -60,8 +59,10 @@ export const createRulesData = async (payload) => {
 export const setRulesStatusData = async (payload) => {
     try {
         const { data } = await Rest.post(apiRoutes.updateRulesStatus, payload);
+        if (!data?.data?.enable_edit_on_active) {
+            showToastMessage(data?.options?.validation[0] || data?.response, data?.responseCode);
+        }
 
-        showToastMessage(data?.options?.validation[0] || data?.response, data?.responseCode);
         return data;
     } catch (error) {
         return {
@@ -85,9 +86,7 @@ export const updateRulesData = async (payload) => {
     }
 };
 
-
 export const updateRulesPriorityData = async (payload) => {
-    console.log("service", payload);
     try {
         const { data } = await Rest.post(apiRoutes.updateRulesPriority, payload);
 

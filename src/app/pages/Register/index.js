@@ -36,8 +36,6 @@ const Register = () => {
     const [rpValue, setRPValue] = useState(undefined);
     const [isLoading, setIsLoading] = useState(false);
 
-    console.log({ rpValue });
-
     const gotoLogin = useCallback(() => {
         navigate("/login");
     }, [navigate]);
@@ -57,12 +55,9 @@ const Register = () => {
             mobile_no: values.mobile,
         };
 
-        console.log({ rpValue });
-
         try {
             setIsLoading(true);
             const data = await uniqueValidations(payload, catpchaPayload);
-            console.log({ data });
 
             if (data?.responseCode === 200) {
                 navigate("/verify", {
@@ -70,7 +65,6 @@ const Register = () => {
                 });
             }
         } catch (error) {
-            console.log(error);
         } finally {
             setIsLoading(false);
         }
@@ -112,7 +106,7 @@ const Register = () => {
                 <div className="h-full flex items-center justify-center lg:justify-start">
                     {/* BEGIN: Logo */}
                     <Link to="/" className="-intro-x md:flex">
-                        <img alt="Icewall Tailwind HTML Admin Template" className="w-[150px]" src={Images.logoImage} />
+                        <img alt="Icewall Tailwind HTML Admin Template" className="w-[150px] h-[95px] object-contain" src={Images.logoImage} />
                     </Link>
                     {/* END: Logo */}
                 </div>
@@ -165,15 +159,15 @@ const Register = () => {
                                         errorEnabled={false}
                                     />
                                     {/* <label className="cursor-pointer select-none" htmlFor="remember-me">
-                                        I agree to the Exotic
+                                        I agree to the I2pay
                                     </label>
                                     <a className="text-primary dark:text-slate-200 ml-1" href="#">
                                         Privacy Policy
                                     </a> */}
                                     {/* . */}
                                     <div class="text-sm">
-                                        I agree to the Exotic{" "}
-                                        <a className="text-primary" href="#" target="_blank">
+                                        I agree to the I2pay{" "}
+                                        <a className="text-primary" href="https://payomatix.com/privacy-policy/" target="_blank">
                                             Privacy Policy
                                         </a>
                                     </div>

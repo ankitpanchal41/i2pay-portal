@@ -36,7 +36,7 @@ function Modal(props) {
     if (visible) {
         return (
             <div
-                className="modal  show mt-0 ml-0 pl-0 z-[999999999] justify-center items-center flex  fixed inset-0 outline-none focus:outline-none modal-dialog"
+                className="modal  show mt-0 ml-0 pl-0 z-[999] justify-center items-center flex  fixed inset-0 outline-none focus:outline-none modal-dialog"
                 onClick={onClose}>
                 <div
                     onClick={(e) => e.stopPropagation()}
@@ -49,7 +49,7 @@ function Modal(props) {
                     }>
                     {useFormik ? (
                         <Formik initialValues={initialValues} validationSchema={validationState} onSubmit={onClickSave}>
-                            {({ handleSubmit, values, errors, setFieldValue }) => (
+                            {({ handleSubmit, values, errors, setFieldValue, touched }) => (
                                 <Form className="border-0 rounded-lg shadow-lg relative flex flex-col w-full modal-content outline-none focus:outline-none max-h-[100vh]">
                                     {/* BEGIN: Modal Header */}
                                     <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
@@ -65,7 +65,7 @@ function Modal(props) {
 
                                     {/* BEGIN: Modal Body */}
                                     <div className="relative p-6 flex-auto overflow-hidden overflow-y-auto">
-                                        {func ? children(setFieldValue, values, errors) : children}
+                                        {func ? children(setFieldValue, values, errors, touched) : children}
                                     </div>
                                     {/* END: Modal Body */}
 

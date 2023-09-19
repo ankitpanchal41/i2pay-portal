@@ -125,7 +125,6 @@ const WebhookTest = ({ setRefetchLogs, subscribedEventOptions }) => {
                                         style={{ boxShadow: "none" }}
                                         options={subscribedEventOptions}
                                         onChange={(e) => {
-                                            console.log(e);
                                             setFieldValue("topics", e);
                                         }}
                                         placeholder={messages.webhook.topicsPlaceholder}

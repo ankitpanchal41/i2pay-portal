@@ -172,3 +172,87 @@ export const removeRateLimitConnector = async (payload) => {
         };
     }
 };
+
+export const getVendorsData = async (payload) => {
+    try {
+        const { data } = await Rest.post(apiRoutes.getVendors, payload);
+
+        if (data?.responseCode !== 200) {
+            showToastMessage(data?.options?.validation[0] || data?.response, data?.responseCode);
+        }
+
+        return data;
+    } catch (error) {
+        return {
+            error: true,
+            data: error,
+        };
+    }
+};
+
+export const deleteVendorsData = async (payload) => {
+    try {
+        const { data } = await Rest.post(apiRoutes.deleteVendors, payload);
+
+        showToastMessage(data?.options?.validation[0] || data?.response, data?.responseCode);
+
+        return data;
+    } catch (error) {
+        return {
+            error: true,
+            data: error,
+        };
+    }
+};
+
+export const addVendorsData = async (payload) => {
+    try {
+        const { data } = await Rest.post(apiRoutes.createVendors, payload);
+        showToastMessage(data?.response, data?.responseCode);
+        return data;
+    } catch (error) {
+        return {
+            error: true,
+            data: error,
+        };
+    }
+};
+
+export const updateVendorsData = async (payload) => {
+    try {
+        const { data } = await Rest.post(apiRoutes.updateVendors, payload);
+        showToastMessage(data?.response, data?.responseCode);
+        return data;
+    } catch (error) {
+        return {
+            error: true,
+            data: error,
+        };
+    }
+};
+
+export const splitPaymentEditData = async (payload) => {
+    try {
+        const { data } = await Rest.post(apiRoutes.autoSplitPaymentEdit, payload);
+        showToastMessage(data?.response, data?.responseCode);
+        return data;
+    } catch (error) {
+        return {
+            error: true,
+            data: error,
+        };
+    }
+};
+
+export const getAutoSplitPaymentData = async (payload) => {
+    try {
+        const { data } = await Rest.post(apiRoutes.getAutoSplitPaymentData, payload);
+        // showToastMessage(data?.response, data?.responseCode);
+        return data;
+    } catch (error) {
+        return {
+            error: true,
+            data: error,
+        };
+    }
+};

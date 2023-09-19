@@ -51,7 +51,6 @@ const PaymentLinkEdit = () => {
     };
 
     const onSubmit = (values) => {
-        console.log({ values });
         if (isSubmiting) return;
 
         setIsSubmiting(true);
@@ -313,8 +312,7 @@ const PaymentLinkEdit = () => {
                                                                     type="buttons"
                                                                     className="btn btn-primary w-24 ml-2"
                                                                     onClick={handleSubmit}
-                                                                    disabled={isSubmiting}
-                                                                >
+                                                                    disabled={isSubmiting}>
                                                                     Save <MiniLoader isLoading={isSubmiting} />
                                                                 </button>
                                                             </div>

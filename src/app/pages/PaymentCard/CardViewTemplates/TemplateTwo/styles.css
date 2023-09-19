@@ -1,0 +1,26 @@
+.template-two-background {
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.product-title {
+    color: #e48d66;
+}
+
+.t2-product-image-view {
+    border-radius: 5px;
+    height: 150px;
+    width: 150px;
+}
+
+.t2-product-image-container-view {
+    left: -20px;
+}
+
+@media (max-width: 945px) {
+    .t2-product-image-container {
+        left: 0px;
+        margin: 0 auto;
+        padding-top: 20px;
+    }
+}

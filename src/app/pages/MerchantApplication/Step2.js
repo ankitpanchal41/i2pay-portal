@@ -198,6 +198,7 @@ const Step2 = ({ onNextClick, changeStepNumber, stepValues, onPreviousClick, dis
                             <label className="form-label">{`${typeLabel} ${messages.placeholders.director_country}`}</label>
                             <div className={disabled ? "bg-slate-100" : ""}>
                                 <Select
+                                    isClearable
                                     placeholder={`${typeLabel} ${messages.placeholders.director_country}`}
                                     isDisabled={disabled}
                                     value={countryCodesApplication?.find((item) => item?.code === values?.director_country)}

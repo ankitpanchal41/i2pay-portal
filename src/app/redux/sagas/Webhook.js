@@ -15,7 +15,15 @@ import {
     TEST_WEBHOOK_REQUEST,
     TEST_WEBHOOK_RESPONSE,
 } from "../actions/Webhook";
-import { addWebhookData, deleteWebhookData, getWebhookData, updateWebhookData, detailWebhookData, getWebhookLogsData, testWebhookData } from "../services/Webhook";
+import {
+    addWebhookData,
+    deleteWebhookData,
+    getWebhookData,
+    updateWebhookData,
+    detailWebhookData,
+    getWebhookLogsData,
+    testWebhookData,
+} from "../services/Webhook";
 
 function* getWebhookSaga(data) {
     try {
@@ -27,7 +35,6 @@ function* getWebhookSaga(data) {
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         data?.callback();
     }
@@ -37,7 +44,6 @@ function* addWebhookSaga(action) {
     try {
         const result = yield call(addWebhookData, action.payload);
         if (result?.responseCode === 200) {
-            console.log({ result });
             yield put({
                 type: ADD_WEBHOOK_RESPONSE,
                 data: result,
@@ -45,14 +51,12 @@ function* addWebhookSaga(action) {
             action.navigateState();
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         action.callBack();
     }
 }
 
 function* deleteWebhookSaga(action) {
-    // console.log("Delete Saga", {action});
     // return;
     try {
         const result = yield call(deleteWebhookData, action.payload);
@@ -64,7 +68,6 @@ function* deleteWebhookSaga(action) {
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         action.callBack();
     }
@@ -81,7 +84,6 @@ export function* updateWebhookSaga(action) {
             action.navigateState();
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         action.callBack();
     }
@@ -90,21 +92,19 @@ export function* updateWebhookSaga(action) {
 function* detailWebhookSaga(action) {
     try {
         const result = yield call(detailWebhookData, action.payload);
-        console.log({result})
+
         if (result === 404 && action.navigateListing) {
             action.navigateListing();
             return false;
         }
 
         if (result?.responseCode === 200) {
-            console.log({ result });
             yield put({
                 type: DETAIL_WEBHOOK_RESPONSE,
                 data: result,
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         action.callBack();
     }
@@ -120,7 +120,6 @@ function* getWebhookLogsSaga(data) {
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         data?.callback();
     }
@@ -130,7 +129,6 @@ function* testWebhookSaga(action) {
     try {
         const result = yield call(testWebhookData, action.payload);
         if (result?.responseCode === 200) {
-            console.log({ result });
             yield put({
                 type: TEST_WEBHOOK_RESPONSE,
                 data: result,
@@ -138,16 +136,14 @@ function* testWebhookSaga(action) {
             action.navigateState();
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         action.callBack();
     }
 }
 
-
 function* watchWebhookSaga() {
     yield takeEvery(GET_WEBHOOK_REQUEST, getWebhookSaga);
-    yield takeEvery(ADD_WEBHOOK_REQUEST, addWebhookSaga);    
+    yield takeEvery(ADD_WEBHOOK_REQUEST, addWebhookSaga);
     yield takeEvery(DELETE_WEBHOOK_REQUEST, deleteWebhookSaga);
     yield takeEvery(UPDATE_WEBHOOK_REQUEST, updateWebhookSaga);
     yield takeEvery(DETAIL_WEBHOOK_REQUEST, detailWebhookSaga);

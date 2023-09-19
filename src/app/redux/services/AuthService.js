@@ -235,7 +235,7 @@ export const getMerchantDetail = async (payload) => {
 export const verifyRP = async (payload) => {
     try {
         const { data } = await Rest.get(apiRoutes.verifyRp + payload);
-        console.log({ data });
+
         if (data === undefined) {
             return 500;
         }

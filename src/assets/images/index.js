@@ -1,6 +1,6 @@
 import illustration from "./illustration.svg";
 import profileImage from "./profileImage.jpg";
-import payoMatixLogo from "./payomatix-logo.png";
+import i2PayLogo from "./logoNew1.png";
 import pdfLogo from "./pdf-file.png";
 import excelLogo from "./excel-icon.png";
 import application from "./application.png";
@@ -69,9 +69,10 @@ import AutoPayoutReports from "./icons/auto-payout-reports.svg";
 import DefaultPayoutReports from "./icons/default-payout-reports.svg";
 import Vendors from "./icons/vendors.svg";
 import PayoutIcon from "./pay.svg";
+import XLogoTwitter from "./x-logo-twitter.jpg";
 
 const Images = {
-    logoImage: payoMatixLogo,
+    logoImage: i2PayLogo,
     illustration,
     profileImage,
     pdfLogo,
@@ -142,6 +143,7 @@ const Images = {
     DefaultPayoutReports,
     Vendors,
     PayoutIcon,
+    XLogoTwitter,
 };
 
 export default Images;

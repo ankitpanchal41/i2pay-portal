@@ -10,13 +10,18 @@ import {
     UPDATE_IP_WHITELIST_REQUEST,
     UPDATE_IP_WHITELIST_RESPONSE,
     DETAIL_IP_WHITELIST_REQUEST,
-    DETAIL_IP_WHITELIST_RESPONSE
+    DETAIL_IP_WHITELIST_RESPONSE,
 } from "../actions/IPWhitelist";
-import { addIPWhitelistData, deleteIPWhitelistData, getIPWhitelistData, updateIpWhitelistData, detailIpWhitelistData } from "../services/IPWhiteList";
+import {
+    addIPWhitelistData,
+    deleteIPWhitelistData,
+    getIPWhitelistData,
+    updateIpWhitelistData,
+    detailIpWhitelistData,
+} from "../services/IPWhiteList";
 
 function* getIPWhitelistSaga(data) {
     try {
-
         const result = yield call(getIPWhitelistData, data);
         if (result.responseCode === 200) {
             yield put({
@@ -25,7 +30,6 @@ function* getIPWhitelistSaga(data) {
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         data?.callback();
     }
@@ -35,7 +39,6 @@ function* addIPWhitelistSaga(action) {
     try {
         const result = yield call(addIPWhitelistData, action.payload);
         if (result?.responseCode === 200) {
-            console.log({result})
             yield put({
                 type: ADD_IP_WHITELIST_RESPONSE,
                 data: result,
@@ -43,14 +46,12 @@ function* addIPWhitelistSaga(action) {
             action.navigateState();
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         action.callBack();
     }
 }
 
 function* deleteIPWhitelistSaga(action) {
-    console.log({action})
     try {
         const result = yield call(deleteIPWhitelistData, action.payload);
         if (result?.responseCode === 200) {
@@ -61,14 +62,12 @@ function* deleteIPWhitelistSaga(action) {
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         action.callBack();
     }
 }
 
 export function* updateIpWhitelistSaga(action) {
-
     try {
         const result = yield call(updateIpWhitelistData, action.payload);
         if (result?.responseCode === 200) {
@@ -79,32 +78,27 @@ export function* updateIpWhitelistSaga(action) {
             action.navigateState();
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         action.callBack();
     }
-
 }
 
 function* detailIpWhitelistSaga(action) {
     try {
-
         const result = yield call(detailIpWhitelistData, action.payload);
 
-        if(result === 404 && action.navigateListing) {
+        if (result === 404 && action.navigateListing) {
             action.navigateListing();
             return false;
         }
 
         if (result?.responseCode === 200) {
-            console.log({ result });
             yield put({
                 type: DETAIL_IP_WHITELIST_RESPONSE,
                 data: result,
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         action.callBack();
     }

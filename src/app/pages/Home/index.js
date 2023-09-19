@@ -97,7 +97,7 @@ const Home = () => {
             <MainMenu active={1}>
                 <div className="content">
                     <div className="col-span-12 mt-6 -mb-6 intro-y">
-                        <div className="text-4xl mb-5 font-semibold">Hi Merchant Welcome to Exotic 😊</div>
+                        <div className="text-4xl mb-5 font-semibold">Hi Merchant Welcome to I2pay 😊</div>
                         <div className="alert alert-dismissible show box bg-primary text-white flex items-center mb-6" role="alert">
                             <span>
                                 Your application is {applicationPercent}% done

@@ -44,7 +44,7 @@ const ChangePassword = () => {
                 navigateHook("/");
             }
         } catch (error) {
-            console.log("err", error);
+            // console.log("err", error);
         } finally {
             dispatch(setLoading(false));
         }
@@ -58,7 +58,7 @@ const ChangePassword = () => {
                 <div className="h-full flex items-center justify-center lg:justify-start">
                     {/* BEGIN: Logo */}
                     <Link to="/" className="-intro-x md:flex">
-                        <img alt="Icewall Tailwind HTML Admin Template" className="w-[150px]" src={Images.logoImage} />
+                        <img alt="Icewall Tailwind HTML Admin Template" className="w-[150px] h-[95px] object-contain" src={Images.logoImage} />
                     </Link>
                     {/* END: Logo */}
                 </div>

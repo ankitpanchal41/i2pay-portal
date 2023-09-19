@@ -474,6 +474,7 @@ const Step1 = ({ onNextClick, changeStepNumber, stepValues, disable }) => {
                                     <div className="intro-y col-span-12 sm:col-span-6">
                                         <label className="form-label">{messages.placeholders.country}</label>
                                         <Select
+                                            isClearable
                                             value={countryCodesApplication?.find((item) => item?.code === values?.country_registration)}
                                             styles={colourStyles}
                                             style={{ boxShadow: "none" }}
@@ -704,6 +705,9 @@ const Step1 = ({ onNextClick, changeStepNumber, stepValues, disable }) => {
                                             accept="image/png,image/jpg,image/jpeg,application/pdf"
                                             label={messages.placeholders.gst_doc}
                                         />
+                                        <div className="text-[12] text-[red] mt-2">
+                                            Note: Refraining from submitting your GST certificate will NOT exempt you from filing
+                                        </div>
                                     </div>
                                 </div>
                             </>
@@ -737,6 +741,7 @@ const Step1 = ({ onNextClick, changeStepNumber, stepValues, disable }) => {
                                     <div className="intro-y col-span-12 sm:col-span-6">
                                         <label className="form-label">{messages.placeholders.country}</label>
                                         <Select
+                                            isClearable
                                             value={countryCodesApplication?.find((item) => item?.code === values?.country_registration)}
                                             styles={colourStyles}
                                             style={{ boxShadow: "none" }}
@@ -946,6 +951,7 @@ const Step1 = ({ onNextClick, changeStepNumber, stepValues, disable }) => {
                                     <div className="intro-y col-span-12 sm:col-span-6">
                                         <label className="form-label">{messages.placeholders.country}</label>
                                         <Select
+                                            isClearable
                                             value={countryCodesApplication?.find((item) => item?.code === values?.country_registration)}
                                             styles={colourStyles}
                                             style={{ boxShadow: "none" }}
@@ -1109,6 +1115,9 @@ const Step1 = ({ onNextClick, changeStepNumber, stepValues, disable }) => {
                                                 accept="image/png,image/jpg,image/jpeg,application/pdf"
                                                 label={messages.placeholders.gst_doc}
                                             />
+                                            <div className="text-[12] text-[red] mt-2">
+                                                Note: Refraining from submitting your GST certificate will NOT exempt you from filing
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="intro-y col-span-12 lg:col-span-6 flex justify-between flex-wrap">
@@ -1236,6 +1245,9 @@ const Step1 = ({ onNextClick, changeStepNumber, stepValues, disable }) => {
                                                 accept="image/png,image/jpg,image/jpeg,application/pdf"
                                                 label={messages.placeholders.gst_doc}
                                             />
+                                            <div className="text-[12] text-[red] mt-2">
+                                                Note: Refraining from submitting your GST certificate will NOT exempt you from filing
+                                            </div>
                                         </div>
                                         <div className="intro-y w-[100%] md:w-[49%]">
                                             <Dropzone
@@ -1368,6 +1380,7 @@ const Step1 = ({ onNextClick, changeStepNumber, stepValues, disable }) => {
                                     <div className="intro-y col-span-12 sm:col-span-6">
                                         <label className="form-label">{messages.placeholders.country}</label>
                                         <Select
+                                            isClearable
                                             value={countryCodesApplication?.find((item) => item?.code === values?.country_registration)}
                                             styles={colourStyles}
                                             style={{ boxShadow: "none" }}
@@ -1531,6 +1544,9 @@ const Step1 = ({ onNextClick, changeStepNumber, stepValues, disable }) => {
                                                 accept="image/png,image/jpg,image/jpeg,application/pdf"
                                                 label={messages.placeholders.gst_doc}
                                             />
+                                            <div className="text-[12] text-[red] mt-2">
+                                                Note: Refraining from submitting your GST certificate will NOT exempt you from filing
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="intro-y col-span-12 lg:col-span-6">

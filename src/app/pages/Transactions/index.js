@@ -132,7 +132,7 @@ const LiveTransaction = () => {
         const payload = {
             ...advanceSearchPayload,
             search: searchQuery,
-            test_mode: 0
+            test_mode: 0,
         };
         const data = await downloadTransactionsLiveExcel(payload);
         if (data) {
@@ -145,6 +145,19 @@ const LiveTransaction = () => {
         setActiveTab("billing");
         setSingleDetails(item);
         setVisibleDetailModal(!visibleDetailModal);
+    };
+
+    const onCloseDetailModalWithReload = (item) => {
+        setSingleDetails(item);
+        setVisibleDetailModal(!visibleDetailModal);
+        setIsLoading(true);
+        setIsReset(false);
+        dispatch(
+            getLiveTransactionsStart(currentPage, perPage, searchQuery, { test_mode: 0, ...advanceSearchPayload }, () => {
+                setIsLoading(false);
+                setIsParPage(true);
+            }),
+        );
     };
 
     const formatArea = (val) => {
@@ -309,7 +322,7 @@ const LiveTransaction = () => {
         return (
             <>
                 {/* START: Transactions Table */}
-                <table class="table table-report sm:mt-2 pb-10">
+                <table class="table table-report sm:mt-2">
                     <thead>
                         <tr>
                             <th className="whitespace-nowrap">Order ID</th>
@@ -414,7 +427,14 @@ const LiveTransaction = () => {
                                                         leave="transition ease-in duration-75"
                                                         leaveFrom="transform opacity-100 scale-100"
                                                         leaveTo="transform opacity-0 scale-95">
-                                                        <Menu.Items className="absolute right-0 mt-2 w-48 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                                        <Menu.Items
+                                                            style={{
+                                                                top: "-10px",
+                                                                // bottom: "-15px",
+                                                                left: "-210px",
+                                                                zIndex: 9999,
+                                                            }}
+                                                            className="absolute right-0 mt-2 w-48 origin-top-right divide-y divide-gray-100 rounded-md bg-white dark:bg-darkmode-600 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                                             <div className="p-2">
                                                                 <Menu.Item>
                                                                     {({ active }) => (
@@ -787,7 +807,11 @@ const LiveTransaction = () => {
             {_renderRetrievalBackModal()}
 
             <Modal fullWidth visible={visibleDetailModal} removeFooter={false} onClose={onCloseDetailModal} heading="Transaction Details">
-                <TransactionDetails singleDetails={singleDetails} />
+                <TransactionDetails
+                    singleDetails={singleDetails}
+                    onClose={onCloseDetailModalWithReload}
+                    isSpitEnable={singleDetails?.status === 1}
+                />
             </Modal>
 
             {/* BEGIN: Content */}
@@ -795,9 +819,9 @@ const LiveTransaction = () => {
                 {_renderHeading()}
 
                 <div className="intro-y mt-5">
-                    <div className="overflow-x-auto scrollbar-hidden">
+                    <div className="scrollbar-hidden">
                         <div className="grid grid-cols-12 gap-6">
-                            <div className="intro-y col-span-12 overflow-x-auto overflow-hidden">
+                            <div className="intro-y col-span-12 overflow-auto lg:overflow-visible">
                                 {listingType === "box" ? _renderTransactionBoxTable() : _renderTransactionTable()}
                             </div>
                         </div>

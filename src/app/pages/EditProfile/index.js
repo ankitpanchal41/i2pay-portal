@@ -5,7 +5,7 @@ import { editProfileSchema, otpValidation } from "../../utils/validationSchema";
 import { store } from "../../redux/store";
 import { countryCodes } from "../../utils/countryCode";
 import { showToastMessage } from "../../utils/methods";
-import { editProfile, emailVerify, resendOtp, verifyMobileOtp } from "../../redux/services/Profile";
+import {editProfile, emailVerify, resendOtp, verifyMobileOtp} from "../../redux/services/Profile";
 import { detailStart } from "../../redux/actions/PersistActions";
 import * as Yup from "yup";
 import { messages } from "../../messages/validations";
@@ -53,8 +53,6 @@ const VerifyOTP = (props) => {
     const counterRefEmail = useRef(60);
     const counterRefMobile = useRef(60);
 
-    console.log({ emailSysOtp, mobileSysOtp });
-
     const onSubmitOTP = async (value) => {
         if (isSubmiting) return;
         setIsSubmiting(true);
@@ -63,14 +61,15 @@ const VerifyOTP = (props) => {
             mobile_no: oldData?.mobile_num,
             name: oldData?.name,
             country_code: oldData?.countryCode?.value,
-            otp: value.email_otp || undefined,
+            otp: value?.email_otp || undefined,
             sys_otp: emailSysOtp || undefined,
-            mobile_otp: value.mobile_otp || undefined,
+            mobile_otp: value?.mobile_otp || undefined,
             mobile_sys_otp: mobileSysOtp || undefined,
         };
 
+
         try {
-            if (payload.otp && payload.sys_otp) {
+            if(payload?.otp && payload?.sys_otp) {
                 const data = await emailVerify(payload);
                 if (data?.responseCode === 200) {
                     // setOtpResponse(null);
@@ -81,7 +80,7 @@ const VerifyOTP = (props) => {
                 }
             }
 
-            if (payload.mobile_otp && payload.mobile_sys_otp) {
+            if(payload?.mobile_otp && payload?.mobile_sys_otp) {
                 const data = await verifyMobileOtp(payload);
                 if (data?.responseCode === 200) {
                     // setOtpResponse(null);
@@ -90,11 +89,11 @@ const VerifyOTP = (props) => {
                     setEmailOTP(false);
                     dispatch(detailStart(userData?.data?.token, () => {}));
                 }
-
-                dispatch(detailStart(userData?.data?.token, () => {}));
             }
+
+
+
         } catch (error) {
-            console.log("error", error);
         } finally {
             setIsSubmiting(false);
         }
@@ -122,7 +121,7 @@ const VerifyOTP = (props) => {
             };
 
             const data = await resendOtp(payload);
-            console.log({ data });
+
             if (data?.responseCode === 200) {
                 setMobileSysOtp(data?.data?.otp_mobile);
                 setTimeRemainingMobile(60);
@@ -130,7 +129,6 @@ const VerifyOTP = (props) => {
                 startTimerMobile();
             }
         } catch (error) {
-            console.log("error", error);
         } finally {
             setIsSubmitingResendMobile(false);
         }
@@ -146,7 +144,7 @@ const VerifyOTP = (props) => {
             };
 
             const data = await resendOtp(payload);
-            console.log({ data });
+
             if (data?.responseCode === 200) {
                 setEmailSysOtp(data?.data?.otp);
                 setTimeRemainingEmail(60);
@@ -154,7 +152,6 @@ const VerifyOTP = (props) => {
                 startTimerEmail();
             }
         } catch (error) {
-            console.log("error", error);
         } finally {
             setIsSubmitingResendEmail(false);
         }
@@ -203,7 +200,6 @@ const VerifyOTP = (props) => {
     let validationObject = {};
 
     const onSubmit = async (values, formikBag) => {
-        console.log({ values });
         if (isSubmiting) return;
         try {
             setIsSubmiting(true);
@@ -215,12 +211,11 @@ const VerifyOTP = (props) => {
             };
 
             const data = await editProfile(payload);
-            console.log({ data });
+
             setOldData(values);
             if (data?.responseCode === 200) {
                 showToastMessage(data?.response, data?.responseCode);
                 if (data?.data?.is_update) {
-                    console.log({ data });
                     if (data?.data?.is_mobile_update === 1) {
                         setMobileOTP(true);
                         setMobileSysOtp(data?.data?.otp_mobile);
@@ -252,7 +247,6 @@ const VerifyOTP = (props) => {
                 }
             }
         } catch (error) {
-            console.log("err", error);
         } finally {
             setIsSubmiting(false);
         }
@@ -406,7 +400,7 @@ const VerifyOTP = (props) => {
                                         <div className="mt-4 mb-[-12px]">
                                             Mobile No <span className="text-danger">*</span>
                                         </div>
-                                        {console.log({ errors, touched })}
+
                                         <PhoneInput
                                             countryCodeValue={values.countryCode}
                                             setFieldValue={setFieldValue}

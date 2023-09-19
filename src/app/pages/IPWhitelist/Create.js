@@ -46,7 +46,6 @@ const IPWhiteListCreate = () => {
         let connectors_id = [];
         if (e.length) {
             e.forEach((connector) => {
-                // console.log(connector.value);
                 connectors_id.push(connector.value);
             });
         }
@@ -272,8 +271,7 @@ const IPWhiteListCreate = () => {
                                                             <button
                                                                 className="btn btn-primary w-24 ml-2"
                                                                 onClick={handleSubmit}
-                                                                disabled={isSubmitting}
-                                                            >
+                                                                disabled={isSubmitting}>
                                                                 Save <MiniLoader className="dark:text-white" isLoading={isSubmitting} />
                                                             </button>
                                                         </div>

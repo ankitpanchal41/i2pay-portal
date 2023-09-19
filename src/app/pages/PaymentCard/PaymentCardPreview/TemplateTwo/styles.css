@@ -1,0 +1,40 @@
+t2-input {
+    border: 0;
+    outline: 0;
+    border-bottom: 2px solid black;
+    border-radius: 50px;
+}
+
+t2-input:focus {
+    box-shadow: none !important;
+    outline: 0 !important;
+    outline-offset: 0 !important;
+}
+
+.template-two-background {
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.product-title {
+    color: #e48d66;
+}
+
+.t2-product-image {
+    border-radius: 5px;
+    height: 320px;
+    width: 320px;
+}
+
+.t2-product-image-container {
+    left: -35px;
+}
+
+@media (max-width: 945px) {
+    .t2-product-image-container {
+        left: 0px;
+        margin: 0 auto;
+        padding-top: 20px;
+    }
+}

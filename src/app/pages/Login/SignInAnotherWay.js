@@ -27,13 +27,12 @@ const AnotherWayToSignIn = ({ setIsEmailOtp, setSignInAnotherWay, setSignInType 
             };
 
             const data = await verifyMobileOtp(payload);
-            console.log({ data });
+
             if (data?.responseCode === 200) {
                 // setIsOTPVisible(false);
                 setIsVerifyMobile(true);
             }
         } catch (error) {
-            console.log("error", error);
         } finally {
             setIsVerifyLoading(false);
         }
@@ -52,7 +51,7 @@ const AnotherWayToSignIn = ({ setIsEmailOtp, setSignInAnotherWay, setSignInType 
                         <h3 className="intro-x font-medium text-2xl text-center sm:text-left">More ways to authenticate</h3>
 
                         <div className="sm:whitespace-normal font-medium text-md text-center sm:text-left mt-1">
-                            <b>Having trouble? </b>{" "}<br/>
+                            <b>Having trouble? </b> <br />
                             <em>
                                 Try one of these alternative methods to <b>sign in</b>.
                             </em>{" "}

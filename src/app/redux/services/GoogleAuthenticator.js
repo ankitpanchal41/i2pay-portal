@@ -5,7 +5,7 @@ import Rest from "../../apiMethod/index";
 export const googleAuthPair = async (payload) => {
     try {
         const { data } = await Rest.get(
-            `${apiRoutes.googleAuthPair}AppName=Exotic&AppInfo=${payload?.email}&SecretCode=${payload?.secretCode}`,
+            `${apiRoutes.googleAuthPair}AppName=Payomatix&AppInfo=${payload?.email}&SecretCode=${payload?.secretCode}`,
         );
 
         return data?.data;

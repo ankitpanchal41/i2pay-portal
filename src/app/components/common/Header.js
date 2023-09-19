@@ -209,11 +209,11 @@ export const Header = (props) => {
     }
 
     return (
-        <div className="top-bar-boxed h-[70px] z-index-999 relative border-b border-white/[0.08] px-3 sm:px-8 md:pt-0 auth-bg">
+        <div className="top-bar-boxed h-[70px] z-[99] relative border-b border-white/[0.08] -mx-3 px-3 sm:px-8 md:pt-0 auth-bg">
             <div className="h-full flex items-center">
                 {/* BEGIN: Logo */}
                 <Link to="/" className="-intro-x hidden md:flex">
-                    <img alt="Icewall Tailwind HTML Admin Template" className="w-[150px]" src={Images.logoImage} />
+                    <img alt="Icewall Tailwind HTML Admin Template" className="w-[150px] h-[95px] object-contain" src={Images.logoImage} />
                 </Link>
                 {/* END: Logo */}
 
@@ -396,7 +396,7 @@ export const Header = (props) => {
                         {/* END: Search */}
                         {/* {userData?.data?.token && <ThemeSwitch from={"header"} />} */}
                         {/* BEGIN: Notifications */}
-                        <div className="intro-x dropdown mr-4 z-index-999 sm:mr-6">
+                        <div className="intro-x dropdown mr-4 sm:mr-6">
                             {/* <div className="dropdown-toggle notification cursor-pointer" aria-expanded="true" data-tw-toggle="dropdown">
                                 {" "}
                                 <Icon.Bell className="notification__icon dark:text-slate-500" />{" "}
@@ -413,7 +413,7 @@ export const Header = (props) => {
                         </div>
                         {/* END: Notifications */}
                         {/* BEGIN: Account Menu */}
-                        <div className="intro-x dropdown z-index-999 w-8 h-8">
+                        <div className="intro-x dropdown w-8 h-8">
                             {/* <div
                                 className="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in scale-110"
                                 aria-expanded="true"

@@ -55,8 +55,6 @@ const Notifications = () => {
         totalPage: notificationList?.length === 0 ? 1 : totalPage,
     };
 
-    console.log("notification state", { state });
-
     const onChangePage = (page) => {
         setCurrentPage(page);
     };
@@ -72,8 +70,6 @@ const Notifications = () => {
     const _renderHeading = () => {
         return <Heading title={"All Notifications"} displayBackButton={false} />;
     };
-
-    console.log("NOti", { state });
 
     const _renderTable = () => {
         return (
@@ -94,10 +90,7 @@ const Notifications = () => {
                                 <Link
                                     to={`/notification/detail/${item?.id}`}
                                     class={`flex intro-x items-center box p-3 my-1 ${index === 0 ? "mt-0" : "mt-5"}`}>
-                                    <div
-                                        class={`border-l-2 ${
-                                            item?.is_read === 0 ? "border-success dark:border-success" : ""
-                                        }  pl-1`}>
+                                    <div class={`border-l-2 ${item?.is_read === 0 ? "border-success dark:border-success" : ""}  pl-1`}>
                                         <div className="flex items-center">
                                             <div className="ml-2 overflow-hidden">
                                                 <div className="flex items-center">

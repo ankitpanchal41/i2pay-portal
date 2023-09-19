@@ -13,7 +13,6 @@ function* getWidgetListSaga(data) {
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         data?.callback();
     }

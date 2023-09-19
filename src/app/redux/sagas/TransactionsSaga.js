@@ -13,6 +13,10 @@ import {
     GET_TRANSACTIONS_REMOVE_SUSPICIOUS_START,
     CHANGE_TRANSACTION_STATUS_END,
     CHANGE_TRANSACTION_STATUS_START,
+    GET_TRANSACTIONS_RETRIEVAL_START,
+    GET_TRANSACTIONS_RETRIEVAL_END,
+    GET_TRANSACTIONS_REMOVE_RETRIEVAL_START,
+    GET_TRANSACTIONS_REMOVE_RETRIEVAL_END,
     GET_TRANSACTIONS_LIVE_START,
     GET_TRANSACTIONS_LIVE_END,
     GET_TRANSACTIONS_TEST_END,
@@ -25,12 +29,13 @@ import {
     getTransactionsSuspiciousData,
     getTransactionsRemoveSuspiciousData,
     changeTransactionStatusData,
+    getTransactionsRetrievalData,
+    getTransactionsRemoveRetrievalData,
     getTransactionsLiveData,
 } from "../services/Transactions";
 
 function* getTransactionsSaga(data) {
     try {
-        console.log("test", data);
         //debugger;
         // const formData = new FormData();
 
@@ -42,7 +47,6 @@ function* getTransactionsSaga(data) {
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         data?.callback();
     }
@@ -54,7 +58,6 @@ function* watchTransactionsSaga() {
 
 function* getTransactionsLiveSaga(data) {
     try {
-        console.log("test", data);
         //debugger;
         // const formData = new FormData();
 
@@ -66,7 +69,6 @@ function* getTransactionsLiveSaga(data) {
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         data?.callback();
     }
@@ -78,12 +80,11 @@ function* watchTransactionsLiveSaga() {
 
 function* getTransactionsTestSaga(data) {
     try {
-        console.log("test", data);
         //debugger;
         // const formData = new FormData();
 
         const result = yield call(getTransactionsLiveData, data);
-        console.log({result})
+
         if (result.responseCode === 200) {
             yield put({
                 type: GET_TRANSACTIONS_TEST_END,
@@ -91,7 +92,6 @@ function* getTransactionsTestSaga(data) {
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         data?.callback();
     }
@@ -100,7 +100,6 @@ function* getTransactionsTestSaga(data) {
 function* watchTransactionsTestSaga() {
     yield takeEvery(GET_TRANSACTIONS_TEST_START, getTransactionsTestSaga);
 }
-
 
 function* getTransactionsRefundSaga(data) {
     try {
@@ -112,7 +111,6 @@ function* getTransactionsRefundSaga(data) {
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         data?.callback();
     }
@@ -132,7 +130,6 @@ function* getTransactionsChargeBackSaga(data) {
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         data?.callback();
     }
@@ -152,7 +149,6 @@ function* getTransactionsSuspiciousSaga(data) {
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         data?.callback();
     }
@@ -172,7 +168,6 @@ function* getTransactionsRemoveSuspiciousSaga(data) {
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         data?.callback();
     }
@@ -182,11 +177,48 @@ function* watchTransactionsRemoveSuspiciousSaga() {
     yield takeEvery(GET_TRANSACTIONS_REMOVE_SUSPICIOUS_START, getTransactionsRemoveSuspiciousSaga);
 }
 
+function* getTransactionsRetrievalSaga(data) {
+    try {
+        const result = yield call(getTransactionsRetrievalData, data);
+        if (result.responseCode === 200) {
+            yield put({
+                type: GET_TRANSACTIONS_RETRIEVAL_END,
+                payload: { transactions: result.data, paginate: result?.paginate },
+            });
+        }
+    } catch (error) {
+    } finally {
+        data?.callback();
+    }
+}
+
+function* watchTransactionsRetrievalSaga() {
+    yield takeEvery(GET_TRANSACTIONS_RETRIEVAL_START, getTransactionsRetrievalSaga);
+}
+
+function* getTransactionsRemoveRetrievalSaga(data) {
+    try {
+        const result = yield call(getTransactionsRemoveRetrievalData, data);
+        if (result.responseCode === 200) {
+            yield put({
+                type: GET_TRANSACTIONS_REMOVE_RETRIEVAL_END,
+                payload: { transactions: result.data, paginate: result?.paginate },
+            });
+        }
+    } catch (error) {
+    } finally {
+        data?.callback();
+    }
+}
+
+function* watchTransactionsRemoveRetrievalSaga() {
+    yield takeEvery(GET_TRANSACTIONS_REMOVE_RETRIEVAL_START, getTransactionsRemoveRetrievalSaga);
+}
 
 function* changeTransactionStatusSaga(data) {
     try {
         const result = yield call(changeTransactionStatusData, data);
-        console.log({ result });
+
         if (result.responseCode === 200) {
             yield put({
                 type: CHANGE_TRANSACTION_STATUS_END,
@@ -195,7 +227,6 @@ function* changeTransactionStatusSaga(data) {
             data?.navigationState();
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         data?.callback();
     }
@@ -213,5 +244,7 @@ export default function* rootSaga() {
     yield all([fork(watchTransactionsChargeBackSaga)]);
     yield all([fork(watchTransactionsSuspiciousSaga)]);
     yield all([fork(watchTransactionsRemoveSuspiciousSaga)]);
+    yield all([fork(watchTransactionsRetrievalSaga)]);
+    yield all([fork(watchTransactionsRemoveRetrievalSaga)]);
     yield all([fork(watchChangeTransactionStatusSaga)]);
 }

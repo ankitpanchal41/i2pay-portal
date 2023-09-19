@@ -37,7 +37,6 @@ export default class Rest {
                 }
             })
             .catch((error) => {
-                console.log({ error });
                 if (error?.response === undefined || error?.code === "ECONNABORTED") {
                     showToastMessage("Please check your internet connection", 400);
                 } else if (error?.response?.status === 404) {
@@ -79,8 +78,6 @@ export default class Rest {
                 }
             })
             .catch((error) => {
-                console.log("error", { error });
-
                 if (error?.response === undefined || error?.code === "ECONNABORTED") {
                     showToastMessage("Please check your internet connection", 400);
                 } else if (error?.response?.status === 404) {

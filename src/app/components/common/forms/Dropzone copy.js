@@ -88,21 +88,18 @@ const DropzoneComponent = ({
                     setFieldValue(name, acceptedFiles);
                 }
             } else {
-                console.log({ acceptedFiles });
                 setFieldValue(name, acceptedFiles);
             }
         }
     }, [acceptedFiles]);
 
     const checkPanCardImage = async () => {
-        console.log({ acceptedFiles });
         const formData = new FormData();
         formData.append("image", acceptedFiles[0]);
         setIsLoading(true);
         const data = await Rest.checkPanCardImage(formData);
 
         if (data) {
-            console.log(data?.pan_card_detail);
             setPanNumber(data?.pan_card_detail?.pan_card_number);
             setFieldValue(name, acceptedFiles);
         } else {
@@ -120,13 +117,13 @@ const DropzoneComponent = ({
             const formData = new FormData();
 
             if (name === "director_aadhar_card_front_image") {
-                console.log("FIRST", { image: acceptedFiles[0], back_side_image: allValue?.director_aadhar_card_back_image[0] });
+                // console.log("FIRST", { image: acceptedFiles[0], back_side_image: allValue?.director_aadhar_card_back_image[0] });
                 formData.append("image", acceptedFiles[0]);
                 formData.append("back_side_image", allValue?.director_aadhar_card_back_image[0]);
             }
 
             if (name === "director_aadhar_card_back_image") {
-                console.log("SECOND", { image: allValue?.director_aadhar_card_front_image[0], back_side_image: acceptedFiles[0] });
+                // console.log("SECOND", { image: allValue?.director_aadhar_card_front_image[0], back_side_image: acceptedFiles[0] });
                 formData.append("image", allValue?.director_aadhar_card_front_image[0]);
                 formData.append("back_side_image", acceptedFiles[0]);
             }

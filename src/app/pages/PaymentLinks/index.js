@@ -189,7 +189,7 @@ const PaymentLink = () => {
                                                                 target="_blank"
                                                                 rel="noreferrer"
                                                                 className="font-medium   dark:text-slate-400 whitespace-nowrap text-primary truncate cursor-pointer">
-                                                                {truncateString(item?.link, 40)}
+                                                                {truncateString(item?.link, 20)}
                                                             </a>
 
                                                             <CopyToClipboard

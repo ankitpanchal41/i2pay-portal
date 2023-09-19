@@ -39,14 +39,12 @@ const WebhookReducer = (state = initialValues, action) => {
             };
 
         case ADD_WEBHOOK_RESPONSE:
-            console.log("response", { action });
             return {
                 ...state,
                 webhook: [...state?.webhook, action?.data?.data],
             };
 
         case DELETE_WEBHOOK_RESPONSE:
-            console.log("Delete reducer", state.webhook);
             return {
                 ...state,
                 webhook: state.webhook.filter((item) => item?.id !== action?.id),
@@ -81,7 +79,6 @@ const WebhookReducer = (state = initialValues, action) => {
             };
 
         case TEST_WEBHOOK_RESPONSE:
-            console.log("Test", action?.data?.data);
             return {
                 ...state,
                 webhookLogs: [],

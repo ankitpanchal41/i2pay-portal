@@ -18,12 +18,12 @@ const PrivacyPolicy = () => {
                 <div class="intro-y col-span-12 lg:col-span-6">
                     <div class="box p-5">
                         <div class="accordion-body text-slate-600 dark:text-slate-500 leading-relaxed">
-                            PAYOMATIX TECHNOLOGIES (“we,” “our,” or “us”) is committed to protecting your privacy. This Privacy Policy
-                            explains how your personal information is collected, used, and disclosed by PAYOMATIX TECHNOLOGIES.
+                            I2PAY TECHNOLOGIES (“we,” “our,” or “us”) is committed to protecting your privacy. This Privacy Policy
+                            explains how your personal information is collected, used, and disclosed by I2PAY TECHNOLOGIES.
                             <br />
                             <br />
                             This Privacy Policy applies to our website, and its associated subdomains (collectively, our “Service”)
-                            alongside our application, PAYOMATIX TECHNOLOGIES. By accessing or using our Service, you signify that you have
+                            alongside our application, I2PAY TECHNOLOGIES. By accessing or using our Service, you signify that you have
                             read, understood, and agree to our collection, storage, use, and disclosure of your personal information as
                             described in this Privacy Policy and our Terms of Service.
                         </div>
@@ -44,21 +44,21 @@ const PrivacyPolicy = () => {
                                     preference or login information.
                                 </li>
                                 <li className="mt-2">
-                                    Company: when this policy mentions “Company,” “we,” “us,” or “our,” it refers to PAYOMATIX TECHNOLOGIES
+                                    Company: when this policy mentions “Company,” “we,” “us,” or “our,” it refers to I2PAY TECHNOLOGIES
                                     PRIVATE LIMITED, (SHOP NO. UG-06 TO UG-17 SWARN PLAZA SECTOR SWARN NAGRI NOIDA Gautam Buddha Nagar UP
                                     201310), that is responsible for your information under this Privacy Policy.
                                 </li>
                                 <li className="mt-2">
-                                    Country: where PAYOMATIX TECHNOLOGIES or the owners/founders of PAYOMATIX TECHNOLOGIES are based, in
+                                    Country: where I2PAY TECHNOLOGIES or the owners/founders of I2PAY TECHNOLOGIES are based, in
                                     this case is India
                                 </li>
                                 <li className="mt-2">
-                                    Customer: refers to the company, organization or person that signs up to use the PAYOMATIX TECHNOLOGIES
+                                    Customer: refers to the company, organization or person that signs up to use the I2PAY TECHNOLOGIES
                                     Service to manage the relationships with your consumers or service users.
                                 </li>
                                 <li className="mt-2">
                                     Device: any internet connected device such as a phone, tablet, computer or any other device that can be
-                                    used to visit PAYOMATIX TECHNOLOGIES and use the services.
+                                    used to visit I2PAY TECHNOLOGIES and use the services.
                                 </li>
                                 <li className="mt-2">
                                     IP address: Every device connected to the Internet is assigned a number known as an Internet protocol
@@ -66,7 +66,7 @@ const PrivacyPolicy = () => {
                                     to identify the location from which a device is connecting to the Internet.
                                 </li>
                                 <li className="mt-2">
-                                    Personnel: refers to those individuals who are employed by PAYOMATIX TECHNOLOGIES or are under contract
+                                    Personnel: refers to those individuals who are employed by I2PAY TECHNOLOGIES or are under contract
                                     to perform a service on behalf of one of the parties.
                                 </li>
                                 <li className="mt-2">
@@ -75,7 +75,7 @@ const PrivacyPolicy = () => {
                                     natural person.
                                 </li>
                                 <li className="mt-2">
-                                    Service: refers to the service provided by PAYOMATIX TECHNOLOGIES as described in the relative terms (if
+                                    Service: refers to the service provided by I2PAY TECHNOLOGIES as described in the relative terms (if
                                     available) and on this platform.
                                 </li>
                                 <li className="mt-2">
@@ -83,10 +83,10 @@ const PrivacyPolicy = () => {
                                     others who provide our content or whose products or services we think may interest you.
                                 </li>
                                 <li className="mt-2">
-                                    Website: PAYOMATIX TECHNOLOGIES’s site, which can be accessed via this URL: https://exotic.in/
+                                    Website: I2PAY TECHNOLOGIES’s site, which can be accessed via this URL: https://I2PAY.com/
                                 </li>
                                 <li className="mt-2">
-                                    You: a person or entity that is registered with PAYOMATIX TECHNOLOGIES to use the Services.
+                                    You: a person or entity that is registered with I2PAY TECHNOLOGIES to use the Services.
                                 </li>
                             </ul>
                         </div>
@@ -128,7 +128,7 @@ const PrivacyPolicy = () => {
                         </div>
                         <div className="p-5">
                             <div class="accordion-body text-slate-600 dark:text-slate-500 leading-relaxed">
-                                If you are a PAYOMATIX TECHNOLOGIES worker or applicant, we collect information you voluntarily provide to
+                                If you are a I2PAY TECHNOLOGIES worker or applicant, we collect information you voluntarily provide to
                                 us. We use the information collected for Human Resources purposes in order to administer benefits to workers
                                 and screen applicants.
                                 <br />
@@ -148,8 +148,8 @@ const PrivacyPolicy = () => {
                         <div className="p-5">
                             <div class="accordion-body text-slate-600 dark:text-slate-500 leading-relaxed">
                                 We reserve the right to transfer information to a third party in the event of a sale, merger or other
-                                transfer of all or substantially all of the assets of PAYOMATIX TECHNOLOGIES or any of its Corporate
-                                Affiliates (as defined herein), or that portion of PAYOMATIX TECHNOLOGIES or any of its Corporate Affiliates
+                                transfer of all or substantially all of the assets of I2PAY TECHNOLOGIES or any of its Corporate
+                                Affiliates (as defined herein), or that portion of I2PAY TECHNOLOGIES or any of its Corporate Affiliates
                                 to which the Service relates, or in the event that we discontinue our business or file a petition or have
                                 filed against us a petition in bankruptcy, reorganization or similar proceeding, provided that the third
                                 party agrees to adhere to the terms of this Privacy Policy.
@@ -164,7 +164,7 @@ const PrivacyPolicy = () => {
                             <div class="accordion-body text-slate-600 dark:text-slate-500 leading-relaxed">
                                 We may disclose information (including personal information) about you to our Corporate Affiliates. For
                                 purposes of this Privacy Policy, “Corporate Affiliate” means any person or entity which directly or
-                                indirectly controls, is controlled by or is under common control with PAYOMATIX TECHNOLOGIES, whether by
+                                indirectly controls, is controlled by or is under common control with I2PAY TECHNOLOGIES, whether by
                                 ownership or otherwise. Any information relating to you that we provide to our Corporate Affiliates will be
                                 treated by those Corporate Affiliates in accordance with the terms of this Privacy Policy.
                             </div>
@@ -186,7 +186,7 @@ const PrivacyPolicy = () => {
                                 website. Your use of the website may also be subject to other local, state, national, or international laws.
                                 <br />
                                 <br />
-                                By using PAYOMATIX TECHNOLOGIES or contacting us directly, you signify your acceptance of this Privacy
+                                By using I2PAY TECHNOLOGIES or contacting us directly, you signify your acceptance of this Privacy
                                 Policy. If you do not agree to this Privacy Policy, you should not engage with our website, or use our
                                 services. Continued use of the website, direct engagement with us, or following the posting of changes to
                                 this Privacy Policy that do not significantly affect the use or disclosure of your personal information will
@@ -201,7 +201,7 @@ const PrivacyPolicy = () => {
                         <div className="p-5">
                             <div class="accordion-body text-slate-600 dark:text-slate-500 leading-relaxed">
                                 We’ve updated our Privacy Policy to provide you with complete transparency into what is being set when you
-                                visit our site and how it’s being used. By using our PAYOMATIX TECHNOLOGIES, registering an account, or
+                                visit our site and how it’s being used. By using our I2PAY TECHNOLOGIES, registering an account, or
                                 making a purchase, you hereby consent to our Privacy Policy and agree to its terms.
                             </div>
                         </div>
@@ -213,7 +213,7 @@ const PrivacyPolicy = () => {
                         <div className="p-5">
                             <div class="accordion-body text-slate-600 dark:text-slate-500 leading-relaxed">
                                 This Privacy Policy applies only to the Services. The Services may contain links to other websites not
-                                operated or controlled by PAYOMATIX TECHNOLOGIES. We are not responsible for the content, accuracy or
+                                operated or controlled by I2PAY TECHNOLOGIES. We are not responsible for the content, accuracy or
                                 opinions expressed in such websites, and such websites are not investigated, monitored or checked for
                                 accuracy or completeness by us. Please remember that when you use a link to go from the Services to another
                                 website, our Privacy Policy is no longer in effect. Your browsing and interaction on any other website,

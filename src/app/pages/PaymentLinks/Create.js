@@ -11,7 +11,6 @@ import { Currency } from "../../utils/currency";
 import { decode } from "html-entities";
 import moment from "moment";
 
-
 const Input = React.lazy(() => import("../../components/common/forms/Input"));
 const MiniLoader = React.lazy(() => import("../../components/common/MiniLoader"));
 const Heading = React.lazy(() => import("../../components/common/Heading"));
@@ -48,7 +47,6 @@ const PaymentLinkCreate = () => {
     };
 
     const onSubmit = (values) => {
-        console.log({ values });
         if (isSubmiting) return;
 
         setIsSubmiting(true);
@@ -68,8 +66,6 @@ const PaymentLinkCreate = () => {
             description: values?.description ? values?.description : undefined,
             countryCode: undefined,
         };
-
-        console.log({ payload });
 
         dispatch({ type: ADD_PAYMENT_LINK_REQUEST, payload, callBack, navigateState });
     };
@@ -93,7 +89,7 @@ const PaymentLinkCreate = () => {
             minHeight: 38,
             borderColor: "#e2e8f0",
             color: mode === "dark" ? "#FFFFFF" : "#384252",
-            minHeight: 'auto'
+            minHeight: "auto",
         }),
         option: (styles, { data, isDisabled, isFocused, isSelected }) => {
             return {
@@ -219,7 +215,7 @@ const PaymentLinkCreate = () => {
                                                         <div className="mb-[-12px]">
                                                             Mobile No <span className="text-danger">*</span>
                                                         </div>
-                                                        
+
                                                         <PhoneInput
                                                             countryCodeValue={values.countryCode}
                                                             setFieldValue={setFieldValue}
@@ -267,8 +263,7 @@ const PaymentLinkCreate = () => {
                                                             type="buttons"
                                                             className="btn btn-primary w-24 ml-2"
                                                             onClick={handleSubmit}
-                                                            disabled={isSubmiting}
-                                                        >
+                                                            disabled={isSubmiting}>
                                                             Save <MiniLoader isLoading={isSubmiting} />
                                                         </button>
                                                     </div>

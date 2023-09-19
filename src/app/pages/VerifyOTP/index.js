@@ -31,11 +31,9 @@ const VerifyOTP = (props) => {
     // const [intervalState, setIntervalState] = useState(null);
     const intervalRef = useRef(null);
     const counterRef = useRef(60);
-    console.log("location.state", location.state);
+
     const onSubmit = async (value) => {
         const { mobile, countryCode, email, RP } = location.state;
-
-        console.log({ otpResponse });
 
         const payload = {
             email,
@@ -49,8 +47,6 @@ const VerifyOTP = (props) => {
             expires_at: otpResponse?.data?.expires_at,
         };
 
-        // console.log({ RP }, { location });
-
         setIsLoadingVerify(true);
         try {
             const data = await registerUser(payload);
@@ -59,7 +55,6 @@ const VerifyOTP = (props) => {
                 onCloseModal();
             }
         } catch (error) {
-            console.log("error", error);
         } finally {
             setIsLoadingVerify(false);
         }
@@ -68,7 +63,6 @@ const VerifyOTP = (props) => {
     const getOTP = useCallback(
         async (type, resend = false) => {
             setOtpType(type);
-            console.log({ resend });
 
             if (resend) {
                 setIsLoading(true);
@@ -95,7 +89,6 @@ const VerifyOTP = (props) => {
                 counterRef.current = 60;
                 startTimer();
             } catch (error) {
-                console.log("error", error);
             } finally {
                 if (resend) {
                     setIsLoading(false);
@@ -171,7 +164,7 @@ const VerifyOTP = (props) => {
                 <div className="h-full flex items-center justify-center lg:justify-start">
                     {/* BEGIN: Logo */}
                     <Link to="/" className="-intro-x md:flex">
-                        <img alt="Icewall Tailwind HTML Admin Template" className="w-[150px]" src={Images.logoImage} />
+                        <img alt="Icewall Tailwind HTML Admin Template" className="w-[150px] h-[95px] object-contain" src={Images.logoImage} />
                     </Link>
                     {/* END: Logo */}
                 </div>
@@ -183,7 +176,7 @@ const VerifyOTP = (props) => {
                 {/* BEGIN: Login Form */}
                 {otpResponse ? (
                     <Formik initialValues={initialValues} validationSchema={otpValidation} onSubmit={onSubmit}>
-                        {({ handleSubmit, setFieldValue, values, errors }) => (
+                        {({ handleSubmit, setFieldValue, values, errors, isValid }) => (
                             // <Form className="h-screen xl:h-auto flex py-5 xl:py-0 my-0">
                             //     <div className="h-screen xl:h-auto flex py-5 xl:py-0 my-0 flex-1 justify-center items-center">
                             //         <div className="my-auto mx-auto xl:ml-20 bg-white dark:bg-darkmode-600 xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto">
@@ -217,7 +210,7 @@ const VerifyOTP = (props) => {
                                         <button
                                             className="btn btn-primary py-3 px-4 w-full align-top"
                                             onClick={handleSubmit}
-                                            disabled={isLoadingVerify}>
+                                            disabled={isLoadingVerify || !isValid}>
                                             Verify <MiniLoader isLoading={isLoadingVerify} />
                                         </button>
                                         <button

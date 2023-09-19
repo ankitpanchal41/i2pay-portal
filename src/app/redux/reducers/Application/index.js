@@ -34,7 +34,7 @@ const ApplicationReducer = (state = initialState, action) => {
                     // if (Array.isArray(temp[action.payload.step - 1])) {
                     const temp2 = Array.isArray(temp[action.payload.step - 1]) ? [...temp[action.payload.step - 1]] : [];
                     temp2[action?.payload?.index] = { ...action?.payload?.data };
-                    console.log("TEMP =>>>>>", temp2);
+
                     data = temp2;
                     // } else {
                     // data = [{ ...action?.payload?.data }];
@@ -59,7 +59,7 @@ const ApplicationReducer = (state = initialState, action) => {
         case DELETE_DIRECTOR_SHAREHOLDER_END: {
             const mainIndex = action?.deleteType === "director" ? 1 : 2;
             const clone = [...state.applicationStepValues];
-            console.log("action =>>>>>>>>", action);
+
             if (action?.id) {
                 clone[mainIndex] = clone[mainIndex]?.filter((v) => v?.id !== action?.id);
             } else if (action?.index && !clone?.[mainIndex]?.[action?.index]) {
@@ -101,17 +101,15 @@ const ApplicationReducer = (state = initialState, action) => {
             };
 
         case DELETE_DIRECTOR_MULTIPLE_IMAGE:
-            console.log(action?.data, action?.step);
             state.applicationStepValues[1][action?.step].director_additional_document = action?.data;
-            console.log({ state });
+
             return {
                 ...state,
             };
 
         case DELETE_SHARE_HOLDER_MULTIPLE_IMAGE:
-            console.log(action?.data, action?.step);
             state.applicationStepValues[2][action?.step].share_holder_additional_document = action?.data;
-            console.log({ state });
+
             return {
                 ...state,
             };

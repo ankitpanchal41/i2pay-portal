@@ -189,7 +189,7 @@ export const getTransactionsRemoveSuspiciousData = async (value, payload) => {
 export const changeTransactionStatusData = async (value, payload) => {
     try {
         const { data } = await Rest.post(`${apiRoutes.transactionChangeStatus}`, value.payload);
-        console.log({ data });
+
         return data;
     } catch (error) {
         return error;

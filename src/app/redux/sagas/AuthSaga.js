@@ -9,10 +9,7 @@ function* checkToken(data) {
             server: process.env.NODE_ENV,
         };
         const result = yield call(verifyToken, payload);
-        console.log("RESULT", result);
-    } catch (error) {
-        console.log("ERROR", error);
-    }
+    } catch (error) {}
 }
 
 function* watchVerifyTokenStart() {

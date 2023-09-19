@@ -10,7 +10,6 @@ import { deleteNotificationData, getNotificationData } from "../services/Notific
 
 function* getNotificationSaga(data) {
     try {
-
         const result = yield call(getNotificationData, data);
         if (result.responseCode === 200) {
             yield put({
@@ -19,15 +18,12 @@ function* getNotificationSaga(data) {
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         data?.callback();
     }
 }
 
-
 function* deleteNotificationSaga(action) {
-    console.log({action})
     try {
         const result = yield call(deleteNotificationData, action.payload);
         if (result?.responseCode === 200) {
@@ -38,7 +34,6 @@ function* deleteNotificationSaga(action) {
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         action.callBack();
     }

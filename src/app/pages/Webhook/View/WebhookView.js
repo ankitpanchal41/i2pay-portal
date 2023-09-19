@@ -53,8 +53,6 @@ const WebhookLog = () => {
         }
     };
 
-    // console.log("Webhook Detail", { detailWebhook });
-
     const onClickBack = () => {
         navigate(`/webhook`);
     };

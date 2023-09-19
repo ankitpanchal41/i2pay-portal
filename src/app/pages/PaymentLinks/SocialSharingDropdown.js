@@ -5,8 +5,6 @@ import {
     EmailIcon,
     FacebookIcon,
     FacebookShareButton,
-    TelegramIcon,
-    TelegramShareButton,
     TwitterIcon,
     TwitterShareButton,
     WhatsappIcon,
@@ -17,6 +15,7 @@ import {
 import { PAYMENT_LINK_SEND_REQUEST } from "../../redux/actions/PaymentLinkAction";
 import { useDispatch, useSelector } from "react-redux";
 import { ClipLoader } from "react-spinners";
+import Images from "../../../assets/images";
 
 const SocialSharingDropdown = ({ item }) => {
     const dispatch = useDispatch();
@@ -125,7 +124,8 @@ const SocialSharingDropdown = ({ item }) => {
                                         via={item?.link}
                                         separator=":: "
                                         className="Demo__some-network__share-button mr-2">
-                                        <TwitterIcon size={25} round={true} />
+                                        <img className="h-[25px] w-[25px] rounded-full" src={Images.XLogoTwitter} />
+                                        {/* <TwitterIcon size={25} round={true} /> */}
                                     </TwitterShareButton>
 
                                     <WhatsappShareButton

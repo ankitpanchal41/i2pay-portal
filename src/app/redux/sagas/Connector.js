@@ -1,11 +1,11 @@
-import {all, fork, put, takeEvery, call} from "redux-saga/effects";
+import { all, fork, put, takeEvery, call } from "redux-saga/effects";
 import {
     changeConnectorMode,
     getConnectorData,
     getConnectorSettings,
     getEnabledConnectorData,
     setConnectorData,
-    setConnectorSettingsData
+    setConnectorSettingsData,
 } from "../services/Connector";
 import {
     GET_CONNECTOR_REQUEST,
@@ -19,12 +19,11 @@ import {
     UPDATE_CONNECTOR_SETTINGS_REQUEST,
     UPDATE_CONNECTOR_SETTINGS_RESPONSE,
     UPDATE_CONNECTOR_MODE_REQUEST,
-    UPDATE_CONNECTOR_MODE_RESPONSE
+    UPDATE_CONNECTOR_MODE_RESPONSE,
 } from "../actions/Connector";
 
 function* getConnectorSaga(data) {
     try {
-
         const result = yield call(getConnectorData, data);
         if (result.responseCode === 200) {
             yield put({
@@ -33,14 +32,12 @@ function* getConnectorSaga(data) {
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         data?.callback();
     }
 }
 
 function* getEnabledConnectorSaga(data) {
-    console.log({data})
     try {
         const result = yield call(getEnabledConnectorData, data);
 
@@ -51,14 +48,12 @@ function* getEnabledConnectorSaga(data) {
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         data?.callBack();
     }
 }
 
 export function* getConnectorSettingsSaga(action) {
-
     try {
         const result = yield call(getConnectorSettings, action.payload);
         if (result?.responseCode === 200) {
@@ -68,15 +63,12 @@ export function* getConnectorSettingsSaga(action) {
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         action.callBack();
     }
-
 }
 
 export function* updateConnectorSaga(action) {
-
     try {
         const result = yield call(setConnectorData, action.payload);
         if (result?.responseCode === 200) {
@@ -87,15 +79,12 @@ export function* updateConnectorSaga(action) {
             action.response(result);
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         action.callBack();
     }
-
 }
 
 export function* updateConnectorSettingsSaga(action) {
-
     try {
         const result = yield call(setConnectorSettingsData, action.payload);
         if (result?.responseCode === 200) {
@@ -106,18 +95,15 @@ export function* updateConnectorSettingsSaga(action) {
             action.navigateState();
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         action.callBack();
     }
-
 }
 
 export function* updateConnectorModeSaga(action) {
-
     try {
         const result = yield call(changeConnectorMode, action.payload);
-        console.log({result})
+
         if (result?.responseCode === 200) {
             yield put({
                 type: UPDATE_CONNECTOR_MODE_RESPONSE,
@@ -125,11 +111,9 @@ export function* updateConnectorModeSaga(action) {
             });
         }
     } catch (error) {
-        console.log("ERROR", error);
     } finally {
         action.callBack();
     }
-
 }
 
 function* watchConnectorSaga() {

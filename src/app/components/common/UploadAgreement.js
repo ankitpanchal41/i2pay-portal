@@ -61,13 +61,11 @@ const UploadAgreement = () => {
         dispatch({ type: UPLOAD_AGREEMENT_REQUEST, payload: formData, callBack, navigateState });
     };
 
-    console.log("state", { state });
-
     return (
         <div className="w-[100vw] h-[100vh] flex justify-center items-center bg-[#1e3181]">
             <div className="flex justify-center items-center flex-col h-full">
                 <div className="m-auto">
-                    <img alt="Icewall Tailwind HTML Admin Template" className="w-[200px] mb-10 mx-auto" src={Images.logoImage} />
+                    <img alt="Icewall Tailwind HTML Admin Template" className="w-[200px] object-contain mb-5 mx-auto" src={Images.logoImage} />
                     <div className="box p-[20px]">
                         {!isSubmitted && (
                             <Formik

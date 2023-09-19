@@ -36,8 +36,6 @@ const Profile = () => {
     }, []);
 
     const onProfilePicChange = async (event) => {
-        console.log("image", event);
-
         // let reader = new FileReader();
         // reader.onload = (e) => {
         //     setProfilePic(e.target.result);
@@ -45,7 +43,7 @@ const Profile = () => {
         // reader.readAsDataURL(event.target.files[0]);
         // let formData = new FormData();
         const base64 = await convertBase64(event.target.files[0]);
-        console.log({ base64 });
+
         // formData.append("image", event.target.files[0]);
 
         const payload = { image: base64 };
@@ -92,7 +90,6 @@ const Profile = () => {
                                             <div
                                                 className="cursor-pointer absolute mb-1 mr-1 flex items-center justify-center bottom-0 right-0 bg-primary rounded-full p-2"
                                                 onClick={() => {
-                                                    console.log("ref", profilePicRef);
                                                     profilePicRef.current?.click();
                                                 }}>
                                                 {isLoadingProfile ? (
@@ -199,7 +196,7 @@ const Profile = () => {
                                 <div
                                     className="cursor-pointer absolute mb-1 mr-1 flex items-center justify-center bottom-0 right-0 bg-primary rounded-full p-2"
                                     onClick={() => {
-                                        console.log("ref", profilePicRef);
+                                        
                                         profilePicRef.current?.click();
                                     }}>
                                     {isLoadingProfile ? (

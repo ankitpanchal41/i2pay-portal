@@ -10,6 +10,7 @@ import { Currency } from "../../utils/currency";
 import { transactionsStatus } from "../../utils/transactions";
 import { getConnectorsRequest } from "../../redux/actions/Connector";
 import "react-datepicker/dist/react-datepicker.css";
+import { AutoSplitPayment } from "../../utils/staticDropdown";
 const Input = React.lazy(() => import("../../components/common/forms/Input"));
 
 const AdvanceSearchModal = ({
@@ -25,7 +26,7 @@ const AdvanceSearchModal = ({
     removeConnector,
     removeIPAddress,
 }) => {
-    const initialValues = {
+    const initialValuesObj = {
         email: "",
         order_id: "",
         from_amount: "",
@@ -36,6 +37,7 @@ const AdvanceSearchModal = ({
         currency: "",
         status: "",
         connectors_id: "",
+        is_auto_split_enabled: "",
     };
 
     const dispatch = useDispatch();
@@ -45,6 +47,7 @@ const AdvanceSearchModal = ({
     const [additionalEndDate, setAdditionalEndDate] = useState(null);
     const { connector: connectors } = useSelector((state) => state.connector);
     const [currencyRef, setCurrencyRef] = useState(null);
+    const [initialValues, setInitialValues] = useState(initialValuesObj);
 
     const handleStartDate = (date, setFieldValue) => {
         setFieldValue("start_date", date);
@@ -69,22 +72,34 @@ const AdvanceSearchModal = ({
     };
 
     const onSubmit = (values) => {
-        console.log({ values });
         advanceSearchSubmit(values);
     };
 
     const onReset = () => {
-        setStartDate(null);
-        setEndDate(null);
-        setAdditionalStartDate(null);
-        setAdditionalEndDate(null);
-        currencyRef.clearValue();
-        if (!removeConnector) {
-            document.getElementById("connectors_id").value = "";
-        }
+        setInitialValues({
+            email: "",
+            order_id: "",
+            from_amount: "",
+            to_amount: "",
+            start_date: "",
+            end_date: "",
+            ip_address: "",
+            currency: "",
+            status: "",
+            connectors_id: "",
+            is_auto_split_enabled: "",
+        });
+        // setStartDate(null);
+        // setEndDate(null);
+        // setAdditionalStartDate(null);
+        // setAdditionalEndDate(null);
+        // currencyRef.clearValue();
+        // if (!removeConnector) {
+        //     document.getElementById("connectors_id").value = "";
+        // }
 
-        document.getElementById("status").value = "";
-        resetFilter();
+        // document.getElementById("status").value = "";
+        // resetFilter();
     };
 
     useEffect(() => {
@@ -490,6 +505,35 @@ const AdvanceSearchModal = ({
                                                     </div>
                                                 </div>
                                             )}
+
+                                        <div className="mt-3 grid grid-cols-12 gap-4 gap-y-3">
+                                            <div className="col-span-12 sm:col-span-6">
+                                                <label htmlFor="status" className="form-label">
+                                                    Auto Spit Payment
+                                                </label>
+
+                                                <select
+                                                    id="is_auto_split_enabled"
+                                                    onChange={(e) => setFieldValue("is_auto_split_enabled", e.target.value)}
+                                                    value={values.is_auto_split_enabled}
+                                                    name="is_auto_split_enabled"
+                                                    style={{ zIndex: 1 }}
+                                                    className="form-select intro-x login__input form-control px-4 block">
+                                                    <option value="" disabled>
+                                                        Select Type
+                                                    </option>
+                                                    {AutoSplitPayment &&
+                                                        AutoSplitPayment.map((status, index) => (
+                                                            <option key={index} value={status.value}>
+                                                                {status.label}
+                                                            </option>
+                                                        ))}
+                                                </select>
+                                                {errors.is_auto_split_enabled && touched.is_auto_split_enabled ? (
+                                                    <p className="text-red-500 mt-2 ml-1">{errors.is_auto_split_enabled}</p>
+                                                ) : null}
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div className="modal-footer w-full absolute bottom-0 flex justify-between">

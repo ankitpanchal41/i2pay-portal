@@ -52,13 +52,15 @@ const InvoiceDetails = ({ data }) => {
                             {data?.shipToName && (
                                 <div className="text-[#3B4863] text-[14px] font-semibold text-right">{data?.shipToName}</div>
                             )}
-                            {data?.billToGst && <div className="text-[#3B4863] text-[14px] font-normal text-right">GSTIN: {data?.billToGst}</div>}
+                            {data?.billToGst && (
+                                <div className="text-[#3B4863] text-[14px] font-normal text-right">GSTIN: {data?.billToGst}</div>
+                            )}
                             {data?.shipToContact && (
                                 <div className="text-[#3B4863] text-[14px] font-normal text-right">
                                     Contact number: {data?.shipToContact}
                                 </div>
                             )}
-                            
+
                             {data?.shipToEmail && (
                                 <div className="text-[#3B4863] text-[14px] font-normal text-right">{data?.shipToEmail}</div>
                             )}
@@ -78,7 +80,9 @@ const InvoiceDetails = ({ data }) => {
                         )}
                         {data?.billToName && <div className="text-[#3B4863] text-[14px] font-semibold">Name: {data?.billToName}</div>}
                         {data?.billToGst && <div className="text-[#3B4863] text-[14px] font-normal">GSTIN: {data?.billToGst}</div>}
-                        {data?.billToContact && <div className="text-[#3B4863] text-[14px] font-normal">Contact Number: {data?.billToContact}</div>}
+                        {data?.billToContact && (
+                            <div className="text-[#3B4863] text-[14px] font-normal">Contact Number: {data?.billToContact}</div>
+                        )}
                         {data?.billToEmail && <div className="mt-1">{data?.billToEmail}</div>}
                         {data?.billToAddress && <div className="mt-1">{data?.billToAddress}</div>}
                     </div>
@@ -112,15 +116,19 @@ const InvoiceDetails = ({ data }) => {
                                 const igst = (amount * igstP) / 100;
                                 const sgstCgst = (amount * sgstCgstP) / 100;
                                 const totalAmount = amount + (amount * igstP) / 100;
-                                console.log({ totalAmount });
+
                                 totalFormAmount = totalFormAmount + totalAmount;
                                 return (
                                     <tr key={index} className={`${index % 2 === 0 ? "bg-[#F7F7F780]" : ""}`}>
                                         <td className="border-b dark:border-darkmode-400">
                                             <div className="whitespace-nowrap text-[#3B4863] text-[14px] font-normal">{item?.name}</div>
-                                            <div className="text-slate-500 text-sm mt-0.5 whitespace-nowrap text-[#3B4863] text-[14px] font-normal">{item?.description}</div>
+                                            <div className="text-slate-500 text-sm mt-0.5 whitespace-nowrap text-[#3B4863] text-[14px] font-normal">
+                                                {item?.description}
+                                            </div>
                                         </td>
-                                        <td className="text-right border-b dark:border-darkmode-400 w-32 text-[#3B4863] text-[14px] font-normal">{item?.qty}</td>
+                                        <td className="text-right border-b dark:border-darkmode-400 w-32 text-[#3B4863] text-[14px] font-normal">
+                                            {item?.qty}
+                                        </td>
                                         <td className="text-right border-b dark:border-darkmode-400 w-32 text-[#3B4863] text-[14px] font-normal">
                                             <span>{decode(Currency.find((c) => c?.value === item?.currency)?.symbol)}</span> {item?.price}
                                         </td>
@@ -133,7 +141,9 @@ const InvoiceDetails = ({ data }) => {
                                                         {igst.toFixed(2)}
                                                     </td>
                                                 ) : (
-                                                    <td className="text-right border-b dark:border-darkmode-400 w-32 text-[#3B4863] text-[14px] font-normal">-</td>
+                                                    <td className="text-right border-b dark:border-darkmode-400 w-32 text-[#3B4863] text-[14px] font-normal">
+                                                        -
+                                                    </td>
                                                 )}
                                             </>
                                         )}
@@ -147,7 +157,9 @@ const InvoiceDetails = ({ data }) => {
                                                         {sgstCgst.toFixed(2)}
                                                     </td>
                                                 ) : (
-                                                    <td className="text-right border-b dark:border-darkmode-400 w-32 text-[#3B4863] text-[14px] font-normal">-</td>
+                                                    <td className="text-right border-b dark:border-darkmode-400 w-32 text-[#3B4863] text-[14px] font-normal">
+                                                        -
+                                                    </td>
                                                 )}
                                             </>
                                         )}
@@ -160,7 +172,9 @@ const InvoiceDetails = ({ data }) => {
                                                         {sgstCgst.toFixed(2)}
                                                     </td>
                                                 ) : (
-                                                    <td className="text-right border-b dark:border-darkmode-400 w-32 text-[#3B4863] text-[14px] font-normal">-</td>
+                                                    <td className="text-right border-b dark:border-darkmode-400 w-32 text-[#3B4863] text-[14px] font-normal">
+                                                        -
+                                                    </td>
                                                 )}
                                             </>
                                         )}

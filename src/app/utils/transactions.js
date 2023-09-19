@@ -44,7 +44,7 @@ export const transactionsConnectorAccountStatusLabels = (status) => {
             return <span className="py-0.5 px-2 rounded-full text-xs text-white cursor-pointer font-medium  bg-danger">Self</span>;
 
         case 1:
-            return <span className="py-0.5 px-2 rounded-full text-xs text-white cursor-pointer font-medium bg-success">Exotic</span>;
+            return <span className="py-0.5 px-2 rounded-full text-xs text-white cursor-pointer font-medium bg-success">I2pay</span>;
 
         default:
             break;

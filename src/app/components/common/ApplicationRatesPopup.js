@@ -296,28 +296,28 @@ const ApplicationRatesPopup = ({ visible = true }) => {
                                                     <div className="grid grid-cols-12 font-normal bg-slate-300 dark:bg-darkmode-300 py-3 px-3 mb-2 flex-1">
                                                         <div className="col-span-12 sm:col-span-9  font-bold">Rolling Service (%)</div>
                                                         <div className="col-span-12 sm:col-span-3 text-right  font-bold">
-                                                            ₹ {merchantApplicationRates?.rolling_reserve_paercentage || 0.0}
+                                                            {merchantApplicationRates?.rolling_reserve_paercentage || 0.0}
                                                         </div>
                                                     </div>
 
                                                     <div className="grid grid-cols-12 font-normal bg-slate-300 dark:bg-darkmode-300 py-3 px-3 mb-2 flex-1">
                                                         <div className="col-span-12 sm:col-span-9 font-bold">Transaction Fee</div>
                                                         <div className="col-span-12 sm:col-span-3 text-right font-bold">
-                                                            ₹ {merchantApplicationRates?.transaction_fee || 0.0}
+                                                            {merchantApplicationRates?.transaction_fee || 0.0}
                                                         </div>
                                                     </div>
 
                                                     <div className="grid grid-cols-12 font-normal bg-slate-300 dark:bg-darkmode-300 py-3 px-3 mb-2 flex-1">
                                                         <div className="col-span-12 sm:col-span-9 font-bold">Refund Fee</div>
                                                         <div className="col-span-12 sm:col-span-3 text-right font-bold">
-                                                            ₹ {merchantApplicationRates?.refund_fee || 0.0}
+                                                            {merchantApplicationRates?.refund_fee || 0.0}
                                                         </div>
                                                     </div>
 
                                                     <div className="grid grid-cols-12 font-normal bg-slate-300 dark:bg-darkmode-300 py-3 px-3 mb-2 flex-1">
                                                         <div className="col-span-12 sm:col-span-9 font-bold">Chargeback Fee</div>
                                                         <div className="col-span-12 sm:col-span-3 text-right font-bold">
-                                                            ₹ {merchantApplicationRates?.chargeback_fee || 0.0}
+                                                            {merchantApplicationRates?.chargeback_fee || 0.0}
                                                         </div>
                                                     </div>
 
@@ -326,14 +326,14 @@ const ApplicationRatesPopup = ({ visible = true }) => {
                                                             Suspicious Transaction Fee
                                                         </div>
                                                         <div className="col-span-12 sm:col-span-3 text-right font-bold">
-                                                            ₹ {merchantApplicationRates?.flagged_fee || 0.0}
+                                                            {merchantApplicationRates?.flagged_fee || 0.0}
                                                         </div>
                                                     </div>
 
                                                     <div className="grid grid-cols-12 font-normal bg-slate-300 dark:bg-darkmode-300 py-3 px-3 mb-2 flex-1">
                                                         <div className="col-span-12 sm:col-span-9 font-bold">Retrieval Fee</div>
                                                         <div className="col-span-12 sm:col-span-3 text-right font-bold">
-                                                            ₹ {merchantApplicationRates?.retrieval_fee || 0.0}
+                                                            {merchantApplicationRates?.retrieval_fee || 0.0}
                                                         </div>
                                                     </div>
                                                 </div>

@@ -70,7 +70,6 @@ const OtpScreen = ({ setViewOtpScreen, setSignInAnotherWay, signInType, setSignI
                 // setIsOTPVisible(true);
             }
         } catch (error) {
-            console.log("error", error);
         } finally {
             setIsLoading(false);
         }
@@ -86,8 +85,7 @@ const OtpScreen = ({ setViewOtpScreen, setSignInAnotherWay, signInType, setSignI
 
             const data = await verifyMobileOtp(payload, loginData?.token);
             // console.group("verify mobile otp");
-            // console.log("Data", data);
-            // console.log("Login Data", loginData);
+
             // console.groupEnd();
             // debugger;
             if (data?.responseCode === 200) {
@@ -96,7 +94,6 @@ const OtpScreen = ({ setViewOtpScreen, setSignInAnotherWay, signInType, setSignI
                 dispatch(detailStart(loginData?.token, () => {}));
             }
         } catch (error) {
-            console.log("error", error);
         } finally {
             setIsSubmitting(false);
         }
@@ -114,7 +111,6 @@ const OtpScreen = ({ setViewOtpScreen, setSignInAnotherWay, signInType, setSignI
                 setIsLoading(false);
             }
         } catch (error) {
-            console.log("error", error);
         } finally {
             setIsLoading(false);
         }
@@ -143,8 +139,6 @@ const OtpScreen = ({ setViewOtpScreen, setSignInAnotherWay, signInType, setSignI
             onClickForgetAuthenticationCode();
         }
     }, [signInType]);
-
-    console.log("Login Data", { loginData });
 
     return (
         <Formik initialValues={initialValuesOTP} validationSchema={otpValidation} onSubmit={handleSubmit} enableReinitialize={true}>

@@ -1,0 +1,31 @@
+export const GET_PAYMENT_CARD_REQUEST = "GET_PAYMENT_CARD_REQUEST";
+export const GET_PAYMENT_CARD_RESPONSE = "GET_PAYMENT_CARD_RESPONSE";
+
+export const ADD_PAYMENT_CARD_REQUEST = "ADD_PAYMENT_CARD_REQUEST";
+export const ADD_PAYMENT_CARD_RESPONSE = "ADD_PAYMENT_CARD_RESPONSE";
+
+export const DELETE_PAYMENT_CARD_REQUEST = "DELETE_PAYMENT_CARD_REQUEST";
+export const DELETE_PAYMENT_CARD_RESPONSE = "DELETE_PAYMENT_CARD_RESPONSE";
+
+export const UPDATE_PAYMENT_CARD_REQUEST = "UPDATE_PAYMENT_CARD_REQUEST";
+export const UPDATE_PAYMENT_CARD_RESPONSE = "UPDATE_PAYMENT_CARD_RESPONSE";
+
+export const DETAIL_PAYMENT_CARD_REQUEST = "DETAIL_PAYMENT_CARD_REQUEST";
+export const DETAIL_PAYMENT_CARD_RESPONSE = "DETAIL_PAYMENT_CARD_RESPONSE";
+
+export const PAYMENT_CARD_SEND_REQUEST = "PAYMENT_CARD_SEND_REQUEST";
+export const PAYMENT_CARD_SEND_RESPONSE = "PAYMENT_CARD_SEND_RESPONSE";
+
+export const getPaymentCardRequest = (currentPage, perPage, searchQuery, payload, callback) => ({
+    type: GET_PAYMENT_CARD_REQUEST,
+    currentPage,
+    perPage,
+    searchQuery,
+    payload,
+    callback,
+});
+
+export const getPaymentCardResponse = (data) => ({
+    type: GET_PAYMENT_CARD_RESPONSE,
+    payload: data,
+});

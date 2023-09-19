@@ -12,7 +12,7 @@ const TransactionCounts = ({ isLoading, currencyValue }) => {
 
     return (
         <div className={`grid grid-cols-12 gap-6 gap-y-20 py-8`}>
-            {/* {isLoading ? (
+            {isLoading ? (
                 <div className="intro-y col-span-12 md:col-span-6 lg:col-span-3 px-0">
                     <div className="flex items-center">
                         <div className="dashboard-order-view mr-[20px]">
@@ -45,9 +45,9 @@ const TransactionCounts = ({ isLoading, currencyValue }) => {
                         </div>
                     </div>
                 </Link>
-            )} */}
+            )}
 
-            {/* {isLoading ? (
+            {isLoading ? (
                 <div className="intro-y col-span-12 md:col-span-6 lg:col-span-3 px-0">
                     <div className="flex items-center">
                         <div className="dashboard-order-view mr-[20px]">
@@ -80,9 +80,9 @@ const TransactionCounts = ({ isLoading, currencyValue }) => {
                         </div>
                     </div>
                 </Link>
-            )} */}
+            )}
 
-            {/* {isLoading ? (
+            {isLoading ? (
                 <div className="intro-y col-span-12 md:col-span-6 lg:col-span-3 px-0">
                     <div className="flex items-center">
                         <div className="dashboard-order-view mr-[20px]">
@@ -115,9 +115,8 @@ const TransactionCounts = ({ isLoading, currencyValue }) => {
                         </div>
                     </div>
                 </Link>
-            )} */}
-
-            {/* {isLoading ? (
+            )}
+            {isLoading ? (
                 <div className="intro-y col-span-12 md:col-span-6 lg:col-span-3 px-0">
                     <div className="flex items-center">
                         <div className="dashboard-order-view mr-[20px]">
@@ -150,9 +149,8 @@ const TransactionCounts = ({ isLoading, currencyValue }) => {
                         </div>
                     </div>
                 </Link>
-            )} */}
-
-            {/* {isLoading ? (
+            )}
+            {isLoading ? (
                 <div className="intro-y col-span-12 md:col-span-6 lg:col-span-3 px-0">
                     <div className="flex items-center">
                         <div className="dashboard-order-view mr-[20px]">
@@ -185,11 +183,10 @@ const TransactionCounts = ({ isLoading, currencyValue }) => {
                         </div>
                     </div>
                 </Link>
-            )} */}
-
+            )}
             {isLoading ? (
-                <div className="intro-y col-span-12 px-0">
-                    <div className="flex items-center justify-center">
+                <div className="intro-y col-span-12 md:col-span-6 lg:col-span-3 px-0">
+                    <div className="flex items-center">
                         <div className="dashboard-order-view mr-[20px]">
                             <PlaceholderLoading shape="rect" width={50} height={50} />
                         </div>
@@ -204,8 +201,8 @@ const TransactionCounts = ({ isLoading, currencyValue }) => {
                     </div>
                 </div>
             ) : (
-                <Link to="/payment-links" className="intro-y col-span-12 px-0">
-                    <div className="flex items-center justify-center">
+                <Link to="/payment-links" className="intro-y col-span-12 md:col-span-6 lg:col-span-3 px-0">
+                    <div className="flex items-center">
                         <div className="dashboard-pay-button-view mr-[20px]">
                             <Icon.Link size={26} color="#FFF" />
                         </div>
@@ -221,8 +218,7 @@ const TransactionCounts = ({ isLoading, currencyValue }) => {
                     </div>
                 </Link>
             )}
-
-            {/* {isLoading ? (
+            {isLoading ? (
                 <div className="intro-y col-span-12 md:col-span-6 lg:col-span-3 px-0">
                     <div className="flex items-center">
                         <div className="dashboard-order-view mr-[20px]">
@@ -255,9 +251,8 @@ const TransactionCounts = ({ isLoading, currencyValue }) => {
                         </div>
                     </div>
                 </Link>
-            )} */}
-
-            {/* {isLoading ? (
+            )}
+            {isLoading ? (
                 <div className="intro-y col-span-12 md:col-span-6 lg:col-span-3 px-0">
                     <div className="flex items-center">
                         <div className="dashboard-order-view mr-[20px]">
@@ -290,7 +285,7 @@ const TransactionCounts = ({ isLoading, currencyValue }) => {
                         </div>
                     </div>
                 </Link>
-            )} */}
+            )}
         </div>
     );
 };

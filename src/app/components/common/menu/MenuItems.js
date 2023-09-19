@@ -44,22 +44,25 @@ const MenuItems = ({
         applicationStatus == "10"
     ) {
         hideMenuCount = 0;
-    } else if (screenWidth?.width < 768) {
+    } else if (screenWidth?.width < 789) {
         hideMenuCount = 0;
-    } else if (screenWidth?.width < 880) {
+    } else if (screenWidth?.width < 922) {
+        hideMenuCount = 7;
+    } else if (screenWidth?.width < 1072) {
+        hideMenuCount = 6;
+    } else if (screenWidth?.width < 1262) {
         hideMenuCount = 5;
-    } else if (screenWidth?.width < 1040) {
+    } else if (screenWidth?.width < 1412) {
         hideMenuCount = 4;
-    } else if (screenWidth?.width < 1210) {
+    } else if (screenWidth?.width < 1562) {
         hideMenuCount = 3;
-    } else if (screenWidth?.width < 1390) {
+    } else if (screenWidth?.width < 1690) {
         hideMenuCount = 2;
-    } else if (screenWidth?.width < 1450) {
+    } else if (screenWidth?.width < 1745) {
         hideMenuCount = 1;
     }
 
     // hideMenuCount = 0;
-    // console.log({hideMenuCount})
 
     return (
         <>
@@ -71,7 +74,7 @@ const MenuItems = ({
                         applicationStatus == "2" ||
                         applicationStatus == "3" ||
                         applicationStatus == "10") &&
-                        (item.id === 3 || item.id === 4 || item.id === 5 || item.id === 6 || item.id === 7) &&
+                    (item.id === 3 || item.id === 4 || item.id === 5 || item.id === 6 || item.id === 7 || item.id === 8) &&
                     isRateSent != "1"
                 ) {
                     return <li key={index} />;
@@ -80,10 +83,18 @@ const MenuItems = ({
                         case menuElementsType.SINGLE:
                             return (
                                 <li data-tip data-for={`global${item?.title}`} key={index} onClick={() => openSubMenuPaymentMethod(null)}>
-                                    <Link to={item.to} className={linkClassName(index + 1)} onClick={closeMenu}>
-                                        {item?.icon && <div className={iconClassName}>{item?.icon()}</div>}
-                                        {!visibleTooltip && <div className={titleClassName}>{item?.title}</div>}
-                                    </Link>
+                                    {item?.redirect_link ? (
+                                        <a target="_blank" to={item.redirect_link} className={linkClassName(index + 1)}>
+                                            {item?.icon && <div className={iconClassName}>{item?.icon()}</div>}
+                                            {!visibleTooltip && <div className={titleClassName}>{item?.title}</div>}
+                                        </a>
+                                    ) : (
+                                        <Link to={item.to} className={linkClassName(index + 1)} onClick={closeMenu}>
+                                            {item?.icon && <div className={iconClassName}>{item?.icon()}</div>}
+                                            {!visibleTooltip && <div className={titleClassName}>{item?.title}</div>}
+                                        </Link>
+                                    )}
+
                                     {visibleTooltip && (
                                         <ReactTooltip id={`global${item?.title}`} type="dark" place="right" effect="solid">
                                             <div className={titleClassName}>{item?.title}</div>
@@ -134,17 +145,34 @@ const MenuItems = ({
                                             } else {
                                                 return (
                                                     <li data-tip data-for={`global${subMenu?.title}`} key={subMenuIndex}>
-                                                        <Link
-                                                            to={subMenu?.to}
-                                                            className={
-                                                                active === index + 1 && activeSubMenu === subMenuIndex
-                                                                    ? `${menuTypeClassName} top-menu--active`
-                                                                    : menuTypeClassName
-                                                            }
-                                                            onClick={closeMenu}>
-                                                            <div className={iconClassName}>{subMenu?.icon()}</div>
-                                                            {!visibleTooltip && <div className={titleClassName}> {subMenu?.title} </div>}
-                                                        </Link>
+                                                        {subMenu?.redirect_link ? (
+                                                            <a
+                                                                style={{ cursor: "pointer" }}
+                                                                target="_blank"
+                                                                href={subMenu.redirect_link}
+                                                                className={
+                                                                    active === index + 1 && activeSubMenu === subMenuIndex
+                                                                        ? `${menuTypeClassName} top-menu--active`
+                                                                        : menuTypeClassName
+                                                                }>
+                                                                {subMenu?.icon && <div className={iconClassName}>{subMenu?.icon()}</div>}
+                                                                {!visibleTooltip && <div className={titleClassName}>{subMenu?.title}</div>}
+                                                            </a>
+                                                        ) : (
+                                                            <Link
+                                                                to={subMenu?.to}
+                                                                className={
+                                                                    active === index + 1 && activeSubMenu === subMenuIndex
+                                                                        ? `${menuTypeClassName} top-menu--active`
+                                                                        : menuTypeClassName
+                                                                }
+                                                                onClick={closeMenu}>
+                                                                <div className={iconClassName}>{subMenu?.icon()}</div>
+                                                                {!visibleTooltip && (
+                                                                    <div className={titleClassName}> {subMenu?.title} </div>
+                                                                )}
+                                                            </Link>
+                                                        )}
                                                         {visibleTooltip && (
                                                             <ReactTooltip
                                                                 id={`global${subMenu?.title}`}
@@ -207,10 +235,23 @@ const MenuItems = ({
                                                     data-for={`global${item?.title}`}
                                                     key={index}
                                                     onClick={() => openSubMenuPaymentMethod(null)}>
-                                                    <Link to={item.to} className={linkClassName(index + 1)} onClick={closeMenu}>
-                                                        {item?.icon && <div className={iconClassName}>{item?.icon()}</div>}
-                                                        {!visibleTooltip && <div className={titleClassName}>{item?.title}</div>}
-                                                    </Link>
+                                                    {item?.redirect_link ? (
+                                                        <a
+                                                            style={{ cursor: "pointer" }}
+                                                            href={item?.redirect_link}
+                                                            target="_blank"
+                                                            className={linkClassName(index + 1)}
+                                                            onClick={closeMenu}>
+                                                            {item?.icon && <div className={iconClassName}>{item?.icon()}</div>}
+                                                            {!visibleTooltip && <div className={titleClassName}>{item?.title}</div>}
+                                                        </a>
+                                                    ) : (
+                                                        <Link to={item.to} className={linkClassName(index + 1)} onClick={closeMenu}>
+                                                            {item?.icon && <div className={iconClassName}>{item?.icon()}</div>}
+                                                            {!visibleTooltip && <div className={titleClassName}>{item?.title}</div>}
+                                                        </Link>
+                                                    )}
+
                                                     {visibleTooltip && (
                                                         <ReactTooltip id={`global${item?.title}`} type="dark" place="right" effect="solid">
                                                             <div className={titleClassName}>{item?.title}</div>
@@ -250,6 +291,7 @@ const MenuItems = ({
                                                         <div className="menu-arrow-right"></div>
                                                         <div className="menu-arrow-right-two"></div>
                                                         {item?.subMenuItems?.map((subMenu, subMenuIndex) => {
+                                                            console.log({ subMenu });
                                                             if (
                                                                 (applicationStatus == "0" ||
                                                                     applicationStatus == "" ||
@@ -266,19 +308,37 @@ const MenuItems = ({
                                                             } else {
                                                                 return (
                                                                     <li data-tip data-for={`global${subMenu?.title}`} key={subMenuIndex}>
-                                                                        <Link
-                                                                            to={subMenu?.to}
-                                                                            className={
-                                                                                active === index + 1 && activeSubMenu === subMenuIndex
-                                                                                    ? `${menuTypeClassName} top-menu--active`
-                                                                                    : menuTypeClassName
-                                                                            }
-                                                                            onClick={closeMenu}>
-                                                                            <div className={iconClassName}>{subMenu?.icon()}</div>
-                                                                            {!visibleTooltip && (
-                                                                                <div className={titleClassName}> {subMenu?.title} </div>
-                                                                            )}
-                                                                        </Link>
+                                                                        {subMenu?.redirect_link ? (
+                                                                            <a
+                                                                                href={subMenu?.redirect_link}
+                                                                                target="_blank"
+                                                                                className={
+                                                                                    active === index + 1 && activeSubMenu === subMenuIndex
+                                                                                        ? `${menuTypeClassName} top-menu--active`
+                                                                                        : menuTypeClassName
+                                                                                }
+                                                                                style={{ cursor: "pointer" }}
+                                                                                onClick={closeMenu}>
+                                                                                <div className={iconClassName}>{subMenu?.icon()}</div>
+                                                                                {!visibleTooltip && (
+                                                                                    <div className={titleClassName}> {subMenu?.title} </div>
+                                                                                )}
+                                                                            </a>
+                                                                        ) : (
+                                                                            <Link
+                                                                                to={subMenu?.to}
+                                                                                className={
+                                                                                    active === index + 1 && activeSubMenu === subMenuIndex
+                                                                                        ? `${menuTypeClassName} top-menu--active`
+                                                                                        : menuTypeClassName
+                                                                                }
+                                                                                onClick={closeMenu}>
+                                                                                <div className={iconClassName}>{subMenu?.icon()}</div>
+                                                                                {!visibleTooltip && (
+                                                                                    <div className={titleClassName}> {subMenu?.title} </div>
+                                                                                )}
+                                                                            </Link>
+                                                                        )}
                                                                         {visibleTooltip && (
                                                                             <ReactTooltip
                                                                                 id={`global${subMenu?.title}`}

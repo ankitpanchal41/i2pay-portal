@@ -30,7 +30,7 @@ const MultiStepForm = ({ formSteps, stepNumber, storeFrontStep, disable }) => {
     const dispatch = useDispatch();
 
     const state = useSelector((state) => state);
-    // console.log({ state });
+
     const changeStepNumber = (step) => {
         if (!disable) {
             if (step === 3) {
@@ -80,14 +80,8 @@ const MultiStepForm = ({ formSteps, stepNumber, storeFrontStep, disable }) => {
                     key={index}
                     className={`${
                         stepNumber >= index
-                            ? activeClasses.container +
-                              (index === 0
-                                  ? " flex flex-row py-3"
-                                  : " flex flex-row py-3")
-                            : inactiveClasses.container +
-                              (index === 0
-                                  ? " flex flex-row py-3"
-                                  : " flex flex-row py-3")
+                            ? activeClasses.container + (index === 0 ? " flex flex-row py-3" : " flex flex-row py-3")
+                            : inactiveClasses.container + (index === 0 ? " flex flex-row py-3" : " flex flex-row py-3")
                     }`}>
                     <button
                         onClick={() => changeStepNumber(index + 1)}
@@ -95,7 +89,9 @@ const MultiStepForm = ({ formSteps, stepNumber, storeFrontStep, disable }) => {
                         {index + 1}
                     </button>
                     <div className={stepNumber >= index ? activeClasses.textDiv : inactiveClasses.textDiv}>{step}</div>
-                    <Icon.ArrowRight className={disable ? disableClasses.icon : stepNumber >= index ? activeClasses.icon : inactiveClasses.icon}/>
+                    <Icon.ArrowRight
+                        className={disable ? disableClasses.icon : stepNumber >= index ? activeClasses.icon : inactiveClasses.icon}
+                    />
                 </div>
             ))}
         </div>

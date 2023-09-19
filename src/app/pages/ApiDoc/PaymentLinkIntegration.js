@@ -211,8 +211,8 @@ const PaymentLinkIntegration = () => {
 
                         <p>
                             After that, click on the <strong>Status</strong> button to <strong>activate</strong> connector. As you can see,
-                            you need to provide appropriate credentials. On the other hand, you can use exotic connector by clicking{" "}
-                            <strong>Use Exotic Connector</strong> too.
+                            you need to provide appropriate credentials. On the other hand, you can use i2pay connector by clicking{" "}
+                            <strong>Use I2pay Connector</strong> too.
                         </p>
 
                         <div className="api-document-detail">

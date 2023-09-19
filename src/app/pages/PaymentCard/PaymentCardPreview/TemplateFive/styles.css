@@ -1,0 +1,68 @@
+.t5-input {
+    border: 0 !important;
+    outline: 0;
+    background-color: #f2efef;
+}
+
+.t5-input:focus{
+    border: 0 !important;
+    box-shadow: none !important;
+    outline: 0 !important;
+    outline-offset: 0 !important;
+}
+
+.template-five-background {
+    background-repeat: no-repeat;
+    background-size: 100vh;
+    background-color: #e8dce4;
+}
+
+.t5-pay-button {
+    background-color: #764d52;
+    color: #ffffff;
+}
+
+.t5-product-left-container {
+    background-color: #d3bcc0;
+}
+
+.t5-product-title {
+    background-color: #764d52;
+    color: #ffffff;
+    line-height: 30px;
+    font-size: 20px;
+    letter-spacing: 2px;
+    font-weight: normal;
+}
+
+.t5-product-image{
+    height: 300px;
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+}
+
+.t5-payment-details-title, .t5-label{
+    color: #764d52;
+}
+
+.t5-description {
+    color: #764d52;
+    background-color: #f2efef;
+}
+
+.t5-color-brown{
+    color: #764d52;
+}
+
+.t5-pay {
+    font-size: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.t5-amount {
+    font-size: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}

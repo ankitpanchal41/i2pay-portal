@@ -6,7 +6,6 @@ import { store } from "../../redux/store";
 export const PrivateRoute = ({ children, ...rest }) => {
     const { isLoggedIn, userData } = store.getState()?.persist;
     const applicationStatus = store.getState()?.persist?.userData?.data?.application_status;
-    // console.log({ userData });
 
     useEffect(() => {
         // document.body.classList.remove("login");
